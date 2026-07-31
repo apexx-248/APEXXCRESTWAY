@@ -699,6 +699,11 @@
         <label style="font-size:12px; font-weight:700;">Gmail Address</label>
         <input type="email" id="loginGmail" placeholder="you@gmail.com" style="width:100%; margin-top:6px; height:44px; padding:0 14px; border-radius:12px; border:1px solid var(--line); font-size:14px; font-family:inherit; outline:none;">
       </div>
+      <div class="field" id="loginQuickName" style="display:none;">
+        <label style="font-size:12px; font-weight:700;">Full Name</label>
+        <input type="text" id="loginNameQuick" placeholder="Dr. Ibrahim Musa" style="width:100%; margin-top:6px; height:44px; padding:0 14px; border-radius:12px; border:1px solid var(--line); font-size:14px; font-family:inherit; outline:none;">
+        <div class="hint">We didn't find that Gmail on our waitlist — add your name to register and get your code.</div>
+      </div>
       <div id="loginMsg"></div>
       <button class="submit" id="sendCodeBtn" style="margin-top:18px;">Send Code →</button>
       <p class="fine">Not registered yet? <a href="#register" onclick="document.getElementById('loginOverlay').classList.remove('open'); document.getElementById('register').scrollIntoView({behavior:'smooth'});" style="color:var(--blue); font-weight:700;">Join the waitlist</a></p>
@@ -938,6 +943,7 @@
     loginStepOtp.style.display = 'none';
     loginStepGmail.style.display = 'block';
     otpMsg.innerHTML = ''; otpInput.value = '';
+    resetGmailStep();
   }
   function showOtpStep(gmail) {
     pendingLoginGmail = gmail;
@@ -977,6 +983,17 @@
   loginOverlay.addEventListener('click', (e) => { if (e.target === loginOverlay) closeLoginModal(); });
   changeGmailBtn.addEventListener('click', showGmailStep);
 
+  const loginNameQuick = document.getElementById('loginNameQuick');
+  const loginQuickName = document.getElementById('loginQuickName');
+  let awaitingQuickRegister = false;
+
+  function resetGmailStep() {
+    awaitingQuickRegister = false;
+    loginQuickName.style.display = 'none';
+    loginNameQuick.value = '';
+    sendCodeBtn.textContent = 'Send Code →';
+  }
+
   async function requestOtp(gmail) {
     return apiPost({ action: 'requestOtp', gmail });
   }
@@ -987,18 +1004,57 @@
       loginMsg.innerHTML = '<div class="msg-box msg-err">Enter a valid Gmail address.</div>';
       return;
     }
+
+    // Step 2 of quick sign-up: name field is showing, so register first, then send the code.
+    if (awaitingQuickRegister) {
+      const name = loginNameQuick.value.trim();
+      if (!name || name.length < 2) {
+        loginMsg.innerHTML = '<div class="msg-box msg-err">Enter your full name.</div>';
+        return;
+      }
+      sendCodeBtn.disabled = true; sendCodeBtn.textContent = 'Registering...';
+      try {
+        const regData = await apiPost({ action: 'register', name, gmail, source: window.location.href });
+        if (regData.status !== 'success' && regData.status !== 'duplicate') {
+          loginMsg.innerHTML = `<div class="msg-box msg-err">${escapeHtml(regData.message || 'Could not register. Try again.')}</div>`;
+          return;
+        }
+        const otpData = await requestOtp(gmail);
+        if (otpData.status === 'success') {
+          resetGmailStep();
+          showOtpStep(gmail);
+        } else {
+          loginMsg.innerHTML = `<div class="msg-box msg-err">${escapeHtml(otpData.message || 'Could not send code.')}</div>`;
+        }
+      } catch (err) {
+        loginMsg.innerHTML = '<div class="msg-box msg-err">Could not reach the server. Try again.</div>';
+      } finally {
+        sendCodeBtn.disabled = false; if (awaitingQuickRegister) sendCodeBtn.textContent = 'Register & Send Code →';
+      }
+      return;
+    }
+
+    // Step 1: normal login — just try to send a code
     sendCodeBtn.disabled = true; sendCodeBtn.textContent = 'Sending...';
     try {
       const data = await requestOtp(gmail);
       if (data.status === 'success') {
+        resetGmailStep();
         showOtpStep(gmail);
+      } else if (data.status === 'not_found') {
+        awaitingQuickRegister = true;
+        loginQuickName.style.display = 'block';
+        loginMsg.innerHTML = '';
+        sendCodeBtn.textContent = 'Register & Send Code →';
+        loginNameQuick.focus();
       } else {
-        loginMsg.innerHTML = `<div class="msg-box msg-err">${escapeHtml(data.message || "We couldn't find that Gmail. Register first.")}</div>`;
+        loginMsg.innerHTML = `<div class="msg-box msg-err">${escapeHtml(data.message || 'Something went wrong.')}</div>`;
       }
     } catch (err) {
       loginMsg.innerHTML = '<div class="msg-box msg-err">Could not reach the server. Try again.</div>';
     } finally {
-      sendCodeBtn.disabled = false; sendCodeBtn.textContent = 'Send Code →';
+      sendCodeBtn.disabled = false;
+      if (!awaitingQuickRegister) sendCodeBtn.textContent = 'Send Code →';
     }
   });
 
