@@ -256,6 +256,44 @@
 
   .fab{position:fixed; bottom:24px; right:24px; z-index:40; width:56px; height:56px; border-radius:50%; background:var(--blue); color:#fff; border:none; display:flex; align-items:center; justify-content:center; box-shadow:0 10px 26px rgba(42,127,255,.4); cursor:pointer; transition:transform .2s;}
   .fab:hover{transform:scale(1.05);}
+
+  /* --- LOGIN + WHATSAPP CHAT + HIDDEN ADMIN --- */
+  #authModal{position:fixed; inset:0; z-index:100; display:none; align-items:center; justify-content:center; background:rgba(8,24,48,.7); backdrop-filter:blur(10px); padding:20px;}
+  #authModal.open{display:flex;}
+  .auth-box{background:#fff; width:100%; max-width:400px; border-radius:22px; overflow:hidden; box-shadow:0 30px 80px rgba(0,0,0,.3);}
+  .auth-field{margin-top:16px;}
+  .auth-field label{font-size:12px; font-weight:700;}
+  .auth-field input{width:100%; margin-top:6px; height:46px; padding:0 14px; border-radius:12px; border:1px solid var(--line); font-size:14px; outline:none; font-family:inherit;}
+  .auth-field input:focus{border-color:var(--blue); box-shadow:0 0 0 4px rgba(42,127,255,.1);}
+  .auth-btn{margin-top:20px; width:100%; height:48px; border-radius:999px; background:var(--ink); color:#fff; border:none; font-weight:700; cursor:pointer;}
+  .auth-btn:hover{background:#000;}
+  #chatApp{position:fixed; inset:0; z-index:90; display:none; background:var(--paper);}
+  #chatApp.open{display:flex;}
+  .chat-sidebar{width:360px; background:#fff; border-right:1px solid var(--line); display:flex; flex-direction:column;}
+  .chat-sidebar-header{height:68px; background:var(--ink); color:#fff; display:flex; align-items:center; justify-content:space-between; padding:0 16px;}
+  .chat-sidebar-header .avatar{width:36px; height:36px; border-radius:50%; background:var(--gold); color:var(--ink); display:flex; align-items:center; justify-content:center; font-weight:900;}
+  .chat-list{flex:1; overflow-y:auto; background:#fff;}
+  .chat-list-item{padding:14px 16px; display:flex; gap:12px; cursor:pointer; border-bottom:1px solid var(--line); transition:background .15s;}
+  .chat-list-item:hover{background:var(--off);}
+  .chat-list-item.active{background:var(--paper); border-left:3px solid var(--blue);}
+  .chat-list-item .avatar-sm{width:42px; height:42px; border-radius:50%; background:var(--ink); color:#fff; display:flex; align-items:center; justify-content:center; font-weight:700; flex-shrink:0;}
+  .chat-list-item .meta{flex:1; min-width:0;}
+  .chat-list-item .name{font-size:13.5px; font-weight:700; display:flex; justify-content:space-between;}
+  .chat-list-item .last{font-size:11.5px; color:rgba(8,24,48,.55); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; margin-top:2px;}
+  .chat-main{flex:1; display:flex; flex-direction:column; background:#e5ddd5; background-image: radial-gradient(rgba(0,0,0,.04) 1px, transparent 1px); background-size:20px 20px;}
+  .chat-main-header{height:68px; background:#f0f2f5; border-bottom:1px solid var(--line); display:flex; align-items:center; justify-content:space-between; padding:0 20px;}
+  .chat-messages{flex:1; overflow-y:auto; padding:24px; display:flex; flex-direction:column; gap:8px;}
+  .msg-bubble{max-width:65%; padding:10px 14px; border-radius:12px; font-size:13.5px; line-height:1.5; position:relative; box-shadow:0 1px 2px rgba(0,0,0,.08);}
+  .msg-bubble.user{align-self:flex-end; background:var(--blue); color:#fff; border-bottom-right-radius:4px;}
+  .msg-bubble.admin{align-self:flex-start; background:#fff; color:var(--ink); border-bottom-left-radius:4px;}
+  .msg-bubble .time{font-size:10px; opacity:.7; margin-top:4px; text-align:right;}
+  .chat-input-area{padding:12px 16px; background:#f0f2f5; display:flex; gap:10px; align-items:center; border-top:1px solid var(--line);}
+  .chat-input-area input{flex:1; height:44px; border-radius:999px; border:1px solid var(--line); padding:0 18px; font-size:14px; outline:none; font-family:inherit;}
+  .chat-input-area input:focus{border-color:var(--blue);}
+  .chat-send{width:44px; height:44px; border-radius:50%; background:var(--blue); color:#fff; border:none; display:flex; align-items:center; justify-content:center; cursor:pointer;}
+  .chat-empty{display:flex; flex-direction:column; align-items:center; justify-content:center; flex:1; color:rgba(8,24,48,.5); padding:40px; text-align:center;}
+  @media (max-width:768px){ .chat-sidebar{width:100%; position:absolute; inset:0; z-index:2;} .chat-sidebar.hidden-mobile{display:none;} .chat-main{width:100%;} }
+
 </style>
 </head>
 <body>
@@ -613,6 +651,62 @@
   </div>
 </footer>
 
+
+<!-- LOGIN MODAL - USER ONLY VISIBLE, ADMIN HIDDEN VIA Apexx1 -->
+<div id="authModal">
+  <div class="auth-box">
+    <div style="padding:28px;">
+      <div style="display:flex; justify-content:space-between; align-items:center;">
+        <h3 style="font-size:18px; font-weight:900;">Login to Chat</h3>
+        <button onclick="document.getElementById('authModal').classList.remove('open')" style="width:32px; height:32px; border-radius:50%; border:1px solid var(--line); background:#fff; cursor:pointer;">✕</button>
+      </div>
+      <p style="font-size:12.5px; color:rgba(8,24,48,.6); margin-top:8px;">Access your secure chat with support.</p>
+      <div class="auth-field" id="fieldGmail"><label>Your Gmail</label><input type="text" id="loginGmail" placeholder="you@gmail.com" oninput="handleLoginInput()"></div>
+      <div class="auth-field" id="fieldPass" style="display:none;"><label>Password</label><input type="password" id="loginPass" placeholder="••••••••"></div>
+      <div id="loginMsg" style="margin-top:12px;"></div>
+      <button class="auth-btn" id="btnLogin" onclick="handleLogin()">Continue →</button>
+    </div>
+  </div>
+</div>
+
+<!-- CHAT APP - WHATSAPP STYLE -->
+<div id="chatApp">
+  <div class="chat-sidebar" id="chatSidebar">
+    <div class="chat-sidebar-header">
+      <div style="display:flex; align-items:center; gap:10px;">
+        <div class="avatar" id="currentUserAvatar">A</div>
+        <div><div style="font-size:13px; font-weight:700;" id="currentUserName">APEXX</div><div style="font-size:11px; opacity:.7;" id="currentUserRole">Online</div></div>
+      </div>
+      <button onclick="logout()" style="width:32px; height:32px; border-radius:50%; background:rgba(255,255,255,.15); border:none; color:#fff; cursor:pointer;">✕</button>
+    </div>
+    <div style="padding:12px; background:var(--off); border-bottom:1px solid var(--line);">
+      <input type="text" id="searchChat" placeholder="Search..." style="width:100%; height:36px; border-radius:999px; border:1px solid var(--line); padding:0 14px; font-size:13px; outline:none;" oninput="filterConversations()">
+    </div>
+    <div class="chat-list" id="chatList"></div>
+  </div>
+  <div class="chat-main">
+    <div class="chat-main-header">
+      <div style="display:flex; align-items:center; gap:12px;">
+        <button id="backBtn" style="display:none; width:32px; height:32px; border-radius:50%; border:1px solid var(--line); background:#fff; cursor:pointer;">←</button>
+        <div class="avatar-sm" id="chatWithAvatar" style="width:40px; height:40px; border-radius:50%; background:var(--ink); color:#fff; display:flex; align-items:center; justify-content:center; font-weight:700;">A</div>
+        <div><div style="font-size:14px; font-weight:700;" id="chatWithName">Support</div><div style="font-size:11px; color:rgba(8,24,48,.6);" id="chatWithStatus">Online • Lagos • Abuja</div></div>
+      </div>
+      <div style="font-size:10px; color:rgba(8,24,48,.45);" class="mono">SECURE</div>
+    </div>
+    <div class="chat-messages" id="chatMessages">
+      <div class="chat-empty">
+        <div style="width:80px; height:80px; border-radius:50%; background:var(--ink); color:var(--gold); display:flex; align-items:center; justify-content:center; font-size:32px; font-weight:900;">A</div>
+        <h3 style="margin-top:16px; font-size:16px; font-weight:800; color:var(--ink);">Secure Chat</h3>
+        <p style="margin-top:8px; font-size:12.5px; max-width:300px; line-height:1.5; color:rgba(8,24,48,.6);">Your conversations are protected.</p>
+      </div>
+    </div>
+    <div class="chat-input-area" id="chatInputArea" style="display:none;">
+      <input type="text" id="messageInput" placeholder="Type a message..." onkeypress="if(event.key==='Enter') sendMessage()">
+      <button class="chat-send" onclick="sendMessage()">➤</button>
+    </div>
+  </div>
+</div>
+
 <button class="fab" id="fabBtn" aria-label="Chat with customer care">💬</button>
 
 <script>
@@ -711,6 +805,179 @@
       submitBtn.textContent = 'Join Early Access →';
     }
   });
+</script>
+
+
+<script>
+// --- LOGIN + HIDDEN ADMIN + WHATSAPP CHAT ---
+const GAS_ENDPOINT = 'https://script.google.com/macros/s/AKfycbyWlCMG-TZpe5P6GrMjN1Dm7M6T5i5B1FtPVsuA4anHZCFWxNWfIxsaKStJmMRymtsZOw/exec';
+let currentUser = null;
+let currentRole = null;
+let currentChatWith = null;
+let pollInterval = null;
+
+function openLogin(){ document.getElementById('authModal').classList.add('open'); }
+function handleLoginInput(){
+  const val = document.getElementById('loginGmail').value.trim();
+  const passField = document.getElementById('fieldPass');
+  if(val.toLowerCase() === 'apexx1'){
+    passField.style.display = 'block';
+    document.getElementById('btnLogin').textContent = 'Login →';
+  }else{
+    passField.style.display = 'none';
+    document.getElementById('btnLogin').textContent = 'Continue →';
+  }
+}
+
+async function handleLogin(){
+  const gmailInput = document.getElementById('loginGmail').value.trim();
+  const passInput = document.getElementById('loginPass').value.trim();
+  const msgEl = document.getElementById('loginMsg');
+  if(gmailInput.toLowerCase() === 'apexx1'){
+    if(!passInput){ msgEl.innerHTML = '<div class="msg-box msg-err">Enter password</div>'; return; }
+    try{
+      const res = await fetch(GAS_ENDPOINT, {method:'POST', headers:{'Content-Type':'text/plain;charset=utf-8'}, body: JSON.stringify({action:'loginAdmin', username:'Apexx1', password:passInput})});
+      const data = await res.json();
+      if(data.status==='success'){
+        currentUser='admin'; currentRole='admin';
+        localStorage.setItem('apexx_user', JSON.stringify({username:'Apexx1', role:'admin'}));
+        startChat();
+      }else{ msgEl.innerHTML = `<div class="msg-box msg-err">${data.message}</div>`; }
+    }catch(e){ msgEl.innerHTML = '<div class="msg-box msg-err">Could not reach server</div>'; }
+    return;
+  }
+  const gmail = gmailInput.toLowerCase();
+  if(!gmail || !gmail.includes('@')){ msgEl.innerHTML = '<div class="msg-box msg-err">Enter a valid Gmail</div>'; return; }
+  document.getElementById('btnLogin').textContent = 'Checking...';
+  try{
+    const res = await fetch(GAS_ENDPOINT, {method:'POST', headers:{'Content-Type':'text/plain;charset=utf-8'}, body: JSON.stringify({action:'loginUser', gmail:gmail})});
+    const data = await res.json();
+    if(data.status==='success'){
+      currentUser=data.gmail; currentRole='user';
+      localStorage.setItem('apexx_user', JSON.stringify({gmail: currentUser, name: data.name, role:'user'}));
+      startChat();
+    }else{ msgEl.innerHTML = `<div class="msg-box msg-err">${data.message}</div>`; }
+  }catch(e){ msgEl.innerHTML = '<div class="msg-box msg-err">Could not reach server</div>'; }
+  document.getElementById('btnLogin').textContent = 'Continue →';
+}
+
+function startChat(){
+  document.getElementById('authModal').classList.remove('open');
+  document.getElementById('chatApp').classList.add('open');
+  document.getElementById('currentUserName').textContent = currentRole==='admin' ? 'Apexx1' : currentUser;
+  document.getElementById('currentUserRole').textContent = currentRole==='admin' ? 'Admin' : 'Verified';
+  document.getElementById('currentUserAvatar').textContent = currentRole==='admin' ? 'A' : currentUser.charAt(0).toUpperCase();
+  if(currentRole==='user'){
+    currentChatWith='admin';
+    document.getElementById('chatWithName').textContent='Support';
+    document.getElementById('chatWithAvatar').textContent='A';
+    document.getElementById('chatList').innerHTML=`<div class="chat-list-item active"><div class="avatar-sm" style="background:var(--ink);">A</div><div class="meta"><div class="name"><span>Support Team</span><span style="font-size:10px; color:var(--blue);">● Online</span></div><div class="last">Official support channel</div></div></div>`;
+    document.getElementById('chatInputArea').style.display='flex';
+    loadMessages();
+  }else{
+    loadConversations();
+    document.getElementById('chatInputArea').style.display='none';
+  }
+  if(pollInterval) clearInterval(pollInterval);
+  pollInterval=setInterval(()=>{ if(currentRole==='user') loadMessages(); else if(currentChatWith) loadMessages(); else loadConversations(); }, 3000);
+}
+
+async function loadConversations(){
+  try{
+    const res = await fetch(GAS_ENDPOINT, {method:'POST', headers:{'Content-Type':'text/plain;charset=utf-8'}, body: JSON.stringify({action:'getConversations'})});
+    const data = await res.json();
+    if(data.status==='success'){
+      const list=document.getElementById('chatList'); list.innerHTML='';
+      data.conversations.forEach(conv=>{
+        const div=document.createElement('div');
+        div.className='chat-list-item'+(currentChatWith===conv.gmail?' active':'');
+        div.onclick=()=>openConversation(conv.gmail, conv.name);
+        const time=conv.lastTime? new Date(conv.lastTime).toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'}):'';
+        div.innerHTML=`<div class="avatar-sm">${conv.name.charAt(0).toUpperCase()}</div><div class="meta"><div class="name"><span>${conv.name}</span><span style="font-size:10px; color:rgba(8,24,48,.5);">${time}</span></div><div style="font-size:10px; color:var(--blue); font-weight:600;">${conv.gmail}</div><div class="last">${conv.lastMessage.substring(0,50)}</div></div>`;
+        list.appendChild(div);
+      });
+    }
+  }catch(e){}
+}
+
+function openConversation(gmail, name){
+  currentChatWith=gmail;
+  document.getElementById('chatWithName').textContent=name;
+  document.getElementById('chatWithAvatar').textContent=name.charAt(0).toUpperCase();
+  document.getElementById('chatInputArea').style.display='flex';
+  document.getElementById('chatSidebar').classList.add('hidden-mobile');
+  document.getElementById('backBtn').style.display='flex';
+  loadMessages();
+}
+
+async function loadMessages(){
+  const userGmail = currentRole==='admin' ? currentChatWith : currentUser;
+  if(!userGmail) return;
+  try{
+    const payload = currentRole==='admin' ? {action:'getMessages', userGmail:'admin', targetUser:userGmail} : {action:'getMessages', userGmail:currentUser};
+    const res = await fetch(GAS_ENDPOINT, {method:'POST', headers:{'Content-Type':'text/plain;charset=utf-8'}, body: JSON.stringify(payload)});
+    const data = await res.json();
+    if(data.status==='success'){
+      const container=document.getElementById('chatMessages'); container.innerHTML='';
+      if(data.messages.length===0){
+        container.innerHTML='<div class="chat-empty"><p style="font-size:12px;">No messages yet. Start the conversation.</p></div>';
+      }else{
+        data.messages.forEach(m=>{
+          let bubbleClass='admin';
+          if(currentRole==='user'){ bubbleClass = m.from.toLowerCase()===currentUser.toLowerCase() ? 'user' : 'admin'; }
+          else{ bubbleClass = m.role==='admin' ? 'user' : 'admin'; }
+          const div=document.createElement('div'); div.className='msg-bubble '+bubbleClass;
+          const time=new Date(m.timestamp).toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'});
+          div.innerHTML=`${m.message}<div class="time">${time}</div>`;
+          container.appendChild(div);
+        });
+        container.scrollTop=container.scrollHeight;
+      }
+    }
+  }catch(e){}
+}
+
+async function sendMessage(){
+  const input=document.getElementById('messageInput');
+  const text=input.value.trim(); if(!text||!currentUser) return;
+  const to=currentRole==='admin'? currentChatWith : 'admin';
+  const from=currentRole==='admin'? 'admin' : currentUser;
+  input.value='';
+  const container=document.getElementById('chatMessages');
+  const div=document.createElement('div'); div.className='msg-bubble user'; div.innerHTML=`${text}<div class="time">now</div>`;
+  if(container.querySelector('.chat-empty')) container.innerHTML='';
+  container.appendChild(div); container.scrollTop=container.scrollHeight;
+  try{
+    await fetch(GAS_ENDPOINT, {method:'POST', headers:{'Content-Type':'text/plain;charset=utf-8'}, body: JSON.stringify({action:'sendMessage', from:from, to:to, message:text, role:currentRole})});
+    setTimeout(loadMessages, 500);
+  }catch(e){}
+}
+
+function logout(){
+  localStorage.removeItem('apexx_user'); currentUser=null; currentRole=null; currentChatWith=null;
+  if(pollInterval) clearInterval(pollInterval);
+  document.getElementById('chatApp').classList.remove('open');
+}
+
+function filterConversations(){
+  const q=document.getElementById('searchChat').value.toLowerCase();
+  document.querySelectorAll('.chat-list-item').forEach(el=>{ el.style.display=el.textContent.toLowerCase().includes(q)?'flex':'none'; });
+}
+
+document.getElementById('backBtn')?.addEventListener('click', ()=>{
+  document.getElementById('chatSidebar').classList.remove('hidden-mobile');
+  document.getElementById('chatInputArea').style.display='none';
+});
+
+window.addEventListener('load', ()=>{
+  const nav=document.querySelector('nav div:last-child');
+  if(nav && !document.getElementById('loginNavBtn')){
+    const btn=document.createElement('button');
+    btn.id='loginNavBtn'; btn.textContent='Login';
+    btn.style.cssText='height:36px; padding:0 20px; border-radius:999px; background:#fff; color:var(--ink); border:1px solid var(--line); font-size:13px; font-weight:600; cursor:pointer; margin-left:8px;';
+    btn.onclick=openLogin; nav.prepend(btn);
+  }
+});
 </script>
 
 </body>
