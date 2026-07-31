@@ -294,6 +294,10 @@
   .chat-empty{display:flex; flex-direction:column; align-items:center; justify-content:center; flex:1; color:rgba(8,24,48,.5); padding:40px; text-align:center;}
   @media (max-width:768px){ .chat-sidebar{width:100%; position:absolute; inset:0; z-index:2;} .chat-sidebar.hidden-mobile{display:none;} .chat-main{width:100%;} }
 
+
+  #loginNavBtn{ display:inline-flex !important; }
+  @media (max-width:1024px){ #loginNavBtn{ display:inline-flex !important; height:36px; } .nav-cta{ display:none !important; } }
+
 </style>
 </head>
 <body>
@@ -309,7 +313,8 @@
         <button data-target="who">Who We Serve</button>
         <button data-target="roadmap">Roadmap</button>
       </div>
-      <div style="display:flex; align-items:center; gap:10px;">
+            <div style="display:flex; align-items:center; gap:10px;">
+        <button id="loginNavBtn" onclick="openLogin()" style="height:36px; padding:0 18px; border-radius:999px; background:#fff; color:var(--ink); border:1px solid var(--line); font-size:13px; font-weight:700; cursor:pointer; display:inline-flex; align-items:center; gap:6px;">Login</button>
         <button class="nav-cta" data-target="register">Join Waitlist →</button>
         <button class="menu-btn" id="menuBtn" aria-label="Menu">☰</button>
       </div>
@@ -322,6 +327,7 @@
       <button data-target="market">Market</button>
       <button data-target="who">Who We Serve</button>
       <button data-target="roadmap">Roadmap</button>
+      <button onclick="openLogin()">Login to Chat</button>
       <button data-target="register">Join Waitlist</button>
       <button data-target="contact">Customer Care</button>
     </div>
@@ -723,7 +729,8 @@
     document.getElementById('mobileMenu').classList.toggle('open');
   });
   document.getElementById('fabBtn').addEventListener('click', () => {
-    document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
+    const user = localStorage.getItem('apexx_user');
+    if(user) { document.getElementById('chatApp').classList.add('open'); } else { openLogin(); }
   });
   const io = new IntersectionObserver(entries => {
     entries.forEach(en => { if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); } });
