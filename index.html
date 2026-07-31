@@ -256,48 +256,71 @@
 
   .fab{position:fixed; bottom:24px; right:24px; z-index:40; width:56px; height:56px; border-radius:50%; background:var(--blue); color:#fff; border:none; display:flex; align-items:center; justify-content:center; box-shadow:0 10px 26px rgba(42,127,255,.4); cursor:pointer; transition:transform .2s;}
   .fab:hover{transform:scale(1.05);}
+  .fab .badge-dot{position:absolute; top:-2px; right:-2px; width:16px; height:16px; border-radius:50%; background:#ef4444; color:#fff; font-size:9px; font-weight:800; display:none; align-items:center; justify-content:center; border:2px solid #fff;}
 
-  /* --- LOGIN + WHATSAPP CHAT + HIDDEN ADMIN --- */
-  #authModal{position:fixed; inset:0; z-index:100; display:none; align-items:center; justify-content:center; background:rgba(8,24,48,.7); backdrop-filter:blur(10px); padding:20px;}
-  #authModal.open{display:flex;}
-  .auth-box{background:#fff; width:100%; max-width:400px; border-radius:22px; overflow:hidden; box-shadow:0 30px 80px rgba(0,0,0,.3);}
-  .auth-field{margin-top:16px;}
-  .auth-field label{font-size:12px; font-weight:700;}
-  .auth-field input{width:100%; margin-top:6px; height:46px; padding:0 14px; border-radius:12px; border:1px solid var(--line); font-size:14px; outline:none; font-family:inherit;}
-  .auth-field input:focus{border-color:var(--blue); box-shadow:0 0 0 4px rgba(42,127,255,.1);}
-  .auth-btn{margin-top:20px; width:100%; height:48px; border-radius:999px; background:var(--ink); color:#fff; border:none; font-weight:700; cursor:pointer;}
-  .auth-btn:hover{background:#000;}
-  #chatApp{position:fixed; inset:0; z-index:90; display:none; background:var(--paper);}
-  #chatApp.open{display:flex;}
-  .chat-sidebar{width:360px; background:#fff; border-right:1px solid var(--line); display:flex; flex-direction:column;}
-  .chat-sidebar-header{height:68px; background:var(--ink); color:#fff; display:flex; align-items:center; justify-content:space-between; padding:0 16px;}
-  .chat-sidebar-header .avatar{width:36px; height:36px; border-radius:50%; background:var(--gold); color:var(--ink); display:flex; align-items:center; justify-content:center; font-weight:900;}
-  .chat-list{flex:1; overflow-y:auto; background:#fff;}
-  .chat-list-item{padding:14px 16px; display:flex; gap:12px; cursor:pointer; border-bottom:1px solid var(--line); transition:background .15s;}
-  .chat-list-item:hover{background:var(--off);}
-  .chat-list-item.active{background:var(--paper); border-left:3px solid var(--blue);}
-  .chat-list-item .avatar-sm{width:42px; height:42px; border-radius:50%; background:var(--ink); color:#fff; display:flex; align-items:center; justify-content:center; font-weight:700; flex-shrink:0;}
-  .chat-list-item .meta{flex:1; min-width:0;}
-  .chat-list-item .name{font-size:13.5px; font-weight:700; display:flex; justify-content:space-between;}
-  .chat-list-item .last{font-size:11.5px; color:rgba(8,24,48,.55); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; margin-top:2px;}
-  .chat-main{flex:1; display:flex; flex-direction:column; background:#e5ddd5; background-image: radial-gradient(rgba(0,0,0,.04) 1px, transparent 1px); background-size:20px 20px;}
-  .chat-main-header{height:68px; background:#f0f2f5; border-bottom:1px solid var(--line); display:flex; align-items:center; justify-content:space-between; padding:0 20px;}
-  .chat-messages{flex:1; overflow-y:auto; padding:24px; display:flex; flex-direction:column; gap:8px;}
-  .msg-bubble{max-width:65%; padding:10px 14px; border-radius:12px; font-size:13.5px; line-height:1.5; position:relative; box-shadow:0 1px 2px rgba(0,0,0,.08);}
-  .msg-bubble.user{align-self:flex-end; background:var(--blue); color:#fff; border-bottom-right-radius:4px;}
-  .msg-bubble.admin{align-self:flex-start; background:#fff; color:var(--ink); border-bottom-left-radius:4px;}
-  .msg-bubble .time{font-size:10px; opacity:.7; margin-top:4px; text-align:right;}
-  .chat-input-area{padding:12px 16px; background:#f0f2f5; display:flex; gap:10px; align-items:center; border-top:1px solid var(--line);}
-  .chat-input-area input{flex:1; height:44px; border-radius:999px; border:1px solid var(--line); padding:0 18px; font-size:14px; outline:none; font-family:inherit;}
-  .chat-input-area input:focus{border-color:var(--blue);}
-  .chat-send{width:44px; height:44px; border-radius:50%; background:var(--blue); color:#fff; border:none; display:flex; align-items:center; justify-content:center; cursor:pointer;}
-  .chat-empty{display:flex; flex-direction:column; align-items:center; justify-content:center; flex:1; color:rgba(8,24,48,.5); padding:40px; text-align:center;}
-  @media (max-width:768px){ .chat-sidebar{width:100%; position:absolute; inset:0; z-index:2;} .chat-sidebar.hidden-mobile{display:none;} .chat-main{width:100%;} }
+  /* ===== LOGIN / MODALS ===== */
+  .overlay{position:fixed; inset:0; z-index:90; background:rgba(8,24,48,.55); backdrop-filter:blur(4px); display:none; align-items:center; justify-content:center; padding:20px;}
+  .overlay.open{display:flex;}
+  .modal-card{background:#fff; border-radius:20px; width:100%; max-width:380px; padding:28px; position:relative; box-shadow:0 30px 80px rgba(0,0,0,.3);}
+  .modal-card h3{font-size:18px; font-weight:900; letter-spacing:-.01em;}
+  .modal-card p.sub{margin-top:6px; font-size:12.5px; color:rgba(8,24,48,.6);}
+  .modal-close{position:absolute; top:16px; right:16px; width:28px; height:28px; border-radius:50%; background:var(--paper); border:none; cursor:pointer; font-size:14px; display:flex; align-items:center; justify-content:center;}
+  .modal-card .field{margin-top:16px;}
+  .modal-card .msg-box{margin-top:14px;}
+  .modal-switch{margin-top:16px; font-size:12px; text-align:center; color:rgba(8,24,48,.55);}
+  .modal-switch button{background:none; border:none; color:var(--blue); font-weight:700; cursor:pointer; font:inherit;}
 
+  /* ===== WHATSAPP-STYLE CHAT — FULL PAGE (becomes the landing view once logged in) ===== */
+  .chat-widget{position:fixed; inset:0; z-index:85; background:#fff; display:none; flex-direction:column;}
+  .chat-widget.open{display:flex;}
+  .chat-head{background:#075E54; color:#fff; padding:14px 20px; display:flex; align-items:center; gap:12px; flex-shrink:0;}
+  .chat-head .back{background:rgba(255,255,255,.15); border:none; color:#fff; width:32px; height:32px; border-radius:50%; cursor:pointer; font-size:15px; flex-shrink:0;}
+  .chat-head .av{width:38px; height:38px; border-radius:50%; background:var(--gold); color:var(--ink); display:flex; align-items:center; justify-content:center; font-weight:900; font-size:15px; flex-shrink:0;}
+  .chat-head .who{flex:1; min-width:0;}
+  .chat-head .who .n{font-size:15px; font-weight:700;}
+  .chat-head .who .s{font-size:11.5px; color:rgba(255,255,255,.75); display:flex; align-items:center; gap:5px;}
+  .chat-head .who .s .d{width:6px; height:6px; border-radius:50%; background:#34d399;}
+  .chat-head button.icon{background:rgba(255,255,255,.15); border:none; color:#fff; width:32px; height:32px; border-radius:50%; cursor:pointer; font-size:13px; flex-shrink:0;}
+  .chat-body{flex:1; overflow-y:auto; padding:20px; background:#E5DDD5 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60'%3E%3Crect width='60' height='60' fill='%23E5DDD5'/%3E%3C/svg%3E"); display:flex; flex-direction:column; gap:8px;}
+  .bubble{max-width:min(78%,520px); padding:9px 13px; border-radius:10px; font-size:14px; line-height:1.5; position:relative; box-shadow:0 1px 1px rgba(0,0,0,.08);}
+  .bubble .t{font-size:10px; color:rgba(0,0,0,.4); margin-top:4px; text-align:right;}
+  .bubble.in{align-self:flex-start; background:#fff; border-top-left-radius:2px;}
+  .bubble.out{align-self:flex-end; background:#DCF8C6; border-top-right-radius:2px;}
+  .chat-empty{margin:auto; text-align:center; color:rgba(8,24,48,.4); font-size:13px; padding:20px; max-width:320px;}
+  .chat-inputrow{display:flex; gap:10px; padding:14px 20px; background:var(--paper); border-top:1px solid var(--line); flex-shrink:0;}
+  .chat-inputrow input{flex:1; height:44px; border-radius:22px; border:1px solid var(--line); padding:0 16px; font-size:14px; font-family:inherit; outline:none; max-width:720px; margin:0 auto;}
+  .chat-inputrow input:focus{border-color:#075E54;}
+  .chat-inputrow button{width:44px; height:44px; border-radius:50%; background:#075E54; color:#fff; border:none; cursor:pointer; font-size:16px; flex-shrink:0;}
+  .chat-inputrow button:disabled{opacity:.5; cursor:not-allowed;}
 
-  #loginNavBtn{ display:inline-flex !important; }
-  @media (max-width:1024px){ #loginNavBtn{ display:inline-flex !important; height:36px; } .nav-cta{ display:none !important; } }
-
+  /* ===== ADMIN DASHBOARD ===== */
+  .admin-shell{position:fixed; inset:0; z-index:95; background:#fff; display:none; flex-direction:column;}
+  .admin-shell.open{display:flex;}
+  .admin-topbar{background:var(--ink); color:#fff; padding:14px 20px; display:flex; align-items:center; justify-content:space-between; flex-shrink:0;}
+  .admin-topbar .t{font-weight:900; font-size:15px; display:flex; align-items:center; gap:8px;}
+  .admin-topbar button{background:rgba(255,255,255,.12); border:none; color:#fff; font-size:12px; font-weight:700; padding:8px 14px; border-radius:999px; cursor:pointer;}
+  .admin-body{flex:1; display:flex; overflow:hidden;}
+  .admin-list{width:320px; max-width:40vw; border-right:1px solid var(--line); overflow-y:auto; flex-shrink:0; background:var(--off);}
+  .admin-list-head{padding:14px 16px; font-size:11px; font-weight:800; letter-spacing:.08em; color:rgba(8,24,48,.5); border-bottom:1px solid var(--line); text-transform:uppercase;}
+  .admin-row{padding:14px 16px; border-bottom:1px solid var(--line); cursor:pointer; display:flex; gap:10px; align-items:flex-start; transition:background .15s;}
+  .admin-row:hover, .admin-row.active{background:#fff;}
+  .admin-row.active{border-left:3px solid var(--blue);}
+  .admin-row .av2{width:36px; height:36px; border-radius:50%; background:var(--ink); color:var(--gold); font-weight:800; font-size:13px; display:flex; align-items:center; justify-content:center; flex-shrink:0;}
+  .admin-row .info{flex:1; min-width:0;}
+  .admin-row .info .n{font-size:13px; font-weight:700; display:flex; justify-content:space-between; gap:6px;}
+  .admin-row .info .g{font-size:11px; color:rgba(8,24,48,.55); overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}
+  .admin-row .info .m{font-size:10.5px; color:rgba(8,24,48,.4); margin-top:3px;}
+  .unread-badge{background:#25D366; color:#fff; font-size:10px; font-weight:800; border-radius:999px; padding:2px 7px; flex-shrink:0;}
+  .admin-chat{flex:1; display:flex; flex-direction:column; min-width:0;}
+  .admin-chat-empty{margin:auto; text-align:center; color:rgba(8,24,48,.4); font-size:13px; padding:30px;}
+  .admin-chat-head{padding:14px 20px; border-bottom:1px solid var(--line); display:flex; align-items:center; gap:10px;}
+  .admin-chat-head .n{font-size:14px; font-weight:800;}
+  .admin-chat-head .g{font-size:11.5px; color:rgba(8,24,48,.5);}
+  .admin-chat-body{flex:1; overflow-y:auto; padding:20px; background:#E5DDD5; display:flex; flex-direction:column; gap:8px;}
+  .admin-chat-input{display:flex; gap:10px; padding:14px 20px; border-top:1px solid var(--line);}
+  .admin-chat-input input{flex:1; height:44px; border-radius:22px; border:1px solid var(--line); padding:0 16px; font-size:14px; font-family:inherit; outline:none;}
+  .admin-chat-input button{padding:0 20px; height:44px; border-radius:22px; background:#075E54; color:#fff; border:none; font-weight:700; cursor:pointer;}
+  .admin-login-link{background:none; border:none; color:rgba(255,255,255,.35); font-size:10.5px; cursor:pointer; text-decoration:underline;}
 </style>
 </head>
 <body>
@@ -313,8 +336,8 @@
         <button data-target="who">Who We Serve</button>
         <button data-target="roadmap">Roadmap</button>
       </div>
-            <div style="display:flex; align-items:center; gap:10px;">
-        <button id="loginNavBtn" onclick="openLogin()" style="height:36px; padding:0 18px; border-radius:999px; background:#fff; color:var(--ink); border:1px solid var(--line); font-size:13px; font-weight:700; cursor:pointer; display:inline-flex; align-items:center; gap:6px;">Login</button>
+      <div style="display:flex; align-items:center; gap:10px;">
+        <button class="nav-cta" id="navLoginBtn" style="background:transparent; border:1px solid rgba(8,24,48,.15); color:var(--ink);">Login</button>
         <button class="nav-cta" data-target="register">Join Waitlist →</button>
         <button class="menu-btn" id="menuBtn" aria-label="Menu">☰</button>
       </div>
@@ -327,9 +350,8 @@
       <button data-target="market">Market</button>
       <button data-target="who">Who We Serve</button>
       <button data-target="roadmap">Roadmap</button>
-      <button onclick="openLogin()">Login to Chat</button>
       <button data-target="register">Join Waitlist</button>
-      <button data-target="contact">Customer Care</button>
+      <button id="navLoginBtnMobile">Login to Chat</button>
     </div>
   </div>
 </header>
@@ -654,66 +676,111 @@
       <span>© 2026 APEXXCRESTWAY.</span>
       <span class="mono">RAISING ₦600M • 24-MO RUNWAY → ₦1.4B REVENUE TARGET</span>
     </div>
+    <div style="margin-top:14px; text-align:right;">
+      <button class="admin-login-link" id="adminLinkBtn">Admin</button>
+    </div>
   </div>
 </footer>
 
+<button class="fab" id="fabBtn" aria-label="Chat with customer care">
+  💬
+  <span class="badge-dot" id="fabBadge"></span>
+</button>
 
-<!-- LOGIN MODAL - USER ONLY VISIBLE, ADMIN HIDDEN VIA Apexx1 -->
-<div id="authModal">
-  <div class="auth-box">
-    <div style="padding:28px;">
-      <div style="display:flex; justify-content:space-between; align-items:center;">
-        <h3 style="font-size:18px; font-weight:900;">Login to Chat</h3>
-        <button onclick="document.getElementById('authModal').classList.remove('open')" style="width:32px; height:32px; border-radius:50%; border:1px solid var(--line); background:#fff; cursor:pointer;">✕</button>
+<!-- ===== CUSTOMER LOGIN MODAL (Gmail -> OTP) ===== -->
+<div class="overlay" id="loginOverlay">
+  <div class="modal-card">
+    <button class="modal-close" id="loginCloseBtn">✕</button>
+
+    <div id="loginStepGmail">
+      <h3>Log in to chat</h3>
+      <p class="sub">Enter the Gmail address you registered with — we'll send a one-time code to verify it's you.</p>
+      <div class="field">
+        <label style="font-size:12px; font-weight:700;">Gmail Address</label>
+        <input type="email" id="loginGmail" placeholder="you@gmail.com" style="width:100%; margin-top:6px; height:44px; padding:0 14px; border-radius:12px; border:1px solid var(--line); font-size:14px; font-family:inherit; outline:none;">
       </div>
-      <p style="font-size:12.5px; color:rgba(8,24,48,.6); margin-top:8px;">Access your secure chat with support.</p>
-      <div class="auth-field" id="fieldGmail"><label>Your Gmail</label><input type="text" id="loginGmail" placeholder="you@gmail.com" oninput="handleLoginInput()"></div>
-      <div class="auth-field" id="fieldPass" style="display:none;"><label>Password</label><input type="password" id="loginPass" placeholder="••••••••"></div>
-      <div id="loginMsg" style="margin-top:12px;"></div>
-      <button class="auth-btn" id="btnLogin" onclick="handleLogin()">Continue →</button>
+      <div id="loginMsg"></div>
+      <button class="submit" id="sendCodeBtn" style="margin-top:18px;">Send Code →</button>
+      <p class="fine">Not registered yet? <a href="#register" onclick="document.getElementById('loginOverlay').classList.remove('open'); document.getElementById('register').scrollIntoView({behavior:'smooth'});" style="color:var(--blue); font-weight:700;">Join the waitlist</a></p>
+    </div>
+
+    <div id="loginStepOtp" style="display:none;">
+      <h3>Enter your code</h3>
+      <p class="sub">We sent a 6-digit code to <b id="otpGmailLabel"></b>. It expires in 5 minutes.</p>
+      <div class="field">
+        <label style="font-size:12px; font-weight:700;">6-Digit Code</label>
+        <input type="text" id="otpInput" inputmode="numeric" pattern="[0-9]*" maxlength="6" placeholder="••••••" style="width:100%; margin-top:6px; height:48px; padding:0 14px; border-radius:12px; border:1px solid var(--line); font-size:20px; letter-spacing:.35em; text-align:center; font-family:'JetBrains Mono',monospace; outline:none;">
+      </div>
+      <div id="otpMsg"></div>
+      <button class="submit" id="verifyOtpBtn" style="margin-top:18px;">Verify &amp; Log In →</button>
+      <p class="fine" style="margin-top:14px;">
+        <button type="button" id="resendOtpBtn" style="background:none; border:none; color:var(--blue); font-weight:700; cursor:pointer; font-size:12px; font-family:inherit;">Resend code</button>
+        &nbsp;•&nbsp;
+        <button type="button" id="changeGmailBtn" style="background:none; border:none; color:rgba(8,24,48,.5); font-weight:600; cursor:pointer; font-size:12px; font-family:inherit;">Use a different Gmail</button>
+      </p>
     </div>
   </div>
 </div>
 
-<!-- CHAT APP - WHATSAPP STYLE -->
-<div id="chatApp">
-  <div class="chat-sidebar" id="chatSidebar">
-    <div class="chat-sidebar-header">
-      <div style="display:flex; align-items:center; gap:10px;">
-        <div class="avatar" id="currentUserAvatar">A</div>
-        <div><div style="font-size:13px; font-weight:700;" id="currentUserName">APEXX</div><div style="font-size:11px; opacity:.7;" id="currentUserRole">Online</div></div>
-      </div>
-      <button onclick="logout()" style="width:32px; height:32px; border-radius:50%; background:rgba(255,255,255,.15); border:none; color:#fff; cursor:pointer;">✕</button>
+<!-- ===== CUSTOMER CHAT WIDGET (WhatsApp-style) ===== -->
+<div class="chat-widget" id="chatWidget">
+  <div class="chat-head">
+    <button class="back" id="chatBackBtn" title="Back to site">←</button>
+    <div class="av">A</div>
+    <div class="who">
+      <div class="n">APEXXCRESTWAY Support</div>
+      <div class="s"><span class="d"></span>Online • avg reply 11 min</div>
     </div>
-    <div style="padding:12px; background:var(--off); border-bottom:1px solid var(--line);">
-      <input type="text" id="searchChat" placeholder="Search..." style="width:100%; height:36px; border-radius:999px; border:1px solid var(--line); padding:0 14px; font-size:13px; outline:none;" oninput="filterConversations()">
-    </div>
-    <div class="chat-list" id="chatList"></div>
+    <button class="icon" id="chatLogoutBtn" title="Log out">⎋</button>
   </div>
-  <div class="chat-main">
-    <div class="chat-main-header">
-      <div style="display:flex; align-items:center; gap:12px;">
-        <button id="backBtn" style="display:none; width:32px; height:32px; border-radius:50%; border:1px solid var(--line); background:#fff; cursor:pointer;">←</button>
-        <div class="avatar-sm" id="chatWithAvatar" style="width:40px; height:40px; border-radius:50%; background:var(--ink); color:#fff; display:flex; align-items:center; justify-content:center; font-weight:700;">A</div>
-        <div><div style="font-size:14px; font-weight:700;" id="chatWithName">Support</div><div style="font-size:11px; color:rgba(8,24,48,.6);" id="chatWithStatus">Online • Lagos • Abuja</div></div>
-      </div>
-      <div style="font-size:10px; color:rgba(8,24,48,.45);" class="mono">SECURE</div>
-    </div>
-    <div class="chat-messages" id="chatMessages">
-      <div class="chat-empty">
-        <div style="width:80px; height:80px; border-radius:50%; background:var(--ink); color:var(--gold); display:flex; align-items:center; justify-content:center; font-size:32px; font-weight:900;">A</div>
-        <h3 style="margin-top:16px; font-size:16px; font-weight:800; color:var(--ink);">Secure Chat</h3>
-        <p style="margin-top:8px; font-size:12.5px; max-width:300px; line-height:1.5; color:rgba(8,24,48,.6);">Your conversations are protected.</p>
-      </div>
-    </div>
-    <div class="chat-input-area" id="chatInputArea" style="display:none;">
-      <input type="text" id="messageInput" placeholder="Type a message..." onkeypress="if(event.key==='Enter') sendMessage()">
-      <button class="chat-send" onclick="sendMessage()">➤</button>
-    </div>
+  <div class="chat-body" id="chatBody">
+    <div class="chat-empty">Say hello 👋 — a real person from our customer care team will reply here.</div>
+  </div>
+  <div class="chat-inputrow">
+    <input type="text" id="chatInput" placeholder="Type a message...">
+    <button id="chatSendBtn">➤</button>
   </div>
 </div>
 
-<button class="fab" id="fabBtn" aria-label="Chat with customer care">💬</button>
+<!-- ===== ADMIN LOGIN MODAL ===== -->
+<div class="overlay" id="adminLoginOverlay">
+  <div class="modal-card">
+    <button class="modal-close" id="adminLoginCloseBtn">✕</button>
+    <h3>Admin Login</h3>
+    <p class="sub">Restricted to the APEXXCRESTWAY team.</p>
+    <div class="field">
+      <label style="font-size:12px; font-weight:700;">Username</label>
+      <input type="text" id="adminUsername" autocomplete="username" style="width:100%; margin-top:6px; height:44px; padding:0 14px; border-radius:12px; border:1px solid var(--line); font-size:14px; font-family:inherit; outline:none;">
+    </div>
+    <div class="field">
+      <label style="font-size:12px; font-weight:700;">Password</label>
+      <input type="password" id="adminPassword" autocomplete="current-password" style="width:100%; margin-top:6px; height:44px; padding:0 14px; border-radius:12px; border:1px solid var(--line); font-size:14px; font-family:inherit; outline:none;">
+    </div>
+    <div id="adminLoginMsg"></div>
+    <button class="submit" id="adminLoginSubmitBtn" style="margin-top:18px;">Log In →</button>
+  </div>
+</div>
+
+<!-- ===== ADMIN DASHBOARD ===== -->
+<div class="admin-shell" id="adminShell">
+  <div class="admin-topbar">
+    <div class="t">🛡 APEXXCRESTWAY Admin</div>
+    <div style="display:flex; gap:10px;">
+      <button id="adminRefreshBtn">Refresh</button>
+      <button id="adminLogoutBtn">Log out</button>
+      <button id="adminCloseBtn">Close ✕</button>
+    </div>
+  </div>
+  <div class="admin-body">
+    <div class="admin-list" id="adminList">
+      <div class="admin-list-head">Registered Users</div>
+      <div id="adminListItems"></div>
+    </div>
+    <div class="admin-chat" id="adminChatPane">
+      <div class="admin-chat-empty">Select a user on the left to view their signup details and chat with them.</div>
+    </div>
+  </div>
+</div>
 
 <script>
   const header = document.getElementById('siteHeader');
@@ -729,8 +796,7 @@
     document.getElementById('mobileMenu').classList.toggle('open');
   });
   document.getElementById('fabBtn').addEventListener('click', () => {
-    const user = localStorage.getItem('apexx_user');
-    if(user) { document.getElementById('chatApp').classList.add('open'); } else { openLogin(); }
+    document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
   });
   const io = new IntersectionObserver(entries => {
     entries.forEach(en => { if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); } });
@@ -814,177 +880,419 @@
   });
 </script>
 
-
 <script>
-// --- LOGIN + HIDDEN ADMIN + WHATSAPP CHAT ---
-const GAS_ENDPOINT = 'https://script.google.com/macros/s/AKfycbyWlCMG-TZpe5P6GrMjN1Dm7M6T5i5B1FtPVsuA4anHZCFWxNWfIxsaKStJmMRymtsZOw/exec';
-let currentUser = null;
-let currentRole = null;
-let currentChatWith = null;
-let pollInterval = null;
+  // =====================================================================
+  // LOGIN + CHAT + ADMIN DASHBOARD
+  // =====================================================================
+  const API = GAS_ENDPOINT; // reuse the same Apps Script Web App URL
 
-function openLogin(){ document.getElementById('authModal').classList.add('open'); }
-function handleLoginInput(){
-  const val = document.getElementById('loginGmail').value.trim();
-  const passField = document.getElementById('fieldPass');
-  if(val.toLowerCase() === 'apexx1'){
-    passField.style.display = 'block';
-    document.getElementById('btnLogin').textContent = 'Login →';
-  }else{
-    passField.style.display = 'none';
-    document.getElementById('btnLogin').textContent = 'Continue →';
+  async function apiPost(payload) {
+    const res = await fetch(API, {
+      method: 'POST',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify(payload)
+    });
+    return res.json();
   }
-}
 
-async function handleLogin(){
-  const gmailInput = document.getElementById('loginGmail').value.trim();
-  const passInput = document.getElementById('loginPass').value.trim();
-  const msgEl = document.getElementById('loginMsg');
-  if(gmailInput.toLowerCase() === 'apexx1'){
-    if(!passInput){ msgEl.innerHTML = '<div class="msg-box msg-err">Enter password</div>'; return; }
-    try{
-      const res = await fetch(GAS_ENDPOINT, {method:'POST', headers:{'Content-Type':'text/plain;charset=utf-8'}, body: JSON.stringify({action:'loginAdmin', username:'Apexx1', password:passInput})});
-      const data = await res.json();
-      if(data.status==='success'){
-        currentUser='admin'; currentRole='admin';
-        localStorage.setItem('apexx_user', JSON.stringify({username:'Apexx1', role:'admin'}));
-        startChat();
-      }else{ msgEl.innerHTML = `<div class="msg-box msg-err">${data.message}</div>`; }
-    }catch(e){ msgEl.innerHTML = '<div class="msg-box msg-err">Could not reach server</div>'; }
-    return;
+  function escapeHtml(str) {
+    return (str || '').toString()
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
   }
-  const gmail = gmailInput.toLowerCase();
-  if(!gmail || !gmail.includes('@')){ msgEl.innerHTML = '<div class="msg-box msg-err">Enter a valid Gmail</div>'; return; }
-  document.getElementById('btnLogin').textContent = 'Checking...';
-  try{
-    const res = await fetch(GAS_ENDPOINT, {method:'POST', headers:{'Content-Type':'text/plain;charset=utf-8'}, body: JSON.stringify({action:'loginUser', gmail:gmail})});
-    const data = await res.json();
-    if(data.status==='success'){
-      currentUser=data.gmail; currentRole='user';
-      localStorage.setItem('apexx_user', JSON.stringify({gmail: currentUser, name: data.name, role:'user'}));
-      startChat();
-    }else{ msgEl.innerHTML = `<div class="msg-box msg-err">${data.message}</div>`; }
-  }catch(e){ msgEl.innerHTML = '<div class="msg-box msg-err">Could not reach server</div>'; }
-  document.getElementById('btnLogin').textContent = 'Continue →';
-}
-
-function startChat(){
-  document.getElementById('authModal').classList.remove('open');
-  document.getElementById('chatApp').classList.add('open');
-  document.getElementById('currentUserName').textContent = currentRole==='admin' ? 'Apexx1' : currentUser;
-  document.getElementById('currentUserRole').textContent = currentRole==='admin' ? 'Admin' : 'Verified';
-  document.getElementById('currentUserAvatar').textContent = currentRole==='admin' ? 'A' : currentUser.charAt(0).toUpperCase();
-  if(currentRole==='user'){
-    currentChatWith='admin';
-    document.getElementById('chatWithName').textContent='Support';
-    document.getElementById('chatWithAvatar').textContent='A';
-    document.getElementById('chatList').innerHTML=`<div class="chat-list-item active"><div class="avatar-sm" style="background:var(--ink);">A</div><div class="meta"><div class="name"><span>Support Team</span><span style="font-size:10px; color:var(--blue);">● Online</span></div><div class="last">Official support channel</div></div></div>`;
-    document.getElementById('chatInputArea').style.display='flex';
-    loadMessages();
-  }else{
-    loadConversations();
-    document.getElementById('chatInputArea').style.display='none';
+  function timeLabel(ts) {
+    try { return new Date(ts).toLocaleString([], { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' }); }
+    catch (e) { return ''; }
   }
-  if(pollInterval) clearInterval(pollInterval);
-  pollInterval=setInterval(()=>{ if(currentRole==='user') loadMessages(); else if(currentChatWith) loadMessages(); else loadConversations(); }, 3000);
-}
 
-async function loadConversations(){
-  try{
-    const res = await fetch(GAS_ENDPOINT, {method:'POST', headers:{'Content-Type':'text/plain;charset=utf-8'}, body: JSON.stringify({action:'getConversations'})});
-    const data = await res.json();
-    if(data.status==='success'){
-      const list=document.getElementById('chatList'); list.innerHTML='';
-      data.conversations.forEach(conv=>{
-        const div=document.createElement('div');
-        div.className='chat-list-item'+(currentChatWith===conv.gmail?' active':'');
-        div.onclick=()=>openConversation(conv.gmail, conv.name);
-        const time=conv.lastTime? new Date(conv.lastTime).toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'}):'';
-        div.innerHTML=`<div class="avatar-sm">${conv.name.charAt(0).toUpperCase()}</div><div class="meta"><div class="name"><span>${conv.name}</span><span style="font-size:10px; color:rgba(8,24,48,.5);">${time}</span></div><div style="font-size:10px; color:var(--blue); font-weight:600;">${conv.gmail}</div><div class="last">${conv.lastMessage.substring(0,50)}</div></div>`;
-        list.appendChild(div);
-      });
-    }
-  }catch(e){}
-}
+  // ---- session ----
+  function getCustomerSession() {
+    const raw = sessionStorage.getItem('apexx_customer');
+    return raw ? JSON.parse(raw) : null;
+  }
+  function setCustomerSession(user) { sessionStorage.setItem('apexx_customer', JSON.stringify(user)); }
+  function clearCustomerSession() { sessionStorage.removeItem('apexx_customer'); }
 
-function openConversation(gmail, name){
-  currentChatWith=gmail;
-  document.getElementById('chatWithName').textContent=name;
-  document.getElementById('chatWithAvatar').textContent=name.charAt(0).toUpperCase();
-  document.getElementById('chatInputArea').style.display='flex';
-  document.getElementById('chatSidebar').classList.add('hidden-mobile');
-  document.getElementById('backBtn').style.display='flex';
-  loadMessages();
-}
+  function getAdminToken() { return sessionStorage.getItem('apexx_admin_token'); }
+  function setAdminToken(t) { sessionStorage.setItem('apexx_admin_token', t); }
+  function clearAdminToken() { sessionStorage.removeItem('apexx_admin_token'); }
 
-async function loadMessages(){
-  const userGmail = currentRole==='admin' ? currentChatWith : currentUser;
-  if(!userGmail) return;
-  try{
-    const payload = currentRole==='admin' ? {action:'getMessages', userGmail:'admin', targetUser:userGmail} : {action:'getMessages', userGmail:currentUser};
-    const res = await fetch(GAS_ENDPOINT, {method:'POST', headers:{'Content-Type':'text/plain;charset=utf-8'}, body: JSON.stringify(payload)});
-    const data = await res.json();
-    if(data.status==='success'){
-      const container=document.getElementById('chatMessages'); container.innerHTML='';
-      if(data.messages.length===0){
-        container.innerHTML='<div class="chat-empty"><p style="font-size:12px;">No messages yet. Start the conversation.</p></div>';
-      }else{
-        data.messages.forEach(m=>{
-          let bubbleClass='admin';
-          if(currentRole==='user'){ bubbleClass = m.from.toLowerCase()===currentUser.toLowerCase() ? 'user' : 'admin'; }
-          else{ bubbleClass = m.role==='admin' ? 'user' : 'admin'; }
-          const div=document.createElement('div'); div.className='msg-bubble '+bubbleClass;
-          const time=new Date(m.timestamp).toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'});
-          div.innerHTML=`${m.message}<div class="time">${time}</div>`;
-          container.appendChild(div);
-        });
-        container.scrollTop=container.scrollHeight;
+  // =====================================================================
+  // CUSTOMER LOGIN MODAL
+  // =====================================================================
+  const loginOverlay = document.getElementById('loginOverlay');
+  const loginStepGmail = document.getElementById('loginStepGmail');
+  const loginStepOtp = document.getElementById('loginStepOtp');
+  const loginGmail = document.getElementById('loginGmail');
+  const loginMsg = document.getElementById('loginMsg');
+  const sendCodeBtn = document.getElementById('sendCodeBtn');
+  const otpInput = document.getElementById('otpInput');
+  const otpMsg = document.getElementById('otpMsg');
+  const otpGmailLabel = document.getElementById('otpGmailLabel');
+  const verifyOtpBtn = document.getElementById('verifyOtpBtn');
+  const resendOtpBtn = document.getElementById('resendOtpBtn');
+  const changeGmailBtn = document.getElementById('changeGmailBtn');
+  let pendingLoginGmail = '';
+  let resendCooldownTimer = null;
+
+  function showGmailStep() {
+    loginStepOtp.style.display = 'none';
+    loginStepGmail.style.display = 'block';
+    otpMsg.innerHTML = ''; otpInput.value = '';
+  }
+  function showOtpStep(gmail) {
+    pendingLoginGmail = gmail;
+    otpGmailLabel.textContent = gmail;
+    loginStepGmail.style.display = 'none';
+    loginStepOtp.style.display = 'block';
+    otpMsg.innerHTML = ''; otpInput.value = ''; otpInput.focus();
+    startResendCooldown();
+  }
+  function startResendCooldown() {
+    let secs = 30;
+    resendOtpBtn.disabled = true;
+    resendOtpBtn.textContent = `Resend code (${secs}s)`;
+    if (resendCooldownTimer) clearInterval(resendCooldownTimer);
+    resendCooldownTimer = setInterval(() => {
+      secs -= 1;
+      if (secs <= 0) {
+        clearInterval(resendCooldownTimer);
+        resendOtpBtn.disabled = false;
+        resendOtpBtn.textContent = 'Resend code';
+      } else {
+        resendOtpBtn.textContent = `Resend code (${secs}s)`;
       }
-    }
-  }catch(e){}
-}
-
-async function sendMessage(){
-  const input=document.getElementById('messageInput');
-  const text=input.value.trim(); if(!text||!currentUser) return;
-  const to=currentRole==='admin'? currentChatWith : 'admin';
-  const from=currentRole==='admin'? 'admin' : currentUser;
-  input.value='';
-  const container=document.getElementById('chatMessages');
-  const div=document.createElement('div'); div.className='msg-bubble user'; div.innerHTML=`${text}<div class="time">now</div>`;
-  if(container.querySelector('.chat-empty')) container.innerHTML='';
-  container.appendChild(div); container.scrollTop=container.scrollHeight;
-  try{
-    await fetch(GAS_ENDPOINT, {method:'POST', headers:{'Content-Type':'text/plain;charset=utf-8'}, body: JSON.stringify({action:'sendMessage', from:from, to:to, message:text, role:currentRole})});
-    setTimeout(loadMessages, 500);
-  }catch(e){}
-}
-
-function logout(){
-  localStorage.removeItem('apexx_user'); currentUser=null; currentRole=null; currentChatWith=null;
-  if(pollInterval) clearInterval(pollInterval);
-  document.getElementById('chatApp').classList.remove('open');
-}
-
-function filterConversations(){
-  const q=document.getElementById('searchChat').value.toLowerCase();
-  document.querySelectorAll('.chat-list-item').forEach(el=>{ el.style.display=el.textContent.toLowerCase().includes(q)?'flex':'none'; });
-}
-
-document.getElementById('backBtn')?.addEventListener('click', ()=>{
-  document.getElementById('chatSidebar').classList.remove('hidden-mobile');
-  document.getElementById('chatInputArea').style.display='none';
-});
-
-window.addEventListener('load', ()=>{
-  const nav=document.querySelector('nav div:last-child');
-  if(nav && !document.getElementById('loginNavBtn')){
-    const btn=document.createElement('button');
-    btn.id='loginNavBtn'; btn.textContent='Login';
-    btn.style.cssText='height:36px; padding:0 20px; border-radius:999px; background:#fff; color:var(--ink); border:1px solid var(--line); font-size:13px; font-weight:600; cursor:pointer; margin-left:8px;';
-    btn.onclick=openLogin; nav.prepend(btn);
+    }, 1000);
   }
-});
+
+  function openLoginModal() {
+    loginOverlay.classList.add('open');
+    showGmailStep();
+    loginMsg.innerHTML = ''; loginGmail.value = ''; loginGmail.focus();
+  }
+  function closeLoginModal() {
+    loginOverlay.classList.remove('open');
+    if (resendCooldownTimer) clearInterval(resendCooldownTimer);
+  }
+  document.getElementById('loginCloseBtn').addEventListener('click', closeLoginModal);
+  loginOverlay.addEventListener('click', (e) => { if (e.target === loginOverlay) closeLoginModal(); });
+  changeGmailBtn.addEventListener('click', showGmailStep);
+
+  async function requestOtp(gmail) {
+    return apiPost({ action: 'requestOtp', gmail });
+  }
+
+  sendCodeBtn.addEventListener('click', async () => {
+    const gmail = loginGmail.value.trim();
+    if (!/^[^\s@]+@gmail\.com$/i.test(gmail)) {
+      loginMsg.innerHTML = '<div class="msg-box msg-err">Enter a valid Gmail address.</div>';
+      return;
+    }
+    sendCodeBtn.disabled = true; sendCodeBtn.textContent = 'Sending...';
+    try {
+      const data = await requestOtp(gmail);
+      if (data.status === 'success') {
+        showOtpStep(gmail);
+      } else {
+        loginMsg.innerHTML = `<div class="msg-box msg-err">${escapeHtml(data.message || "We couldn't find that Gmail. Register first.")}</div>`;
+      }
+    } catch (err) {
+      loginMsg.innerHTML = '<div class="msg-box msg-err">Could not reach the server. Try again.</div>';
+    } finally {
+      sendCodeBtn.disabled = false; sendCodeBtn.textContent = 'Send Code →';
+    }
+  });
+
+  resendOtpBtn.addEventListener('click', async () => {
+    if (resendOtpBtn.disabled) return;
+    try {
+      const data = await requestOtp(pendingLoginGmail);
+      if (data.status === 'success') {
+        otpMsg.innerHTML = '<div class="msg-box msg-ok">A new code has been sent.</div>';
+        startResendCooldown();
+      } else {
+        otpMsg.innerHTML = `<div class="msg-box msg-err">${escapeHtml(data.message || 'Could not resend code.')}</div>`;
+      }
+    } catch (err) {
+      otpMsg.innerHTML = '<div class="msg-box msg-err">Could not reach the server.</div>';
+    }
+  });
+
+  async function verifyOtp() {
+    const otp = otpInput.value.trim();
+    if (!/^\d{6}$/.test(otp)) {
+      otpMsg.innerHTML = '<div class="msg-box msg-err">Enter the 6-digit code.</div>';
+      return;
+    }
+    verifyOtpBtn.disabled = true; verifyOtpBtn.textContent = 'Verifying...';
+    try {
+      const data = await apiPost({ action: 'verifyOtp', gmail: pendingLoginGmail, otp });
+      if (data.status === 'success') {
+        setCustomerSession(data.user);
+        closeLoginModal();
+        openChat();
+      } else {
+        otpMsg.innerHTML = `<div class="msg-box msg-err">${escapeHtml(data.message || 'Incorrect code.')}</div>`;
+        if (data.status === 'expired') showGmailStep();
+      }
+    } catch (err) {
+      otpMsg.innerHTML = '<div class="msg-box msg-err">Could not reach the server. Try again.</div>';
+    } finally {
+      verifyOtpBtn.disabled = false; verifyOtpBtn.textContent = 'Verify & Log In →';
+    }
+  }
+  verifyOtpBtn.addEventListener('click', verifyOtp);
+  otpInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') verifyOtp(); });
+
+  // =====================================================================
+  // CUSTOMER CHAT WIDGET
+  // =====================================================================
+  const chatWidget = document.getElementById('chatWidget');
+  const chatBody = document.getElementById('chatBody');
+  const chatInput = document.getElementById('chatInput');
+  const chatSendBtn = document.getElementById('chatSendBtn');
+  let chatPollTimer = null;
+
+  function renderMessages(container, messages, myRole) {
+    if (!messages.length) {
+      container.innerHTML = '<div class="chat-empty">Say hello 👋 — a real person from our customer care team will reply here.</div>';
+      return;
+    }
+    container.innerHTML = messages.map(m => {
+      const mine = m.sender === myRole;
+      return `<div class="bubble ${mine ? 'out' : 'in'}">${escapeHtml(m.text)}<div class="t">${timeLabel(m.timestamp)}</div></div>`;
+    }).join('');
+    container.scrollTop = container.scrollHeight;
+  }
+
+  async function refreshCustomerChat() {
+    const user = getCustomerSession();
+    if (!user) return;
+    try {
+      const data = await apiPost({ action: 'getMessages', gmail: user.gmail });
+      if (data.status === 'success') renderMessages(chatBody, data.messages, 'customer');
+    } catch (err) { /* silent poll failure */ }
+  }
+
+  function openChat() {
+    const user = getCustomerSession();
+    if (!user) { openLoginModal(); return; }
+    document.querySelector('#chatWidget .chat-head .n').textContent = user.name ? `Hi ${user.name.split(' ')[0]} — APEXXCRESTWAY Support` : 'APEXXCRESTWAY Support';
+    chatWidget.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    refreshCustomerChat();
+    if (chatPollTimer) clearInterval(chatPollTimer);
+    chatPollTimer = setInterval(refreshCustomerChat, 4000);
+  }
+  function closeChat() {
+    chatWidget.classList.remove('open');
+    document.body.style.overflow = '';
+    if (chatPollTimer) clearInterval(chatPollTimer);
+  }
+  document.getElementById('chatBackBtn').addEventListener('click', closeChat);
+  document.getElementById('chatLogoutBtn').addEventListener('click', () => {
+    clearCustomerSession();
+    closeChat();
+  });
+
+  // Nav "Login" buttons — log in if needed, otherwise jump straight into chat
+  function handleLoginNavClick() {
+    const user = getCustomerSession();
+    if (user) openChat(); else openLoginModal();
+  }
+  document.getElementById('navLoginBtn').addEventListener('click', handleLoginNavClick);
+  document.getElementById('navLoginBtnMobile').addEventListener('click', () => {
+    document.getElementById('mobileMenu').classList.remove('open');
+    handleLoginNavClick();
+  });
+
+  // If a logged-in session already exists (returning visitor), the chat
+  // becomes the landing view immediately instead of the marketing page.
+  if (getCustomerSession()) openChat();
+
+  async function sendCustomerMessage() {
+    const user = getCustomerSession();
+    const text = chatInput.value.trim();
+    if (!user || !text) return;
+    chatInput.value = '';
+    chatSendBtn.disabled = true;
+    try {
+      await apiPost({ action: 'sendMessage', gmail: user.gmail, sender: 'customer', text });
+      await refreshCustomerChat();
+    } catch (err) { /* ignore */ }
+    finally { chatSendBtn.disabled = false; }
+  }
+  chatSendBtn.addEventListener('click', sendCustomerMessage);
+  chatInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') sendCustomerMessage(); });
+
+  // Route the fab button into login+chat instead of the earlier scroll-to-contact
+  // behaviour. Cloning the node strips its old listener before adding the new one.
+  (function rebindFab() {
+    const old = document.getElementById('fabBtn');
+    const clone = old.cloneNode(true);
+    old.parentNode.replaceChild(clone, old);
+    clone.addEventListener('click', () => {
+      const user = getCustomerSession();
+      if (user) openChat(); else openLoginModal();
+    });
+  })();
+
+  document.querySelectorAll('[data-target="contact"]').forEach(btn => {
+    // keep default scroll-to-contact behaviour from the earlier script, no change needed
+  });
+
+  // The "Join to Unlock Chat" card in the Customer Care section: if already logged in, open chat instead of scrolling to register
+  document.querySelectorAll('.ccard .cta-blue').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      const user = getCustomerSession();
+      if (user) { e.preventDefault(); openChat(); }
+    });
+  });
+
+  // On load, if there's an existing session, show an unread hint dot on the fab (best-effort, silent)
+  if (getCustomerSession()) {
+    document.getElementById('fabBadge').style.display = 'flex';
+    document.getElementById('fabBadge').textContent = '';
+  }
+
+  // =====================================================================
+  // ADMIN LOGIN
+  // =====================================================================
+  const adminLoginOverlay = document.getElementById('adminLoginOverlay');
+  const adminUsername = document.getElementById('adminUsername');
+  const adminPassword = document.getElementById('adminPassword');
+  const adminLoginMsg = document.getElementById('adminLoginMsg');
+  const adminLoginSubmitBtn = document.getElementById('adminLoginSubmitBtn');
+  const adminShell = document.getElementById('adminShell');
+
+  document.getElementById('adminLinkBtn').addEventListener('click', () => {
+    if (getAdminToken()) { openAdminShell(); return; }
+    adminLoginOverlay.classList.add('open');
+    adminLoginMsg.innerHTML = ''; adminUsername.value = ''; adminPassword.value = '';
+  });
+  document.getElementById('adminLoginCloseBtn').addEventListener('click', () => adminLoginOverlay.classList.remove('open'));
+  adminLoginOverlay.addEventListener('click', (e) => { if (e.target === adminLoginOverlay) adminLoginOverlay.classList.remove('open'); });
+
+  adminLoginSubmitBtn.addEventListener('click', async () => {
+    const username = adminUsername.value.trim();
+    const password = adminPassword.value;
+    if (!username || !password) { adminLoginMsg.innerHTML = '<div class="msg-box msg-err">Enter username and password.</div>'; return; }
+    adminLoginSubmitBtn.disabled = true; adminLoginSubmitBtn.textContent = 'Checking...';
+    try {
+      const data = await apiPost({ action: 'adminLogin', username, password });
+      if (data.status === 'success') {
+        setAdminToken(data.token);
+        adminLoginOverlay.classList.remove('open');
+        openAdminShell();
+      } else {
+        adminLoginMsg.innerHTML = `<div class="msg-box msg-err">${escapeHtml(data.message || 'Invalid credentials.')}</div>`;
+      }
+    } catch (err) {
+      adminLoginMsg.innerHTML = '<div class="msg-box msg-err">Could not reach the server.</div>';
+    } finally {
+      adminLoginSubmitBtn.disabled = false; adminLoginSubmitBtn.textContent = 'Log In →';
+    }
+  });
+
+  // =====================================================================
+  // ADMIN DASHBOARD
+  // =====================================================================
+  const adminListItems = document.getElementById('adminListItems');
+  const adminChatPane = document.getElementById('adminChatPane');
+  let activeAdminGmail = null;
+  let adminPollTimer = null;
+  let adminListPollTimer = null;
+
+  function initials(name) {
+    return (name || '?').trim().split(/\s+/).slice(0, 2).map(w => w[0] || '').join('').toUpperCase();
+  }
+
+  async function loadSignups() {
+    const token = getAdminToken();
+    if (!token) return;
+    try {
+      const data = await apiPost({ action: 'getSignups', adminToken: token });
+      if (data.status !== 'success') return;
+      adminListItems.innerHTML = data.signups.map(s => `
+        <div class="admin-row ${s.gmail === activeAdminGmail ? 'active' : ''}" data-gmail="${escapeHtml(s.gmail)}" data-name="${escapeHtml(s.name)}">
+          <div class="av2">${escapeHtml(initials(s.name))}</div>
+          <div class="info">
+            <div class="n"><span>${escapeHtml(s.name)}</span>${s.unread > 0 ? `<span class="unread-badge">${s.unread}</span>` : ''}</div>
+            <div class="g">${escapeHtml(s.gmail)}</div>
+            <div class="m">${escapeHtml(s.investorType || '')} • ${timeLabel(s.timestamp)}</div>
+          </div>
+        </div>
+      `).join('') || '<div style="padding:20px; font-size:12.5px; color:rgba(8,24,48,.5);">No signups yet.</div>';
+
+      adminListItems.querySelectorAll('.admin-row').forEach(row => {
+        row.addEventListener('click', () => openAdminThread(row.dataset.gmail, row.dataset.name));
+      });
+    } catch (err) { /* silent */ }
+  }
+
+  function openAdminThread(gmail, name) {
+    activeAdminGmail = gmail;
+    adminChatPane.innerHTML = `
+      <div class="admin-chat-head">
+        <div class="av2" style="width:36px;height:36px;">${escapeHtml(initials(name))}</div>
+        <div><div class="n">${escapeHtml(name)}</div><div class="g">${escapeHtml(gmail)}</div></div>
+      </div>
+      <div class="admin-chat-body" id="adminChatBody"></div>
+      <div class="admin-chat-input">
+        <input type="text" id="adminChatInput" placeholder="Reply as APEXXCRESTWAY Admin...">
+        <button id="adminChatSendBtn">Send</button>
+      </div>
+    `;
+    refreshAdminThread();
+    if (adminPollTimer) clearInterval(adminPollTimer);
+    adminPollTimer = setInterval(refreshAdminThread, 4000);
+
+    document.getElementById('adminChatSendBtn').addEventListener('click', sendAdminMessage);
+    document.getElementById('adminChatInput').addEventListener('keydown', (e) => { if (e.key === 'Enter') sendAdminMessage(); });
+
+    loadSignups(); // refresh list so the unread badge / active highlight update
+  }
+
+  async function refreshAdminThread() {
+    const token = getAdminToken();
+    if (!token || !activeAdminGmail) return;
+    const body = document.getElementById('adminChatBody');
+    if (!body) return;
+    try {
+      const data = await apiPost({ action: 'getMessages', gmail: activeAdminGmail, adminToken: token });
+      if (data.status === 'success') renderMessages(body, data.messages, 'admin');
+    } catch (err) { /* silent */ }
+  }
+
+  async function sendAdminMessage() {
+    const token = getAdminToken();
+    const input = document.getElementById('adminChatInput');
+    const text = input.value.trim();
+    if (!token || !activeAdminGmail || !text) return;
+    input.value = '';
+    try {
+      await apiPost({ action: 'sendMessage', gmail: activeAdminGmail, sender: 'admin', text, adminToken: token });
+      await refreshAdminThread();
+    } catch (err) { /* ignore */ }
+  }
+
+  function openAdminShell() {
+    adminShell.classList.add('open');
+    loadSignups();
+    if (adminListPollTimer) clearInterval(adminListPollTimer);
+    adminListPollTimer = setInterval(loadSignups, 6000);
+  }
+  function closeAdminShell() {
+    adminShell.classList.remove('open');
+    if (adminPollTimer) clearInterval(adminPollTimer);
+    if (adminListPollTimer) clearInterval(adminListPollTimer);
+  }
+  document.getElementById('adminCloseBtn').addEventListener('click', closeAdminShell);
+  document.getElementById('adminRefreshBtn').addEventListener('click', () => { loadSignups(); refreshAdminThread(); });
+  document.getElementById('adminLogoutBtn').addEventListener('click', () => {
+    clearAdminToken();
+    activeAdminGmail = null;
+    closeAdminShell();
+  });
 </script>
 
 </body>
