@@ -32,13 +32,29 @@
   header.scrolled{background:rgba(255,255,255,.92); backdrop-filter:blur(14px); border-bottom:1px solid var(--line); box-shadow:0 8px 30px rgba(0,0,0,.06);}
   nav{display:flex; align-items:center; justify-content:space-between; height:68px;}
   .brand{display:flex; align-items:center; gap:10px; font-weight:900; letter-spacing:-.02em; font-size:16px;}
-  .brand .mark-img{height:36px; width:auto; object-fit:contain; border-radius:8px; background:#fff; padding:2px; border:1px solid var(--line);}
+  .brand .mark-img{height:36px; width:auto; object-fit:contain; border-radius:8px; background:transparent; padding:2px; border:none;}
+  .brand .mark-img.dark{display:none;}
+  .brand .mark-img.light{display:block;}
+  header.scrolled .brand .mark-img.dark{display:block;}
+  header.scrolled .brand .mark-img.light{display:none;}
+  header.scrolled .brand .mark-img{background:#fff; border:1px solid var(--line);}
+  .hero .brand .mark-img{background:transparent; border:none;}
   header.scrolled .brand .mark-img{background:#fff;}
   .hero .brand .mark-img{background:#fff;}
-  .brand .accent{color:var(--gold); font-weight:500;}
-  .navlinks{display:none; gap:32px; font-size:13.5px; font-weight:500; color:rgba(8,24,48,.7);}
-  .navlinks button{background:none; border:none; font:inherit; color:inherit; cursor:pointer;}
-  .navlinks button:hover{color:var(--ink);}
+  .brand .apexx{
+    color: var(--ink);
+    -webkit-text-stroke: 1px #C6A86F;
+    paint-order: stroke fill;
+    font-weight: 900;
+    letter-spacing: -0.01em;
+    text-shadow: 0 0 0.5px rgba(198,168,111,0.6);
+  }
+  .brand .accent{color:#C6A86F; font-weight:600; margin-left:2px;}
+  .navlinks{display:none; gap:32px; font-size:13.5px; font-weight:600; color:#C6A86F;}
+  .navlinks button{background:none; border:none; font:inherit; color:#C6A86F; cursor:pointer; transition: color .2s ease;}
+  .navlinks button:hover{color:#A68B5B;}
+  header.scrolled .navlinks button{color:#A68B5B;}
+  header.scrolled .navlinks button:hover{color:var(--ink);}
   @media (min-width:1024px){ .navlinks{display:flex;} }
   .nav-cta{display:none; height:36px; padding:0 20px; border-radius:999px; background:var(--ink); color:#fff; font-size:13px; font-weight:600; align-items:center; gap:6px; text-decoration:none; border:none; cursor:pointer;}
   @media (min-width:1024px){ .nav-cta{display:inline-flex;} }
@@ -47,7 +63,12 @@
   .mobile-menu{display:none; border-top:1px solid var(--line); background:rgba(255,255,255,.97); backdrop-filter:blur(14px);}
   .mobile-menu.open{display:block;}
   .mobile-menu .wrap{padding:20px 24px; display:flex; flex-direction:column; gap:16px;}
-  .mobile-menu button{background:none; border:none; text-align:left; font:inherit; font-size:15px; font-weight:500; padding:0; cursor:pointer;}
+
+  #navLoginBtn{border-color:#C6A86F !important; color:#C6A86F !important;}
+  #navLoginBtn:hover{background:rgba(198,168,111,0.08) !important; border-color:#A68B5B !important; color:#A68B5B !important;}
+  #navLoginBtnMobile{color:#C6A86F !important; font-weight:600;}
+
+  .mobile-menu button{background:none; border:none; text-align:left; font:inherit; font-size:15px; font-weight:600; padding:0; cursor:pointer; color:#C6A86F;}
 
   section{position:relative;}
 
@@ -334,8 +355,21 @@
   .admin-chat-input input{flex:1; height:44px; border-radius:22px; border:1px solid var(--line); padding:0 16px; font-size:14px; font-family:inherit; outline:none;}
   .admin-chat-input button{padding:0 20px; height:44px; border-radius:22px; background:#075E54; color:#fff; border:none; font-weight:700; cursor:pointer;}
   .admin-chat-input button:disabled{opacity:.5;}
-  .admin-login-link{background:none; border:none; color:rgba(255,255,255,.35); font-size:10.5px; cursor:pointer; text-decoration:underline;}
+  .admin-login-link{display:none !important; background:none; border:none; color:rgba(255,255,255,.35); font-size:10.5px; cursor:pointer; text-decoration:underline;}
   .debug-log{font-family:'JetBrains Mono',monospace; font-size:10px; background:#fff3cd; color:#664d03; padding:8px 10px; border-radius:8px; margin:0 20px 10px; display:none; border:1px solid #ffe69c;}
+
+
+  /* INTRO LOADER */
+  #introLoader{position:fixed; inset:0; z-index:9999; background:var(--ink); display:flex; align-items:center; justify-content:center; flex-direction:column; gap:20px; transition:opacity .6s ease, visibility .6s ease;}
+  #introLoader.hidden{opacity:0; visibility:hidden; pointer-events:none;}
+  #introLoader .loader-logo{width:140px; height:auto; animation:logoRotate 1.8s cubic-bezier(.68,-0.55,.27,1.55) infinite, logoPulse 1.8s ease-in-out infinite;}
+  #introLoader .loader-text{font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.18em; color:var(--gold); font-weight:700; animation:fadePulse 1.2s ease-in-out infinite;}
+  #introLoader .loader-bar{width:120px; height:2px; background:rgba(255,255,255,.1); border-radius:999px; overflow:hidden; margin-top:8px;}
+  #introLoader .loader-bar-inner{height:100%; width:50%; background:linear-gradient(90deg,var(--blue),var(--gold)); border-radius:999px; animation:barSlide 1.2s ease-in-out infinite;}
+  @keyframes logoRotate{0%{transform:rotate(0deg) scale(1)} 50%{transform:rotate(180deg) scale(1.08)} 100%{transform:rotate(360deg) scale(1)}}
+  @keyframes logoPulse{0%,100%{filter:drop-shadow(0 0 0 rgba(198,168,111,0))} 50%{filter:drop-shadow(0 0 18px rgba(198,168,111,.5))}}
+  @keyframes fadePulse{0%,100%{opacity:.6} 50%{opacity:1}}
+  @keyframes barSlide{0%{transform:translateX(-100%)} 100%{transform:translateX(200%)}}
 
   @media (max-width:800px){
     .user-body{flex-direction:column;}
@@ -350,13 +384,22 @@
 </head>
 <body>
 
+
+<!-- INTRO ANIMATION -->
+<div id="introLoader">
+  <img src="APEXX_GOLD_WHITE.png" alt="APEXXCRESTWAY" class="loader-logo" onerror="this.src='APEXX_GOLD_NAVY.png'">
+  <div class="loader-text">APEXXCRESTWAY</div>
+  <div class="loader-bar"><div class="loader-bar-inner"></div></div>
+</div>
+
 <header id="siteHeader">
   <div class="wrap">
     <nav>
       <div class="brand">
-        <img src="APEXX.PNG" alt="APEXXCRESTWAY Logo" class="mark-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+        <img src="APEXX_GOLD_WHITE.png" alt="APEXXCRESTWAY Logo Light" class="mark-img light" onerror="this.style.display='none'">
+        <img src="APEXX_GOLD_NAVY.png" alt="APEXXCRESTWAY Logo Dark" class="mark-img dark" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
         <span style="display:none; width:36px; height:36px; border-radius:10px; background:var(--ink); color:var(--gold); align-items:center; justify-content:center; font-weight:900;">A</span>
-        APEXX<span class="accent">CRESTWAY</span>
+        <span class="apexx">APEXX</span><span class="accent">CRESTWAY</span>
       </div>
       <div class="navlinks">
         <button data-target="problem">Problem</button>
@@ -366,7 +409,7 @@
         <button data-target="roadmap">Roadmap</button>
       </div>
       <div style="display:flex; align-items:center; gap:10px;">
-        <button class="nav-cta" id="navLoginBtn" style="background:transparent; border:1px solid rgba(8,24,48,.15); color:var(--ink);">Login</button>
+        <button class="nav-cta" id="navLoginBtn" style="background:transparent; border:1px solid #C6A86F; color:#C6A86F;">Login</button>
         <button class="nav-cta" data-target="register">Sign Up →</button>
         <button class="menu-btn" id="menuBtn" aria-label="Menu">☰</button>
       </div>
@@ -684,7 +727,7 @@
   <div class="wrap">
     <div class="foot-top">
       <div class="foot-col wide">
-        <div class="foot-brand"><img src="APEXX.PNG" alt="Logo" class="mark-img" onerror="this.style.display='none'"><span>APEXXCRESTWAY</span></div>
+        <div class="foot-brand"><img src="APEXX_GOLD_NAVY.png" alt="Logo" class="mark-img" onerror="this.style.display='none'"><span>APEXXCRESTWAY</span></div>
         <p style="margin-top:14px;">APEXXCRESTWAY — The Trust &amp; Execution Engine for Nigeria. We eliminate the chaos premium by turning unverified land and volatile construction into transparent, institutional-grade assets. AGIS, LAGIS Registered. Not a real estate agency — a regulated trust infrastructure.</p>
       </div>
       <div class="foot-col">
@@ -692,11 +735,19 @@
         <p>All plots are subject to independent legal verification and AGIS/LAGIS confirmation. Escrow services are provided via CBN-regulated, Tier 1 partner banks. Drone verification is not a substitute for physical inspection. Past verification does not guarantee future title status. Buyers are advised to conduct their own independent due diligence.</p>
       </div>
     </div>
+
+    <div class="foot-links">
+      <button data-modal="about">About Us</button>
+      <button data-modal="privacy">Privacy Policy</button>
+      <button data-modal="terms">Terms & Conditions</button>
+    </div>
+
     <div class="foot-bottom">
       <span>© 2026 APEXXCRESTWAY. AGIS, LAGIS Registered.</span>
       <span class="mono">RAISING ₦600M • Y5 $15M REVENUE TARGET</span>
     </div>
-    <div style="margin-top:14px; text-align:right;">
+    <!-- Admin access hidden from public - access via Ctrl+Shift+A or ?admin -->
+    <div style="display:none;">
       <button class="admin-login-link" id="adminLinkBtn">Admin</button>
     </div>
   </div>
@@ -894,6 +945,15 @@
 </div>
 
 <script>
+
+  // Intro loader
+  window.addEventListener('load', ()=>{
+    setTimeout(()=>{
+      const loader=document.getElementById('introLoader');
+      if(loader){ loader.classList.add('hidden'); setTimeout(()=>loader.remove(), 700); }
+    }, 1600);
+  });
+
   const header = document.getElementById('siteHeader');
   window.addEventListener('scroll', () => { header.classList.toggle('scrolled', window.scrollY > 20); });
   document.querySelectorAll('[data-target]').forEach(el => {
@@ -1628,6 +1688,40 @@
     }
   }
 
+
+  // Secret admin access (hidden link)
+  // 1. Keyboard: Ctrl+Shift+A
+  // 2. URL: ?admin or #admin
+  document.addEventListener('keydown', (e)=>{
+    if(e.ctrlKey && e.shiftKey && e.key.toLowerCase()==='a'){
+      e.preventDefault();
+      if(getAdminToken()){ openAdminShell(); } else { adminLoginOverlay.classList.add('open'); }
+    }
+  });
+  if(window.location.search.includes('admin') || window.location.hash.includes('admin')){
+    setTimeout(()=>{
+      if(getAdminToken()) openAdminShell();
+      else { document.getElementById('adminLoginOverlay').classList.add('open'); }
+    }, 500);
+  }
+
+
+  // Footer modals
+  function openLegalModal(id){ document.getElementById(id).classList.add('open'); document.body.style.overflow='hidden'; }
+  function closeLegalModal(id){ document.getElementById(id).classList.remove('open'); document.body.style.overflow=''; }
+  document.querySelectorAll('[data-modal]').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      const m=btn.dataset.modal;
+      if(m==='about') openLegalModal('aboutModal');
+      if(m==='privacy') openLegalModal('privacyModal');
+      if(m==='terms') openLegalModal('termsModal');
+    });
+  });
+  ['aboutModal','privacyModal','termsModal'].forEach(id=>{
+    const el=document.getElementById(id);
+    if(el) el.addEventListener('click', (e)=>{ if(e.target===el) closeLegalModal(id); });
+  });
+
   function openAdminShell() {
     adminShell.classList.add('open');
     loadSignups();
@@ -1647,5 +1741,103 @@
     closeAdminShell();
   });
 </script>
+
+<!-- FOOTER MODALS WITH WATERMARK -->
+<div class="overlay" id="aboutModal">
+  <div class="modal-card legal-modal watermarked" style="max-width:760px;">
+    <button class="modal-close" onclick="closeLegalModal('aboutModal')">✕</button>
+    <h3>About Us</h3>
+    <div class="updated">APEXX CRESTWAY LTD</div>
+    <h4>Who We Are</h4>
+    <p>Apexx Crestway Ltd exists to make owning premium assets in Nigeria — land, real estate, and construction deals — safe, transparent, and simple. We are the trust and execution layer standing between capital and Nigeria's most valuable, and most vulnerable, asset classes.</p>
+    <h4>The Problem We're Solving</h4>
+    <p>Deploying capital into Nigerian land, Real Estate and construction, has always meant absorbing enormous, avoidable risk. Fraudulent sellers offloading the same plot to multiple buyers. Title registration that drags on for months or years. Hidden fees that surface only after money has changed hands. Local extortion that stalls projects before they start. Developers who promise serviced plots and deliver none of it.</p>
+    <p>These aren't edge cases, they're the default experience for buyers, investors, and diaspora Nigerians trying to build wealth back home. The result is a "chaos premium" baked into nearly every transaction: money lost not to bad investments, but to bad information and broken trust.</p>
+    <h4>Our Solution</h4>
+    <p><b>Guarded Land / Real Estate Deals:</b> We pre-vet land using GIS mapping, drone surveillance, and deep-tier legal audits, then hand buyers and developers clean, litigation-free titles instead of a gamble.</p>
+    <p><b>Milestone-Locked Construction Escrow:</b> We build houses using a "Trust-First" model. Client funds are secured in Escrow and only released to us at verified project milestones. Every client also gets live project tracking with photos, videos, and a dashboard so they see progress and spending in real-time.</p>
+    <p>Underneath both sits the same engine: automated title verification, transparent fee breakdowns, independent on-site surveying, so every party in a transaction can see exactly what they're getting before they commit.</p>
+    <h4>Our Mission</h4>
+    <p>To eliminate the chaos premium from Nigerian infrastructure — turning unverified land and volatile construction deals into transparent, institutional-grade assets that anyone, from a first-time diaspora buyer to a tier-1 bank, can trust.</p>
+    <h4>Who We Serve</h4>
+    <p>We work with everyday investors, diaspora Nigerians building back home, high-net-worth individuals, industrial conglomerates expanding their footprint, institutional banks, and government land ministries looking to modernize and capture more value from the assets already in their registries.</p>
+    <h4>Why Now</h4>
+    <p>Nigeria's real estate sector has overtaken oil and gas as the country's third-largest contributor to GDP. State land registries are finally going digital. AI-powered document verification has become affordable. Regulatory frameworks for digital assets are maturing. And a growing diaspora, remitting billions annually, is actively looking for a way to invest at home without relying on family members or middlemen they can't fully trust.</p>
+    <p>We built Apexx Crestway to meet this moment — replacing manual, paper-based, relationship-dependent processes with verified data, escrow-backed guarantees, and a platform built for scale.</p>
+  </div>
+</div>
+
+<div class="overlay" id="privacyModal">
+  <div class="modal-card legal-modal watermarked">
+    <button class="modal-close" onclick="closeLegalModal('privacyModal')">✕</button>
+    <h3>Privacy Policy</h3>
+    <div class="updated">Last Updated: August 5, 2026 — APEXX CRESTWAY LTD</div>
+    <h4>1. WHO WE ARE</h4>
+    <p>Apexx Crestway Ltd is a tech-enabled real estate and construction platform operating in Nigeria and Diaspora.</p>
+    <h4>2. DATA WE COLLECT</h4>
+    <ul>
+      <li><b>Identity Data:</b> Name, email, phone, ID, BVN/NIN for KYC/AML</li>
+      <li><b>Transaction Data:</b> Land details, project milestones, payment records, escrow data</li>
+      <li><b>Technical Data:</b> IP address, device, cookies, dashboard usage</li>
+      <li><b>Property Data:</b> GIS coordinates, drone images, survey reports uploaded to your dashboard</li>
+    </ul>
+    <h4>3. HOW WE USE YOUR DATA</h4>
+    <p>To provide and improve our services: land verification, escrow management, live construction tracking, fraud prevention, and legal compliance. We do NOT sell your data.</p>
+    <h4>4. DATA SHARING</h4>
+    <p>We share data only with:</p>
+    <ul>
+      <li><b>Partners:</b> Tier-1 banks for escrow, lawyers, surveyors, government portals like AGIS/LAGIS</li>
+      <li><b>Regulators:</b> CBN, SEC, EFCC when required by law</li>
+    </ul>
+    <p>All partners are bound by confidentiality.</p>
+    <h4>5. DATA SECURITY</h4>
+    <p>We use encryption and multi-bank escrow architecture to protect funds and data. However, no system is 100% secure.</p>
+    <h4>6. YOUR RIGHTS</h4>
+    <p>You can request access, correction, or deletion of your data. Email: apexxcrestway@gmail.com</p>
+    <h4>7. COOKIES</h4>
+    <p>We use cookies to improve your dashboard and website experience. You can disable them in your browser.</p>
+    <h4>8. CONTACT</h4>
+    <p>Apexx Crestway Ltd<br>753 Babagana Kingibe Street, Guzape District, Asokoro Extension, Abuja F.C.T<br>Email: apexxcrestway@gmail.com</p>
+  </div>
+</div>
+
+<div class="overlay" id="termsModal">
+  <div class="modal-card legal-modal watermarked">
+    <button class="modal-close" onclick="closeLegalModal('termsModal')">✕</button>
+    <h3>Terms & Conditions</h3>
+    <div class="updated">Last Updated: August 5, 2026 — APEXX CRESTWAY LTD</div>
+    <h4>1. ACCEPTANCE OF TERMS</h4>
+    <p>By accessing or using the Apexx Crestway Ltd website and platform, you agree to be bound by these Terms. If you do not agree, do not use our services.</p>
+    <h4>2. OUR SERVICES</h4>
+    <p>Apexx Crestway provides a tech-enabled platform for:</p>
+    <ul>
+      <li>Guarded Land Deals: GIS mapping, title verification, and due diligence</li>
+      <li>Milestone-Locked Construction Escrow: Holding client funds and releasing to contractors only upon verified milestones via drone/data</li>
+      <li>Title Perfection Concierge, Risk Profiling, Live Dashboards, and Fractional Co-Investment</li>
+    </ul>
+    <p>We act as a technology and trust intermediary. We are not a bank or licensed escrow agent unless partnered as such.</p>
+    <h4>3. PAYMENTS & ESCROW</h4>
+    <ul>
+      <li>All project funds may be held in third-party milestone-based escrow accounts. Funds are only released upon verification of agreed milestones</li>
+      <li>Fees: We charge transactional fees, service fees, and platform fees as disclosed during onboarding</li>
+      <li>Refunds are subject to milestone completion and third-party escrow provider policies</li>
+    </ul>
+    <h4>4. CLIENT RESPONSIBILITIES</h4>
+    <ul>
+      <li>Provide accurate KYC documents for AML/CBN compliance</li>
+      <li>Approve milestones within 48 hours of notification</li>
+      <li>Understand that land and construction carry risks. While we perform due diligence, we do not guarantee against government action, community issues, or force majeure</li>
+    </ul>
+    <h4>5. INTELLECTUAL PROPERTY</h4>
+    <p>All platform content, algorithms, “Automated Triage Engine”, dashboards, and brand are property of Apexx Crestway Ltd. You may not copy or resell.</p>
+    <h4>6. LIMITATION OF LIABILITY</h4>
+    <p>Apexx Crestway is not liable for indirect damages. Our total liability shall not exceed the service fees paid by you in the last 6 months.</p>
+    <h4>7. GOVERNING LAW</h4>
+    <p>These Terms are governed by the laws of the Federal Republic of Nigeria. Disputes shall be resolved in Lagos courts.</p>
+    <h4>8. CHANGES</h4>
+    <p>We may update these Terms. Continued use means acceptance.</p>
+  </div>
+</div>
+
 </body>
-</html>
+</html
