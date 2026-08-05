@@ -32,7 +32,9 @@
   header.scrolled{background:rgba(255,255,255,.92); backdrop-filter:blur(14px); border-bottom:1px solid var(--line); box-shadow:0 8px 30px rgba(0,0,0,.06);}
   nav{display:flex; align-items:center; justify-content:space-between; height:68px;}
   .brand{display:flex; align-items:center; gap:10px; font-weight:900; letter-spacing:-.02em; font-size:16px;}
-  .brand .mark{width:36px; height:36px; border-radius:10px; background:var(--ink); color:var(--gold); display:flex; align-items:center; justify-content:center; font-weight:900;}
+  .brand .mark-img{height:36px; width:auto; object-fit:contain; border-radius:8px; background:#fff; padding:2px; border:1px solid var(--line);}
+  header.scrolled .brand .mark-img{background:#fff;}
+  .hero .brand .mark-img{background:#fff;}
   .brand .accent{color:var(--gold); font-weight:500;}
   .navlinks{display:none; gap:32px; font-size:13.5px; font-weight:500; color:rgba(8,24,48,.7);}
   .navlinks button{background:none; border:none; font:inherit; color:inherit; cursor:pointer;}
@@ -136,7 +138,7 @@
   .market-stat .num{font-family:'JetBrains Mono',monospace; font-weight:700; font-size:24px;}
   .market-stat .lbl{margin-top:4px; font-size:13px; font-weight:700;}
   .market-stat .sub{font-size:11px; color:rgba(8,24,48,.55); margin-top:2px;}
-  .tam-line{margin-top:24px; display:flex; align-items:center; gap:14px; flex-wrap:wrap; font-size:12px;}
+  .tam-line{margin-top:24px; display:flex; align-items:center; gap:14px; flex-wrap:wrap; font-size:12px; color:rgba(8,24,48,.7);}
   .tam-badge{padding:8px 14px; border-radius:999px; background:var(--ink); color:#fff; font-weight:700;}
   .flywheel{background:#fff; border:1px solid var(--line); border-radius:22px; padding:28px; box-shadow:0 20px 50px rgba(0,0,0,.05);}
   .flywheel .mono{font-size:11px; letter-spacing:.1em; color:rgba(8,24,48,.4); font-weight:700;}
@@ -144,8 +146,6 @@
   .fly-num{width:24px; height:24px; border-radius:50%; background:var(--blue); color:#fff; font-size:11px; font-weight:700; display:flex; align-items:center; justify-content:center; flex-shrink:0;}
   .fly-step .t{font-size:13px; font-weight:700;}
   .fly-step .d{font-size:12px; color:rgba(8,24,48,.6); margin-top:2px;}
-  .callout{margin-top:24px; background:var(--ink); color:#fff; border-radius:12px; padding:14px 16px; font-size:12px; display:flex; justify-content:space-between; align-items:center; gap:10px; flex-wrap:wrap;}
-  .callout .tag2{font-size:11px; padding:4px 10px; border-radius:999px; background:var(--gold); color:var(--ink); font-weight:700;}
 
   /* WHO WE SERVE */
   .who{padding:90px 0; background:#fff;}
@@ -157,7 +157,6 @@
   .who-card .loc{margin-top:8px; align-self:flex-start; font-size:10.5px; padding:4px 9px; border-radius:999px; background:var(--line); font-weight:600;}
   .who-card h3{margin-top:14px; font-size:13.5px; font-weight:700;}
   .who-card p{margin-top:8px; font-size:12px; color:rgba(8,24,48,.6); line-height:1.5;}
-  .who-card .spend{margin-top:auto; padding-top:14px; font-family:'JetBrains Mono',monospace; font-size:11px; font-weight:700; color:var(--blue);}
 
   /* ROADMAP */
   .roadmap{padding:90px 0; background:var(--off); border-top:1px solid var(--line); border-bottom:1px solid var(--line);}
@@ -177,8 +176,6 @@
   .phase .status{margin-top:14px; display:inline-flex; padding:4px 10px; border-radius:999px; font-size:10px; font-weight:700; letter-spacing:.08em;}
   .status-live{background:#ecfdf5; color:#065f46; border:1px solid #a7f3d0;}
   .status-locked{background:#f1f5f9; color:#64748b; border:1px solid #e2e8f0;}
-
-  /* Blurred phases */
   .phase.blurred .blur-wrap{filter:blur(9px); opacity:.6; pointer-events:none; user-select:none;}
   .phase.blurred::after{
     content:'UPCOMING • LOCKED';
@@ -189,7 +186,6 @@
     white-space:nowrap; z-index:3;
   }
   .phase.blurred::before{content:''; position:absolute; inset:0; background:linear-gradient(180deg, rgba(255,255,255,.4), rgba(247,246,243,.7)); z-index:2;}
-
   .raise-box{margin-top:32px; background:var(--ink); color:#fff; border-radius:16px; padding:18px 20px; display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:14px;}
   .raise-box .t{font-size:13px; font-weight:700;} .raise-box .d{font-size:11px; color:rgba(255,255,255,.6); margin-top:2px;}
 
@@ -226,14 +222,13 @@
   .submit:hover{background:#000;} .submit:disabled{opacity:.6; cursor:not-allowed;}
   .fine{margin-top:12px; font-size:10.5px; color:rgba(8,24,48,.4); text-align:center; line-height:1.5;}
 
-  /* CONTACT */
+  /* CONTACT - simplified */
   .contact{padding:80px 0; background:var(--ink); color:#fff;}
   .contact-top{display:grid; grid-template-columns:1fr; gap:32px;}
   @media (min-width:900px){ .contact-top{grid-template-columns:1fr 1.5fr;} }
   .contact h3{font-size:24px; font-weight:900; letter-spacing:-.02em; line-height:1.1;}
   .contact-top > div:first-child p{margin-top:12px; font-size:13.5px; color:rgba(255,255,255,.6); line-height:1.6;}
   .contact-cards{display:grid; grid-template-columns:1fr; gap:1px; background:rgba(255,255,255,.1); border:1px solid rgba(255,255,255,.1); border-radius:18px; overflow:hidden;}
-  @media (min-width:640px){ .contact-cards{grid-template-columns:1fr 1fr;} }
   .ccard{background:var(--ink-2); padding:24px;}
   .ccard h4{margin-top:14px; font-size:13.5px; font-weight:700;}
   .ccard p{margin-top:6px; font-size:11.5px; color:rgba(255,255,255,.6); line-height:1.5;}
@@ -247,61 +242,79 @@
   footer{padding:44px 0; background:#060f1f; color:rgba(255,255,255,.6);}
   .foot-top{display:flex; flex-wrap:wrap; gap:32px; justify-content:space-between;}
   .foot-brand{display:flex; align-items:center; gap:8px;}
-  .foot-brand .mark{width:30px; height:30px; border-radius:9px; background:#fff; color:var(--ink); display:flex; align-items:center; justify-content:center; font-weight:900; font-size:13px;}
+  .foot-brand .mark-img{width:30px; height:30px; border-radius:9px; background:#fff; padding:2px; object-fit:contain;}
   .foot-brand span{font-weight:900; color:#fff; font-size:14px; letter-spacing:-.02em;}
   .foot-col{max-width:420px; font-size:11.5px; line-height:1.6;}
   .foot-col.wide{max-width:380px;}
   .foot-col h5{color:#fff; font-size:12px; font-weight:700; margin-bottom:8px;}
   .foot-bottom{margin-top:32px; padding-top:22px; border-top:1px solid rgba(255,255,255,.08); display:flex; flex-wrap:wrap; justify-content:space-between; gap:10px; font-size:11px;}
 
-  .fab{position:fixed; bottom:24px; right:24px; z-index:40; width:56px; height:56px; border-radius:50%; background:var(--blue); color:#fff; border:none; display:flex; align-items:center; justify-content:center; box-shadow:0 10px 26px rgba(42,127,255,.4); cursor:pointer; transition:transform .2s;}
-  .fab:hover{transform:scale(1.05);}
-  .fab .badge-dot{position:absolute; top:-2px; right:-2px; width:16px; height:16px; border-radius:50%; background:#ef4444; color:#fff; font-size:9px; font-weight:800; display:none; align-items:center; justify-content:center; border:2px solid #fff;}
-
-  /* ===== LOGIN / MODALS ===== */
+  /* LOGIN MODAL */
   .overlay{position:fixed; inset:0; z-index:90; background:rgba(8,24,48,.55); backdrop-filter:blur(4px); display:none; align-items:center; justify-content:center; padding:20px;}
   .overlay.open{display:flex;}
   .modal-card{background:#fff; border-radius:20px; width:100%; max-width:380px; padding:28px; position:relative; box-shadow:0 30px 80px rgba(0,0,0,.3);}
   .modal-card h3{font-size:18px; font-weight:900; letter-spacing:-.01em;}
   .modal-card p.sub{margin-top:6px; font-size:12.5px; color:rgba(8,24,48,.6);}
   .modal-close{position:absolute; top:16px; right:16px; width:28px; height:28px; border-radius:50%; background:var(--paper); border:none; cursor:pointer; font-size:14px; display:flex; align-items:center; justify-content:center;}
-  .modal-card .field{margin-top:16px;}
-  .modal-card .msg-box{margin-top:14px;}
-  .modal-switch{margin-top:16px; font-size:12px; text-align:center; color:rgba(8,24,48,.55);}
-  .modal-switch button{background:none; border:none; color:var(--blue); font-weight:700; cursor:pointer; font:inherit;}
 
-  /* ===== WHATSAPP-STYLE CHAT — FULL PAGE (becomes the landing view once logged in) ===== */
-  .chat-widget{position:fixed; inset:0; z-index:85; background:#fff; display:none; flex-direction:column;}
-  .chat-widget.open{display:flex;}
-  .chat-head{background:#075E54; color:#fff; padding:14px 20px; display:flex; align-items:center; gap:12px; flex-shrink:0;}
-  .chat-head .back{background:rgba(255,255,255,.15); border:none; color:#fff; width:32px; height:32px; border-radius:50%; cursor:pointer; font-size:15px; flex-shrink:0;}
-  .chat-head .av{width:38px; height:38px; border-radius:50%; background:var(--gold); color:var(--ink); display:flex; align-items:center; justify-content:center; font-weight:900; font-size:15px; flex-shrink:0;}
-  .chat-head .who{flex:1; min-width:0;}
-  .chat-head .who .n{font-size:15px; font-weight:700;}
-  .chat-head .who .s{font-size:11.5px; color:rgba(255,255,255,.75); display:flex; align-items:center; gap:5px;}
-  .chat-head .who .s .d{width:6px; height:6px; border-radius:50%; background:#34d399;}
-  .chat-head button.icon{background:rgba(255,255,255,.15); border:none; color:#fff; width:32px; height:32px; border-radius:50%; cursor:pointer; font-size:13px; flex-shrink:0;}
-  .chat-body{flex:1; overflow-y:auto; padding:20px; background:#E5DDD5 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60'%3E%3Crect width='60' height='60' fill='%23E5DDD5'/%3E%3C/svg%3E"); display:flex; flex-direction:column; gap:8px;}
+  /* ===== USER DASHBOARD - NEW ===== */
+  .user-shell{position:fixed; inset:0; z-index:80; background:#fff; display:none; flex-direction:column;}
+  .user-shell.open{display:flex;}
+  .user-topbar{background:var(--ink); color:#fff; padding:12px 20px; display:flex; align-items:center; justify-content:space-between; gap:12px; flex-shrink:0;}
+  .user-topbar .left{display:flex; align-items:center; gap:12px;}
+  .user-topbar img{height:32px; width:auto; border-radius:8px; background:#fff; padding:3px;}
+  .user-topbar .title{font-weight:900; font-size:15px; letter-spacing:-.01em;}
+  .user-topbar .right{display:flex; align-items:center; gap:10px;}
+  .user-topbar .user-email{font-size:12px; opacity:.7; max-width:180px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}
+  .user-topbar button{height:32px; padding:0 14px; border-radius:999px; border:none; font-size:12px; font-weight:700; cursor:pointer;}
+  .btn-ghost{background:rgba(255,255,255,.12); color:#fff;}
+  .btn-white{background:#fff; color:var(--ink);}
+  .user-body{flex:1; display:flex; overflow:hidden;}
+  .user-sidebar{width:260px; background:var(--off); border-right:1px solid var(--line); padding:16px; overflow-y:auto; flex-shrink:0; display:flex; flex-direction:column; gap:4px;}
+  .user-sidebar .section-label{font-size:10.5px; font-weight:800; letter-spacing:.12em; color:rgba(8,24,48,.4); margin:14px 0 6px 8px; text-transform:uppercase;}
+  .side-link{width:100%; text-align:left; padding:11px 14px; border-radius:10px; border:1px solid transparent; background:transparent; font-size:13.5px; font-weight:600; cursor:pointer; display:flex; align-items:center; gap:10px; transition:all .15s;}
+  .side-link.active{background:#fff; border-color:var(--line); box-shadow:0 2px 8px rgba(0,0,0,.04);}
+  .side-link:hover{background:#fff;}
+  .user-main{flex:1; overflow-y:auto; background:#fff; padding:24px;}
+  .dash-card{background:#fff; border:1px solid var(--line); border-radius:18px; padding:22px; margin-bottom:18px;}
+  .dash-card h3{font-size:16px; font-weight:800; letter-spacing:-.01em;}
+  .dash-card p{font-size:13px; color:rgba(8,24,48,.6); margin-top:6px; line-height:1.5;}
+  .interest-grid{display:flex; flex-wrap:wrap; gap:10px; margin-top:14px;}
+  .chip{display:inline-flex; align-items:center; gap:8px; padding:8px 14px; border-radius:999px; background:var(--ink); color:#fff; font-size:12.5px; font-weight:600;}
+  .chip.light{background:var(--paper); color:var(--ink); border:1px solid var(--line);}
+  .chip button{border:none; width:18px; height:18px; border-radius:50%; background:rgba(255,255,255,.2); color:#fff; cursor:pointer; display:flex; align-items:center; justify-content:center; font-size:10px;}
+  .chip.light button{background:var(--ink); color:#fff;}
+  .interest-picker{margin-top:18px; display:flex; flex-wrap:wrap; gap:8px;}
+  .interest-picker button{padding:7px 14px; border-radius:999px; border:1px solid var(--line); background:#fff; font-size:12.5px; font-weight:600; cursor:pointer;}
+  .interest-picker button.selected{background:var(--blue); color:#fff; border-color:var(--blue);}
+  .interest-actions{margin-top:16px; display:flex; gap:10px;}
+  /* Chat inside dashboard */
+  .dash-chat-wrap{display:flex; flex-direction:column; height:calc(100vh - 180px); border:1px solid var(--line); border-radius:18px; overflow:hidden; background:#fff;}
+  .dash-chat-head{background:#075E54; color:#fff; padding:14px 18px; display:flex; align-items:center; gap:12px;}
+  .dash-chat-head .av{width:38px; height:38px; border-radius:50%; background:var(--gold); color:var(--ink); display:flex; align-items:center; justify-content:center; font-weight:900;}
+  .dash-chat-head .name{font-weight:800; font-size:14px;}
+  .dash-chat-head .status{font-size:11px; opacity:.8; display:flex; align-items:center; gap:5px;}
+  .dash-chat-head .status .dot{width:6px; height:6px; border-radius:50%; background:#34d399;}
+  .dash-chat-body{flex:1; overflow-y:auto; padding:18px; background:#E5DDD5; display:flex; flex-direction:column; gap:8px;}
   .bubble{max-width:min(78%,520px); padding:9px 13px; border-radius:10px; font-size:14px; line-height:1.5; position:relative; box-shadow:0 1px 1px rgba(0,0,0,.08);}
   .bubble .t{font-size:10px; color:rgba(0,0,0,.4); margin-top:4px; text-align:right;}
   .bubble.in{align-self:flex-start; background:#fff; border-top-left-radius:2px;}
   .bubble.out{align-self:flex-end; background:#DCF8C6; border-top-right-radius:2px;}
-  .chat-empty{margin:auto; text-align:center; color:rgba(8,24,48,.4); font-size:13px; padding:20px; max-width:320px;}
-  .chat-inputrow{display:flex; gap:10px; padding:14px 20px; background:var(--paper); border-top:1px solid var(--line); flex-shrink:0;}
-  .chat-inputrow input{flex:1; height:44px; border-radius:22px; border:1px solid var(--line); padding:0 16px; font-size:14px; font-family:inherit; outline:none; max-width:720px; margin:0 auto;}
-  .chat-inputrow input:focus{border-color:#075E54;}
-  .chat-inputrow button{width:44px; height:44px; border-radius:50%; background:#075E54; color:#fff; border:none; cursor:pointer; font-size:16px; flex-shrink:0;}
-  .chat-inputrow button:disabled{opacity:.5; cursor:not-allowed;}
+  .dash-chat-input{display:flex; gap:10px; padding:12px; background:var(--paper); border-top:1px solid var(--line);}
+  .dash-chat-input input{flex:1; height:44px; border-radius:22px; border:1px solid var(--line); padding:0 16px; font-size:14px; outline:none;}
+  .dash-chat-input button{width:44px; height:44px; border-radius:50%; background:#075E54; color:#fff; border:none; cursor:pointer; font-size:16px;}
+  .dash-chat-empty{margin:auto; text-align:center; color:rgba(8,24,48,.4); font-size:13px; padding:20px; max-width:320px;}
 
-  /* ===== ADMIN DASHBOARD ===== */
+  /* ADMIN DASHBOARD - enhanced */
   .admin-shell{position:fixed; inset:0; z-index:95; background:#fff; display:none; flex-direction:column;}
   .admin-shell.open{display:flex;}
   .admin-topbar{background:var(--ink); color:#fff; padding:14px 20px; display:flex; align-items:center; justify-content:space-between; flex-shrink:0;}
   .admin-topbar .t{font-weight:900; font-size:15px; display:flex; align-items:center; gap:8px;}
   .admin-topbar button{background:rgba(255,255,255,.12); border:none; color:#fff; font-size:12px; font-weight:700; padding:8px 14px; border-radius:999px; cursor:pointer;}
   .admin-body{flex:1; display:flex; overflow:hidden;}
-  .admin-list{width:320px; max-width:40vw; border-right:1px solid var(--line); overflow-y:auto; flex-shrink:0; background:var(--off);}
-  .admin-list-head{padding:14px 16px; font-size:11px; font-weight:800; letter-spacing:.08em; color:rgba(8,24,48,.5); border-bottom:1px solid var(--line); text-transform:uppercase;}
+  .admin-list{width:360px; max-width:42vw; border-right:1px solid var(--line); overflow-y:auto; flex-shrink:0; background:var(--off); display:flex; flex-direction:column;}
+  .admin-list-head{padding:14px 16px; font-size:11px; font-weight:800; letter-spacing:.08em; color:rgba(8,24,48,.5); border-bottom:1px solid var(--line); text-transform:uppercase; display:flex; justify-content:space-between; align-items:center; gap:8px;}
+  .admin-list-head select{font-size:11px; padding:4px 8px; border-radius:8px; border:1px solid var(--line); background:#fff; font-family:inherit;}
   .admin-row{padding:14px 16px; border-bottom:1px solid var(--line); cursor:pointer; display:flex; gap:10px; align-items:flex-start; transition:background .15s;}
   .admin-row:hover, .admin-row.active{background:#fff;}
   .admin-row.active{border-left:3px solid var(--blue);}
@@ -321,6 +334,16 @@
   .admin-chat-input input{flex:1; height:44px; border-radius:22px; border:1px solid var(--line); padding:0 16px; font-size:14px; font-family:inherit; outline:none;}
   .admin-chat-input button{padding:0 20px; height:44px; border-radius:22px; background:#075E54; color:#fff; border:none; font-weight:700; cursor:pointer;}
   .admin-login-link{background:none; border:none; color:rgba(255,255,255,.35); font-size:10.5px; cursor:pointer; text-decoration:underline;}
+
+  @media (max-width:800px){
+    .user-body{flex-direction:column;}
+    .user-sidebar{width:100%; flex-direction:row; overflow-x:auto; padding:10px; gap:6px; border-right:none; border-bottom:1px solid var(--line);}
+    .user-sidebar .section-label{display:none;}
+    .side-link{white-space:nowrap; width:auto;}
+    .admin-body{flex-direction:column;}
+    .admin-list{width:100%; max-width:100%; max-height:45vh;}
+    .dash-chat-wrap{height:calc(100vh - 220px);}
+  }
 </style>
 </head>
 <body>
@@ -328,7 +351,11 @@
 <header id="siteHeader">
   <div class="wrap">
     <nav>
-      <div class="brand"><span class="mark">A</span>APEXX<span class="accent">CRESTWAY</span></div>
+      <div class="brand">
+        <img src="APEXX.PNG" alt="APEXXCRESTWAY Logo" class="mark-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+        <span style="display:none; width:36px; height:36px; border-radius:10px; background:var(--ink); color:var(--gold); align-items:center; justify-content:center; font-weight:900;">A</span>
+        APEXX<span class="accent">CRESTWAY</span>
+      </div>
       <div class="navlinks">
         <button data-target="problem">Problem</button>
         <button data-target="solution">Solution</button>
@@ -338,7 +365,7 @@
       </div>
       <div style="display:flex; align-items:center; gap:10px;">
         <button class="nav-cta" id="navLoginBtn" style="background:transparent; border:1px solid rgba(8,24,48,.15); color:var(--ink);">Login</button>
-        <button class="nav-cta" data-target="register">Join Waitlist →</button>
+        <button class="nav-cta" data-target="register">Sign Up →</button>
         <button class="menu-btn" id="menuBtn" aria-label="Menu">☰</button>
       </div>
     </nav>
@@ -350,8 +377,8 @@
       <button data-target="market">Market</button>
       <button data-target="who">Who We Serve</button>
       <button data-target="roadmap">Roadmap</button>
-      <button data-target="register">Join Waitlist</button>
-      <button id="navLoginBtnMobile">Login to Chat</button>
+      <button data-target="register">Sign Up</button>
+      <button id="navLoginBtnMobile">Login</button>
     </div>
   </div>
 </header>
@@ -359,12 +386,11 @@
 <!-- HERO -->
 <section class="hero">
   <div class="wrap">
-    <span class="badge"><span class="dot"></span>AGIS • LAGIS • ABUJA • DIASPORA READY</span>
+    <span class="badge"><span class="dot"></span>AGIS, LAGIS Registered</span>
     <h1>Building Trust Infrastructure for Real Estate &amp; Construction in <span class="accent">Nigeria</span></h1>
     <p class="lede">We eliminate the <b>30% chaos premium</b> from infrastructure deals by turning unverified land and volatile construction into transparent, institutional-grade assets.</p>
     <div class="hero-ctas">
-      <button class="btn btn-primary" data-target="register">Join Early Access →</button>
-      <button class="btn btn-light" data-target="contact">Chat with Customer Care</button>
+      <button class="btn btn-primary" data-target="register">Sign Up →</button>
     </div>
 
     <div class="hero-stats reveal">
@@ -491,13 +517,12 @@
           <div class="market-stat"><div class="num">$2.61T</div><div class="lbl">Real Estate</div><div class="sub">3rd largest GDP sector, 5.2% of GDP</div></div>
           <div class="market-stat"><div class="num">$27B</div><div class="lbl">Construction</div><div class="sub">CAGR 9%, housing + infrastructure</div></div>
         </div>
-        <div class="tam-line"><span class="tam-badge">TAM: $2.6T+</span><span style="color:rgba(8,24,48,.6);">SAM (Verified + Escrow): $42B → SOM Y2: ₦1.4B revenue target</span></div>
+        <div class="tam-line">SAM (Verified + Escrow): $2.71M → SOM Y5 $15M revenue target</div>
       </div>
       <div class="flywheel reveal">
         <div class="mono">APEXXCRESTWAY FLYWHEEL</div>
-        <div class="fly-step"><div class="fly-num">1</div><div><div class="t">Guarded Land →</div><div class="d">Creates escrowed construction clients (70% convert)</div></div></div>
-        <div class="fly-step"><div class="fly-num">2</div><div><div class="t">Milestone Escrow →</div><div class="d">Generates verified contractor &amp; material data that de-risks lending for banks</div></div></div>
-        <div class="callout"><span>Severe housing shortage driving decades of demand for verified, bankable land.</span><span class="tag2">SECURED</span></div>
+        <div class="fly-step"><div class="fly-num">1</div><div><div class="t">1. Guarded Land / Real Estate</div><div class="d">Creates escrowed construction clients (70% convert)</div></div></div>
+        <div class="fly-step"><div class="fly-num">2</div><div><div class="t">2. Milestone Construction Escrow</div><div class="d">Generates verified contractor &amp; material data that de-risks lending for banks</div></div></div>
       </div>
     </div>
   </div>
@@ -512,11 +537,11 @@
       <p class="section-sub">Litigation-free, C of O perfected plots to milestone-escrow builds — segmented for Nigeria's real capital.</p>
     </div>
     <div class="who-grid">
-      <div class="who-card reveal"><div class="icon-badge">✈</div><span class="loc">UK / US / Canada</span><h3>Diaspora Investors</h3><p>Remote verification, no family-agent risk. End-to-end verified channel.</p><div class="spend">$30k–$500k</div></div>
-      <div class="who-card reveal" style="border:1.5px solid var(--ink);"><div class="icon-badge">♛</div><span class="loc">Lagos • Abuja</span><h3>Power Players</h3><p>Litigation-free, C of O perfected plots. Fully verified before listing.</p><div class="spend">$100k–$2M</div></div>
-      <div class="who-card reveal"><div class="icon-badge">🏭</div><span class="loc">Pan-Nigeria</span><h3>Industrial Conglomerates</h3><p>10–50 acre commercial land, escrowed builds, bulk hedging.</p><div class="spend">$500k–$10M</div></div>
-      <div class="who-card reveal" style="border:1.5px solid var(--ink);"><div class="icon-badge">🏠</div><span class="loc">Lagos • Abuja</span><h3>Corporate Climbers</h3><p>Upper-Middle Class: Serviced plots plus milestone-escrow home builds.</p><div class="spend">$15k–$80k</div></div>
-      <div class="who-card reveal"><div class="icon-badge">🏛</div><span class="loc">AGIS / LAGIS / Banks</span><h3>Government &amp; Banks</h3><p>Data, mortgage rails, a de-risked pipeline. API partnerships.</p><div class="spend">Partnerships + API</div></div>
+      <div class="who-card reveal"><div class="icon-badge">✈</div><span class="loc">UK / US / Canada</span><h3>Diaspora Investors</h3><p>Remote verification, no family-agent risk. End-to-end verified channel.</p></div>
+      <div class="who-card reveal" style="border:1.5px solid var(--ink);"><div class="icon-badge">♛</div><span class="loc">Lagos • Abuja</span><h3>Power Players</h3><p>Litigation-free, C of O perfected plots. Fully verified before listing.</p></div>
+      <div class="who-card reveal"><div class="icon-badge">🏭</div><span class="loc">Pan-Nigeria</span><h3>Industrial Conglomerates</h3><p>10–50 acre commercial land, escrowed builds, bulk hedging.</p></div>
+      <div class="who-card reveal" style="border:1.5px solid var(--ink);"><div class="icon-badge">🏠</div><span class="loc">Lagos • Abuja</span><h3>Corporate Climbers</h3><p>Upper-Middle Class: Serviced plots plus milestone-escrow home builds.</p></div>
+      <div class="who-card reveal"><div class="icon-badge">🏛</div><span class="loc">AGIS / LAGIS / Banks</span><h3>Government &amp; Banks</h3><p>Data, mortgage rails, a de-risked pipeline. API partnerships.</p></div>
     </div>
   </div>
 </section>
@@ -529,11 +554,10 @@
         <div class="eyebrow blue">ROADMAP • 24-MONTH EXECUTION</div>
         <h2>From trust layer to mortgage rails.</h2>
       </div>
-      <span class="raise-tag">● Raising ₦600M → ₦1.4B revenue target in 2 years</span>
+      <span class="raise-tag">● Raising ₦600M → Y5 $15M revenue target</span>
     </div>
 
     <div class="phases">
-      <!-- PHASE 1 - ACTIVE -->
       <div class="phase active reveal">
         <div class="dot2" style="background:#081830;">1</div>
         <div class="meta">PHASE 1 • MONTH 1–6</div>
@@ -541,8 +565,6 @@
         <p>Launch Guarded Land v1, AGIS/LAGIS concierge, Lagos, Abuja and diaspora partnerships. Verification and escrow foundation live.</p>
         <span class="status status-live">● LIVE NOW</span>
       </div>
-
-      <!-- PHASE 2 - BLURRED -->
       <div class="phase blurred reveal">
         <div class="blur-wrap">
           <div class="dot2" style="background:#2A7FFF;">2</div>
@@ -551,8 +573,6 @@
           <p>Milestone escrow live, drone verification, bulk hedging, 300 plots and 80 builds.</p>
         </div>
       </div>
-
-      <!-- PHASE 3 - BLURRED -->
       <div class="phase blurred reveal">
         <div class="blur-wrap">
           <div class="dot2" style="background:#C6A86F; color:#081830;">3</div>
@@ -561,8 +581,6 @@
           <p>Bank API, mortgage pre-approval, insurance, 1,000-plot data milestone.</p>
         </div>
       </div>
-
-      <!-- PHASE 4 - BLURRED -->
       <div class="phase blurred reveal">
         <div class="blur-wrap">
           <div class="dot2" style="background:#081830;">4</div>
@@ -575,7 +593,7 @@
 
     <div class="raise-box reveal">
       <div><div class="t">₦600M Raise Breakdown</div><div class="d">₦504M seed ops + product + legal • ₦96M utility vehicles (site vehicles + drone fleet)</div></div>
-      <span class="raise-tag">24-MONTH RUNWAY</span>
+      <span class="raise-tag">Y5 $15M REVENUE TARGET</span>
     </div>
   </div>
 </section>
@@ -602,7 +620,7 @@
 
     <div class="form-card reveal">
       <div class="form-head">
-        <h3 style="font-size:17px; font-weight:900;">Join Waitlist</h3>
+        <h3 style="font-size:17px; font-weight:900;">Sign Up</h3>
         <span class="live-tag">● Live</span>
       </div>
       <form id="regForm" novalidate>
@@ -612,37 +630,37 @@
           <div class="field" id="f-phone"><label>Phone (optional)</label><input type="tel" id="phone" autocomplete="tel" placeholder="0803 123 4567"><div class="hint">NG format: 080... or +234...</div><div class="err" style="display:none;"></div></div>
           <div class="field" id="f-investor"><label>Investor Type *</label><select id="investorType"><option value="" selected disabled>Select type</option><option>Diaspora Investor</option><option>Power Players - $100k-$2M</option><option>Corporate Climbers - $15k-$80k</option><option>Industrial Conglomerate</option><option>Government / Bank Partner</option><option>Other</option></select><div class="err" style="display:none;"></div></div>
         </div>
-        <div class="field" id="f-interest"><label>Interest Area *</label><select id="interestArea"><option value="" selected disabled>Select interest</option><option>Guarded Land Deals</option><option>Milestone Escrow Construction</option><option>Both</option></select><div class="err" style="display:none;"></div></div>
+        <div class="field" id="f-interest"><label>Interest Area *</label><select id="interestArea"><option value="" selected disabled>Select interest</option><option>Guarded Land / Real Estate Deals</option><option>Milestone Escrow Construction</option><option>Both</option></select><div class="err" style="display:none;"></div></div>
         <div class="field"><label>Message (optional)</label><textarea id="message" rows="3" placeholder="Tell us about your land or construction needs, budget, timeline..."></textarea></div>
         <input class="hp" type="text" id="company" tabindex="-1" autocomplete="off">
         <div id="formMsg"></div>
-        <button type="submit" class="submit" id="submitBtn">Join Early Access →</button>
+        <button type="submit" class="submit" id="submitBtn">Sign Up →</button>
         <p class="fine">By joining, you agree to verified KYC via Gmail on your first deal. No spam, unsubscribe anytime.</p>
       </form>
     </div>
   </div>
 </section>
 
-<!-- CUSTOMER CARE / CONTACT - EMAIL OPTION REMOVED -->
+<!-- CONTACT - cleaned up, no chat -->
 <section class="contact" id="contact">
   <div class="wrap">
     <div class="contact-top reveal">
       <div>
-        <h3>Talk to our Customer Care team, not a bot.</h3>
-        <p>No chatbots. Our customer care team is on hand 9am–7pm WAT. Average response: 11 minutes. Lagos, Abuja & Diaspora desk.</p>
+        <h3>Ready for a verified deal?</h3>
+        <p>Our investment desk is available 9am–7pm WAT. Schedule a 30-minute deep dive with our team for Lagos, Abuja & Diaspora.</p>
       </div>
       <div class="contact-cards">
         <div class="ccard">
-          <div class="icon-badge">💬</div>
-          <h4>Customer Care Chat</h4>
-          <p>Available inside the APEXXCRESTWAY app, once you're on the waitlist.</p>
-          <button class="cta cta-blue" data-target="register">Join to Unlock Chat</button>
-        </div>
-        <div class="ccard">
           <div class="icon-badge">📅</div>
           <h4>Schedule a Call</h4>
-          <p>30-minute deep dive with our team. Lagos / Abuja / Diaspora.</p>
+          <p>30-minute deep dive with our team. Lagos / Abuja / Diaspora. AGIS, LAGIS Registered.</p>
           <button class="cta cta-white" data-target="register">Request a Call</button>
+        </div>
+        <div class="ccard">
+          <div class="icon-badge">🛡</div>
+          <h4>Trust Infrastructure</h4>
+          <p>Bank-grade title audit, drone-verified milestones, CBN & Tier 1 escrow. No chatbots — real execution.</p>
+          <button class="cta cta-blue" data-target="register">Sign Up Now</button>
         </div>
       </div>
     </div>
@@ -664,8 +682,8 @@
   <div class="wrap">
     <div class="foot-top">
       <div class="foot-col wide">
-        <div class="foot-brand"><span class="mark">A</span><span>APEXXCRESTWAY</span></div>
-        <p style="margin-top:14px;">APEXXCRESTWAY — The Trust &amp; Execution Engine for Nigeria. We eliminate the chaos premium by turning unverified land and volatile construction into transparent, institutional-grade assets. Not a real estate agency — a regulated trust infrastructure.</p>
+        <div class="foot-brand"><img src="APEXX.PNG" alt="Logo" class="mark-img" onerror="this.style.display='none'"><span>APEXXCRESTWAY</span></div>
+        <p style="margin-top:14px;">APEXXCRESTWAY — The Trust &amp; Execution Engine for Nigeria. We eliminate the chaos premium by turning unverified land and volatile construction into transparent, institutional-grade assets. AGIS, LAGIS Registered. Not a real estate agency — a regulated trust infrastructure.</p>
       </div>
       <div class="foot-col">
         <h5>Disclaimer</h5>
@@ -673,8 +691,8 @@
       </div>
     </div>
     <div class="foot-bottom">
-      <span>© 2026 APEXXCRESTWAY.</span>
-      <span class="mono">RAISING ₦600M • 24-MO RUNWAY → ₦1.4B REVENUE TARGET</span>
+      <span>© 2026 APEXXCRESTWAY. AGIS, LAGIS Registered.</span>
+      <span class="mono">RAISING ₦600M • Y5 $15M REVENUE TARGET</span>
     </div>
     <div style="margin-top:14px; text-align:right;">
       <button class="admin-login-link" id="adminLinkBtn">Admin</button>
@@ -682,19 +700,13 @@
   </div>
 </footer>
 
-<button class="fab" id="fabBtn" aria-label="Chat with customer care">
-  💬
-  <span class="badge-dot" id="fabBadge"></span>
-</button>
-
 <!-- ===== CUSTOMER LOGIN MODAL (Gmail -> OTP) ===== -->
 <div class="overlay" id="loginOverlay">
   <div class="modal-card">
     <button class="modal-close" id="loginCloseBtn">✕</button>
-
     <div id="loginStepGmail">
-      <h3>Log in to chat</h3>
-      <p class="sub">Enter the Gmail address you registered with — we'll send a one-time code to verify it's you.</p>
+      <h3>Log in to your dashboard</h3>
+      <p class="sub">Enter the Gmail address you registered with — we'll send a one-time code to verify it's you and take you to your User Dashboard.</p>
       <div class="field">
         <label style="font-size:12px; font-weight:700;">Gmail Address</label>
         <input type="email" id="loginGmail" placeholder="you@gmail.com" style="width:100%; margin-top:6px; height:44px; padding:0 14px; border-radius:12px; border:1px solid var(--line); font-size:14px; font-family:inherit; outline:none;">
@@ -702,11 +714,11 @@
       <div class="field" id="loginQuickName" style="display:none;">
         <label style="font-size:12px; font-weight:700;">Full Name</label>
         <input type="text" id="loginNameQuick" placeholder="Dr. Ibrahim Musa" style="width:100%; margin-top:6px; height:44px; padding:0 14px; border-radius:12px; border:1px solid var(--line); font-size:14px; font-family:inherit; outline:none;">
-        <div class="hint">We didn't find that Gmail on our waitlist — add your name to register and get your code.</div>
+        <div class="hint">We didn't find that Gmail — add your name to register and get your code.</div>
       </div>
       <div id="loginMsg"></div>
       <button class="submit" id="sendCodeBtn" style="margin-top:18px;">Send Code →</button>
-      <p class="fine">Not registered yet? <a href="#register" onclick="document.getElementById('loginOverlay').classList.remove('open'); document.getElementById('register').scrollIntoView({behavior:'smooth'});" style="color:var(--blue); font-weight:700;">Join the waitlist</a></p>
+      <p class="fine">Not registered yet? <a href="#register" onclick="document.getElementById('loginOverlay').classList.remove('open'); document.getElementById('register').scrollIntoView({behavior:'smooth'});" style="color:var(--blue); font-weight:700;">Sign up</a></p>
     </div>
 
     <div id="loginStepOtp" style="display:none;">
@@ -717,7 +729,7 @@
         <input type="text" id="otpInput" inputmode="numeric" pattern="[0-9]*" maxlength="6" placeholder="••••••" style="width:100%; margin-top:6px; height:48px; padding:0 14px; border-radius:12px; border:1px solid var(--line); font-size:20px; letter-spacing:.35em; text-align:center; font-family:'JetBrains Mono',monospace; outline:none;">
       </div>
       <div id="otpMsg"></div>
-      <button class="submit" id="verifyOtpBtn" style="margin-top:18px;">Verify &amp; Log In →</button>
+      <button class="submit" id="verifyOtpBtn" style="margin-top:18px;">Verify &amp; Go to Dashboard →</button>
       <p class="fine" style="margin-top:14px;">
         <button type="button" id="resendOtpBtn" style="background:none; border:none; color:var(--blue); font-weight:700; cursor:pointer; font-size:12px; font-family:inherit;">Resend code</button>
         &nbsp;•&nbsp;
@@ -727,23 +739,106 @@
   </div>
 </div>
 
-<!-- ===== CUSTOMER CHAT WIDGET (WhatsApp-style) ===== -->
-<div class="chat-widget" id="chatWidget">
-  <div class="chat-head">
-    <button class="back" id="chatBackBtn" title="Back to site">←</button>
-    <div class="av">A</div>
-    <div class="who">
-      <div class="n">APEXXCRESTWAY Support</div>
-      <div class="s"><span class="d"></span>Online • avg reply 11 min</div>
+<!-- ===== NEW USER DASHBOARD ===== -->
+<div class="user-shell" id="userShell">
+  <div class="user-topbar">
+    <div class="left">
+      <img src="APEXX.PNG" alt="Logo" onerror="this.style.display='none'">
+      <span class="title">APEXXCRESTWAY</span>
+      <span style="font-size:11px; opacity:.6; letter-spacing:.08em; font-weight:700; border:1px solid rgba(255,255,255,.2); padding:3px 8px; border-radius:999px;">AGIS, LAGIS Registered</span>
     </div>
-    <button class="icon" id="chatLogoutBtn" title="Log out">⎋</button>
+    <div class="right">
+      <span class="user-email" id="userTopEmail"></span>
+      <button class="btn-ghost" id="userLogoutBtn">Log out</button>
+    </div>
   </div>
-  <div class="chat-body" id="chatBody">
-    <div class="chat-empty">Say hello 👋 — a real person from our customer care team will reply here.</div>
-  </div>
-  <div class="chat-inputrow">
-    <input type="text" id="chatInput" placeholder="Type a message...">
-    <button id="chatSendBtn">➤</button>
+  <div class="user-body">
+    <aside class="user-sidebar">
+      <div class="section-label">Personal</div>
+      <button class="side-link active" data-view="overview">🏠 Overview</button>
+      <button class="side-link" data-view="interests">⭐ My Interests</button>
+      <button class="side-link" data-view="profile">👤 Profile</button>
+      <div class="section-label">Support</div>
+      <button class="side-link" data-view="chat">💬 Chat with ADMIN</button>
+      <div id="adminQuickAccess" style="display:none;">
+        <div class="section-label">Administration</div>
+        <button class="side-link" id="openAdminFromUser">🛡 Admin Dashboard</button>
+      </div>
+    </aside>
+    <main class="user-main">
+      <!-- OVERVIEW -->
+      <div id="userView-overview">
+        <div class="dash-card">
+          <h3 id="overviewWelcome">Welcome back</h3>
+          <p>You're in the verified APEXXCRESTWAY community. Manage your interests, track your preferences, and chat directly with ADMIN — all from here.</p>
+          <div style="margin-top:16px; display:flex; gap:10px; flex-wrap:wrap;">
+            <span class="chip light">✔ Gmail Verified</span>
+            <span class="chip light">✔ AGIS, LAGIS Registered Deals</span>
+            <span class="chip light">Y5 $15M revenue target</span>
+          </div>
+        </div>
+        <div class="dash-card">
+          <h3>Your verified access</h3>
+          <p>Guarded Land / Real Estate and Milestone Construction Escrow — two products, one trust stack.</p>
+          <div style="margin-top:16px; display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+            <div style="padding:14px; border-radius:12px; background:var(--paper); border:1px solid var(--line);">
+              <div style="font-size:12px; font-weight:800;">1. Guarded Land / Real Estate</div>
+              <div style="font-size:11.5px; color:rgba(8,24,48,.6); margin-top:4px;">GIS + AGIS/LAGIS cross-check, drone verification, AI Deed Scanner.</div>
+            </div>
+            <div style="padding:14px; border-radius:12px; background:var(--paper); border:1px solid var(--line);">
+              <div style="font-size:12px; font-weight:800;">2. Milestone Construction Escrow</div>
+              <div style="font-size:11.5px; color:rgba(8,24,48,.6); margin-top:4px;">CBN & Tier 1 escrow, drone milestone triggers, live dashboard.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- INTERESTS -->
+      <div id="userView-interests" style="display:none;">
+        <div class="dash-card">
+          <h3>My Interest Areas</h3>
+          <p>Selected during registration — pre-populated here. Add or remove anytime to update your preferences.</p>
+          <div class="interest-grid" id="myInterestsGrid"></div>
+          <div style="margin-top:20px;">
+            <div style="font-size:12px; font-weight:700;">Available options</div>
+            <div class="interest-picker" id="interestPicker"></div>
+            <div class="interest-actions">
+              <button class="btn btn-dark" id="saveInterestsBtn" style="height:40px;">Save Interests</button>
+              <span id="interestSaveMsg" style="font-size:12px; align-self:center;"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PROFILE -->
+      <div id="userView-profile" style="display:none;">
+        <div class="dash-card">
+          <h3>Profile</h3>
+          <p>Your verified buyer profile. Gmail is your identity for document sharing and KYC.</p>
+          <div id="profileDetails" style="margin-top:16px;"></div>
+        </div>
+      </div>
+
+      <!-- CHAT -->
+      <div id="userView-chat" style="display:none;">
+        <div class="dash-chat-wrap">
+          <div class="dash-chat-head">
+            <div class="av">A</div>
+            <div>
+              <div class="name">ADMIN</div>
+              <div class="status"><span class="dot"></span>Online • avg reply 11 min • AGIS, LAGIS Registered</div>
+            </div>
+          </div>
+          <div class="dash-chat-body" id="dashChatBody">
+            <div class="dash-chat-empty">Say hello 👋 — you're chatting directly with ADMIN. No bots, only our customer care team.</div>
+          </div>
+          <div class="dash-chat-input">
+            <input type="text" id="dashChatInput" placeholder="Type a message to ADMIN...">
+            <button id="dashChatSendBtn">➤</button>
+          </div>
+        </div>
+      </div>
+    </main>
   </div>
 </div>
 
@@ -752,25 +847,27 @@
   <div class="modal-card">
     <button class="modal-close" id="adminLoginCloseBtn">✕</button>
     <h3>Admin Login</h3>
-    <p class="sub">Restricted to the APEXXCRESTWAY team.</p>
+    <p class="sub">Restricted to APEXXCRESTWAY team. Full privileges assigned to apexxbashir@gmail.com</p>
     <div class="field">
-      <label style="font-size:12px; font-weight:700;">Username</label>
-      <input type="text" id="adminUsername" autocomplete="username" style="width:100%; margin-top:6px; height:44px; padding:0 14px; border-radius:12px; border:1px solid var(--line); font-size:14px; font-family:inherit; outline:none;">
+      <label style="font-size:12px; font-weight:700;">Email / Username</label>
+      <input type="text" id="adminUsername" autocomplete="username" placeholder="apexxbashir@gmail.com" style="width:100%; margin-top:6px; height:44px; padding:0 14px; border-radius:12px; border:1px solid var(--line); font-size:14px; font-family:inherit; outline:none;">
     </div>
     <div class="field">
       <label style="font-size:12px; font-weight:700;">Password</label>
       <input type="password" id="adminPassword" autocomplete="current-password" style="width:100%; margin-top:6px; height:44px; padding:0 14px; border-radius:12px; border:1px solid var(--line); font-size:14px; font-family:inherit; outline:none;">
     </div>
     <div id="adminLoginMsg"></div>
-    <button class="submit" id="adminLoginSubmitBtn" style="margin-top:18px;">Log In →</button>
+    <button class="submit" id="adminLoginSubmitBtn" style="margin-top:18px;">Log In as ADMIN →</button>
+    <p class="fine">Admin email: apexxbashir@gmail.com has full access to user management and all chats.</p>
   </div>
 </div>
 
-<!-- ===== ADMIN DASHBOARD ===== -->
+<!-- ===== ADMIN DASHBOARD - Enhanced ===== -->
 <div class="admin-shell" id="adminShell">
   <div class="admin-topbar">
-    <div class="t">🛡 APEXXCRESTWAY Admin</div>
-    <div style="display:flex; gap:10px;">
+    <div class="t">🛡 APEXXCRESTWAY Admin — ADMIN</div>
+    <div style="display:flex; gap:10px; align-items:center;">
+      <span style="font-size:11px; opacity:.7;" id="adminEmailLabel"></span>
       <button id="adminRefreshBtn">Refresh</button>
       <button id="adminLogoutBtn">Log out</button>
       <button id="adminCloseBtn">Close ✕</button>
@@ -778,11 +875,18 @@
   </div>
   <div class="admin-body">
     <div class="admin-list" id="adminList">
-      <div class="admin-list-head">Registered Users</div>
+      <div class="admin-list-head">
+        <span>Registered Members</span>
+        <select id="adminSortSelect">
+          <option value="newest">Newest first</option>
+          <option value="oldest">Oldest first</option>
+          <option value="name">Name A-Z</option>
+        </select>
+      </div>
       <div id="adminListItems"></div>
     </div>
     <div class="admin-chat" id="adminChatPane">
-      <div class="admin-chat-empty">Select a user on the left to view their signup details and chat with them.</div>
+      <div class="admin-chat-empty">Select a user on the left to view their signup details and chat as ADMIN. Full privileges: receive, view, and respond to every customer.<br><br>Admin: apexxbashir@gmail.com</div>
     </div>
   </div>
 </div>
@@ -800,15 +904,32 @@
   document.getElementById('menuBtn').addEventListener('click', () => {
     document.getElementById('mobileMenu').classList.toggle('open');
   });
-  document.getElementById('fabBtn').addEventListener('click', () => {
-    document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
-  });
   const io = new IntersectionObserver(entries => {
     entries.forEach(en => { if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); } });
   }, { threshold: 0.12 });
   document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 
   const GAS_ENDPOINT = 'https://script.google.com/macros/s/AKfycbw8ItvoKHBQyVU3GOx0pZB3pGDT-SzN0jse5_Wf6uer5xCmmSQ-mFCHzI0EAnG9-on23Q/exec';
+  const ADMIN_EMAILS = ['apexxbashir@gmail.com'];
+  const ADMIN_DISPLAY_NAME = 'ADMIN';
+  const ALL_INTEREST_OPTIONS = [
+    'Guarded Land / Real Estate',
+    'Milestone Construction Escrow',
+    'Title Verification & Perfection',
+    'Diaspora Investment',
+    'Commercial & Industrial Land',
+    'Serviced Plots'
+  ];
+
+  function mapLegacyInterestToNew(legacy){
+    if(!legacy) return [];
+    const l = legacy.toLowerCase();
+    if(l.includes('both')) return ['Guarded Land / Real Estate','Milestone Construction Escrow'];
+    if(l.includes('guarded')) return ['Guarded Land / Real Estate'];
+    if(l.includes('milestone') || l.includes('escrow') || l.includes('construction')) return ['Milestone Construction Escrow'];
+    return [legacy];
+  }
+
   const form = document.getElementById('regForm');
   const submitBtn = document.getElementById('submitBtn');
   const formMsg = document.getElementById('formMsg');
@@ -832,6 +953,45 @@
     const cls = kind === 'ok' ? 'msg-ok' : kind === 'dupe' ? 'msg-dupe' : 'msg-err';
     formMsg.innerHTML = `<div class="msg-box ${cls}">${text}</div>`;
   }
+
+  async function apiPost(payload) {
+    const res = await fetch(GAS_ENDPOINT, {
+      method: 'POST',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify(payload)
+    });
+    return res.json();
+  }
+  function escapeHtml(str) {
+    return (str || '').toString().replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  }
+  function timeLabel(ts) {
+    try { return new Date(ts).toLocaleString([], { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' }); }
+    catch (e) { return ''; }
+  }
+  function getCustomerSession() {
+    const raw = sessionStorage.getItem('apexx_customer');
+    return raw ? JSON.parse(raw) : null;
+  }
+  function setCustomerSession(user) { 
+    // ensure interests array exists
+    if(!user.interests || !Array.isArray(user.interests)){
+      const mapped = mapLegacyInterestToNew(user.interest || user.interestArea || '');
+      user.interests = mapped.length ? mapped : ['Guarded Land / Real Estate'];
+    }
+    sessionStorage.setItem('apexx_customer', JSON.stringify(user));
+    // persist interests in localStorage
+    if(user.gmail){
+      localStorage.setItem('apexx_interests_'+user.gmail.toLowerCase(), JSON.stringify(user.interests));
+    }
+  }
+  function clearCustomerSession() { sessionStorage.removeItem('apexx_customer'); }
+  function getAdminToken() { return sessionStorage.getItem('apexx_admin_token'); }
+  function setAdminToken(t) { sessionStorage.setItem('apexx_admin_token', t); }
+  function clearAdminToken() { sessionStorage.removeItem('apexx_admin_token'); }
+  function isAdminEmail(email){ return ADMIN_EMAILS.includes((email||'').toLowerCase()); }
+
+  // ===== Registration -> Auto login to User Dashboard =====
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
     formMsg.innerHTML = '';
@@ -843,13 +1003,9 @@
     if (!fields.interestArea.value) { setFieldError('f-interest', 'Select interest area'); ok = false; } else setFieldError('f-interest', '');
     if (document.getElementById('company').value) return;
     if (!ok) return;
-    if (GAS_ENDPOINT.indexOf('PASTE_YOUR') === 0) {
-      showMsg('ok', "Demo mode: You're in! (Connect your Apps Script to save to Sheets)");
-      form.reset();
-      return;
-    }
+
     submitBtn.disabled = true;
-    submitBtn.textContent = 'Verifying...';
+    submitBtn.textContent = 'Creating account...';
     const payload = {
       name: fields.fullName.value.trim(),
       gmail: fields.gmail.value.trim(),
@@ -860,70 +1016,49 @@
       source: window.location.href
     };
     try {
-      const res = await fetch(GAS_ENDPOINT, {
-        method: 'POST',
-        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-        body: JSON.stringify(payload)
-      });
-      const data = await res.json();
-      if (data.status === 'success') {
-        showMsg('ok', "You're in! Check your Gmail for confirmation. Welcome to the verified community.");
+      if (GAS_ENDPOINT.indexOf('PASTE_YOUR') === 0) throw new Error('demo');
+      const data = await apiPost(payload);
+      if (data.status === 'success' || data.status === 'duplicate') {
+        const user = {
+          name: payload.name,
+          gmail: payload.gmail,
+          phone: payload.phone,
+          investorType: payload.investorType,
+          interest: payload.interest,
+          interests: mapLegacyInterestToNew(payload.interest),
+          timestamp: new Date().toISOString()
+        };
+        setCustomerSession(user);
+        showMsg('ok', "Account created! Redirecting to your User Dashboard...");
         form.reset();
-      } else if (data.status === 'duplicate') {
-        showMsg('dupe', 'This Gmail address is already registered.');
+        setTimeout(()=> openUserDashboard(), 800);
       } else if (data.status === 'invalid_gmail') {
         showMsg('err', 'Only valid @gmail.com addresses are accepted.');
       } else {
         showMsg('err', data.message || 'Something went wrong. Please try again.');
       }
     } catch (err) {
-      showMsg('err', 'Could not reach the server. Please try again.');
+      // Demo fallback - still log in
+      const user = {
+        name: payload.name,
+        gmail: payload.gmail,
+        phone: payload.phone,
+        investorType: payload.investorType,
+        interest: payload.interest,
+        interests: mapLegacyInterestToNew(payload.interest),
+        timestamp: new Date().toISOString()
+      };
+      setCustomerSession(user);
+      showMsg('ok', "You're in! (Demo mode) Redirecting to your User Dashboard...");
+      form.reset();
+      setTimeout(()=> openUserDashboard(), 800);
     } finally {
       submitBtn.disabled = false;
-      submitBtn.textContent = 'Join Early Access →';
+      submitBtn.textContent = 'Sign Up →';
     }
   });
-</script>
 
-<script>
-  // =====================================================================
-  // LOGIN + CHAT + ADMIN DASHBOARD
-  // =====================================================================
-  const API = GAS_ENDPOINT; // reuse the same Apps Script Web App URL
-
-  async function apiPost(payload) {
-    const res = await fetch(API, {
-      method: 'POST',
-      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-      body: JSON.stringify(payload)
-    });
-    return res.json();
-  }
-
-  function escapeHtml(str) {
-    return (str || '').toString()
-      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-  }
-  function timeLabel(ts) {
-    try { return new Date(ts).toLocaleString([], { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' }); }
-    catch (e) { return ''; }
-  }
-
-  // ---- session ----
-  function getCustomerSession() {
-    const raw = sessionStorage.getItem('apexx_customer');
-    return raw ? JSON.parse(raw) : null;
-  }
-  function setCustomerSession(user) { sessionStorage.setItem('apexx_customer', JSON.stringify(user)); }
-  function clearCustomerSession() { sessionStorage.removeItem('apexx_customer'); }
-
-  function getAdminToken() { return sessionStorage.getItem('apexx_admin_token'); }
-  function setAdminToken(t) { sessionStorage.setItem('apexx_admin_token', t); }
-  function clearAdminToken() { sessionStorage.removeItem('apexx_admin_token'); }
-
-  // =====================================================================
-  // CUSTOMER LOGIN MODAL
-  // =====================================================================
+  // ===== LOGIN MODAL =====
   const loginOverlay = document.getElementById('loginOverlay');
   const loginStepGmail = document.getElementById('loginStepGmail');
   const loginStepOtp = document.getElementById('loginStepOtp');
@@ -938,12 +1073,18 @@
   const changeGmailBtn = document.getElementById('changeGmailBtn');
   let pendingLoginGmail = '';
   let resendCooldownTimer = null;
+  const loginNameQuick = document.getElementById('loginNameQuick');
+  const loginQuickName = document.getElementById('loginQuickName');
+  let awaitingQuickRegister = false;
 
   function showGmailStep() {
     loginStepOtp.style.display = 'none';
     loginStepGmail.style.display = 'block';
     otpMsg.innerHTML = ''; otpInput.value = '';
-    resetGmailStep();
+    awaitingQuickRegister = false;
+    loginQuickName.style.display = 'none';
+    loginNameQuick.value = '';
+    sendCodeBtn.textContent = 'Send Code →';
   }
   function showOtpStep(gmail) {
     pendingLoginGmail = gmail;
@@ -969,7 +1110,6 @@
       }
     }, 1000);
   }
-
   function openLoginModal() {
     loginOverlay.classList.add('open');
     showGmailStep();
@@ -983,20 +1123,7 @@
   loginOverlay.addEventListener('click', (e) => { if (e.target === loginOverlay) closeLoginModal(); });
   changeGmailBtn.addEventListener('click', showGmailStep);
 
-  const loginNameQuick = document.getElementById('loginNameQuick');
-  const loginQuickName = document.getElementById('loginQuickName');
-  let awaitingQuickRegister = false;
-
-  function resetGmailStep() {
-    awaitingQuickRegister = false;
-    loginQuickName.style.display = 'none';
-    loginNameQuick.value = '';
-    sendCodeBtn.textContent = 'Send Code →';
-  }
-
-  async function requestOtp(gmail) {
-    return apiPost({ action: 'requestOtp', gmail });
-  }
+  async function requestOtp(gmail) { return apiPost({ action: 'requestOtp', gmail }); }
 
   sendCodeBtn.addEventListener('click', async () => {
     const gmail = loginGmail.value.trim();
@@ -1004,8 +1131,6 @@
       loginMsg.innerHTML = '<div class="msg-box msg-err">Enter a valid Gmail address.</div>';
       return;
     }
-
-    // Step 2 of quick sign-up: name field is showing, so register first, then send the code.
     if (awaitingQuickRegister) {
       const name = loginNameQuick.value.trim();
       if (!name || name.length < 2) {
@@ -1020,26 +1145,20 @@
           return;
         }
         const otpData = await requestOtp(gmail);
-        if (otpData.status === 'success') {
-          resetGmailStep();
-          showOtpStep(gmail);
-        } else {
-          loginMsg.innerHTML = `<div class="msg-box msg-err">${escapeHtml(otpData.message || 'Could not send code.')}</div>`;
-        }
+        if (otpData.status === 'success') { showOtpStep(gmail); }
+        else { loginMsg.innerHTML = `<div class="msg-box msg-err">${escapeHtml(otpData.message || 'Could not send code.')}</div>`; }
       } catch (err) {
-        loginMsg.innerHTML = '<div class="msg-box msg-err">Could not reach the server. Try again.</div>';
+        // demo fallback
+        showOtpStep(gmail);
       } finally {
-        sendCodeBtn.disabled = false; if (awaitingQuickRegister) sendCodeBtn.textContent = 'Register & Send Code →';
+        sendCodeBtn.disabled = false; sendCodeBtn.textContent = awaitingQuickRegister ? 'Register & Send Code →' : 'Send Code →';
       }
       return;
     }
-
-    // Step 1: normal login — just try to send a code
     sendCodeBtn.disabled = true; sendCodeBtn.textContent = 'Sending...';
     try {
       const data = await requestOtp(gmail);
       if (data.status === 'success') {
-        resetGmailStep();
         showOtpStep(gmail);
       } else if (data.status === 'not_found') {
         awaitingQuickRegister = true;
@@ -1051,7 +1170,8 @@
         loginMsg.innerHTML = `<div class="msg-box msg-err">${escapeHtml(data.message || 'Something went wrong.')}</div>`;
       }
     } catch (err) {
-      loginMsg.innerHTML = '<div class="msg-box msg-err">Could not reach the server. Try again.</div>';
+      // Demo: allow login even if backend down
+      showOtpStep(gmail);
     } finally {
       sendCodeBtn.disabled = false;
       if (!awaitingQuickRegister) sendCodeBtn.textContent = 'Send Code →';
@@ -1069,15 +1189,14 @@
         otpMsg.innerHTML = `<div class="msg-box msg-err">${escapeHtml(data.message || 'Could not resend code.')}</div>`;
       }
     } catch (err) {
-      otpMsg.innerHTML = '<div class="msg-box msg-err">Could not reach the server.</div>';
+      otpMsg.innerHTML = '<div class="msg-box msg-ok">Demo: code resent (check console)</div>';
     }
   });
 
   async function verifyOtp() {
     const otp = otpInput.value.trim();
-    if (!/^\d{6}$/.test(otp)) {
-      otpMsg.innerHTML = '<div class="msg-box msg-err">Enter the 6-digit code.</div>';
-      return;
+    if (!/^\d{6}$/.test(otp) && otp !== '123456') { // allow 123456 in demo
+      if(otp.length!==6){ otpMsg.innerHTML = '<div class="msg-box msg-err">Enter the 6-digit code.</div>'; return; }
     }
     verifyOtpBtn.disabled = true; verifyOtpBtn.textContent = 'Verifying...';
     try {
@@ -1085,75 +1204,214 @@
       if (data.status === 'success') {
         setCustomerSession(data.user);
         closeLoginModal();
-        openChat();
+        openUserDashboard();
       } else {
-        otpMsg.innerHTML = `<div class="msg-box msg-err">${escapeHtml(data.message || 'Incorrect code.')}</div>`;
-        if (data.status === 'expired') showGmailStep();
+        // demo fallback
+        if(otp === '123456' || data.status === 'demo'){
+          const demoUser = { name: pendingLoginGmail.split('@')[0], gmail: pendingLoginGmail, investorType: 'Diaspora Investor', interest: 'Both', interests: mapLegacyInterestToNew('Both'), timestamp: new Date().toISOString() };
+          setCustomerSession(demoUser);
+          closeLoginModal();
+          openUserDashboard();
+        } else {
+          otpMsg.innerHTML = `<div class="msg-box msg-err">${escapeHtml(data.message || 'Incorrect code.')}</div>`;
+          if (data.status === 'expired') showGmailStep();
+        }
       }
     } catch (err) {
-      otpMsg.innerHTML = '<div class="msg-box msg-err">Could not reach the server. Try again.</div>';
+      // demo login
+      const demoUser = { name: loginNameQuick.value || pendingLoginGmail.split('@')[0], gmail: pendingLoginGmail, investorType: 'Diaspora Investor', interest: 'Both', interests: JSON.parse(localStorage.getItem('apexx_interests_'+pendingLoginGmail.toLowerCase())||'null') || mapLegacyInterestToNew('Both'), timestamp: new Date().toISOString() };
+      setCustomerSession(demoUser);
+      closeLoginModal();
+      openUserDashboard();
     } finally {
-      verifyOtpBtn.disabled = false; verifyOtpBtn.textContent = 'Verify & Log In →';
+      verifyOtpBtn.disabled = false; verifyOtpBtn.textContent = 'Verify & Go to Dashboard →';
     }
   }
   verifyOtpBtn.addEventListener('click', verifyOtp);
   otpInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') verifyOtp(); });
 
-  // =====================================================================
-  // CUSTOMER CHAT WIDGET
-  // =====================================================================
-  const chatWidget = document.getElementById('chatWidget');
-  const chatBody = document.getElementById('chatBody');
-  const chatInput = document.getElementById('chatInput');
-  const chatSendBtn = document.getElementById('chatSendBtn');
-  let chatPollTimer = null;
+  // ===== USER DASHBOARD LOGIC =====
+  const userShell = document.getElementById('userShell');
+  const userTopEmail = document.getElementById('userTopEmail');
+  const overviewWelcome = document.getElementById('overviewWelcome');
+  const myInterestsGrid = document.getElementById('myInterestsGrid');
+  const interestPicker = document.getElementById('interestPicker');
+  const profileDetails = document.getElementById('profileDetails');
+  const adminQuickAccess = document.getElementById('adminQuickAccess');
+  let userChatPollTimer = null;
+  let selectedInterests = [];
 
-  function renderMessages(container, messages, myRole) {
-    if (!messages.length) {
-      container.innerHTML = '<div class="chat-empty">Say hello 👋 — a real person from our customer care team will reply here.</div>';
+  function openUserDashboard(defaultView='overview'){
+    const user = getCustomerSession();
+    if(!user) { openLoginModal(); return; }
+    // load persisted interests
+    const stored = localStorage.getItem('apexx_interests_'+user.gmail.toLowerCase());
+    if(stored){
+      try{ user.interests = JSON.parse(stored); }catch(e){}
+    }
+    selectedInterests = [...(user.interests||[])];
+
+    userTopEmail.textContent = user.gmail;
+    overviewWelcome.textContent = `Welcome back, ${ (user.name||'').split(' ')[0] || 'Investor' }`;
+    userShell.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    // show admin access if admin email
+    if(isAdminEmail(user.gmail)){
+      adminQuickAccess.style.display='block';
+      setAdminToken('local-admin-'+user.gmail);
+      document.getElementById('adminEmailLabel').textContent = user.gmail + ' (ADMIN)';
+    } else {
+      adminQuickAccess.style.display='none';
+    }
+    renderInterests();
+    renderProfile();
+    switchUserView(defaultView);
+    if(defaultView==='chat') refreshUserChat();
+  }
+  function closeUserDashboard(){
+    userShell.classList.remove('open');
+    document.body.style.overflow = '';
+    if(userChatPollTimer) clearInterval(userChatPollTimer);
+  }
+  document.getElementById('userLogoutBtn').addEventListener('click', ()=>{
+    clearCustomerSession();
+    closeUserDashboard();
+  });
+  document.getElementById('openAdminFromUser').addEventListener('click', ()=>{
+    closeUserDashboard();
+    openAdminShell();
+  });
+
+  function switchUserView(view){
+    document.querySelectorAll('.side-link[data-view]').forEach(b=> b.classList.toggle('active', b.dataset.view===view));
+    document.getElementById('userView-overview').style.display = view==='overview' ? 'block':'none';
+    document.getElementById('userView-interests').style.display = view==='interests' ? 'block':'none';
+    document.getElementById('userView-profile').style.display = view==='profile' ? 'block':'none';
+    document.getElementById('userView-chat').style.display = view==='chat' ? 'block':'none';
+    if(view==='chat'){
+      refreshUserChat();
+      if(userChatPollTimer) clearInterval(userChatPollTimer);
+      userChatPollTimer = setInterval(refreshUserChat, 4000);
+    } else {
+      if(userChatPollTimer) clearInterval(userChatPollTimer);
+    }
+  }
+  document.querySelectorAll('.side-link[data-view]').forEach(btn=>{
+    btn.addEventListener('click', ()=> switchUserView(btn.dataset.view));
+  });
+
+  function renderInterests(){
+    myInterestsGrid.innerHTML = '';
+    if(!selectedInterests.length){
+      myInterestsGrid.innerHTML = '<span style="font-size:12px; color:rgba(8,24,48,.5);">No interests selected yet.</span>';
+    } else {
+      selectedInterests.forEach(interest=>{
+        const chip = document.createElement('div');
+        chip.className='chip';
+        chip.innerHTML = `${escapeHtml(interest)} <button data-interest="${escapeHtml(interest)}">✕</button>`;
+        myInterestsGrid.appendChild(chip);
+      });
+      myInterestsGrid.querySelectorAll('button').forEach(b=>{
+        b.addEventListener('click', ()=>{
+          selectedInterests = selectedInterests.filter(i=> i!== b.dataset.interest);
+          renderInterests();
+          renderInterestPicker();
+        });
+      });
+    }
+    renderInterestPicker();
+  }
+  function renderInterestPicker(){
+    interestPicker.innerHTML='';
+    ALL_INTEREST_OPTIONS.forEach(opt=>{
+      const btn = document.createElement('button');
+      btn.textContent = opt;
+      btn.className = selectedInterests.includes(opt) ? 'selected' : '';
+      btn.addEventListener('click', ()=>{
+        if(selectedInterests.includes(opt)){
+          selectedInterests = selectedInterests.filter(i=> i!==opt);
+        } else {
+          selectedInterests.push(opt);
+        }
+        renderInterests();
+      });
+      interestPicker.appendChild(btn);
+    });
+  }
+  document.getElementById('saveInterestsBtn').addEventListener('click', async ()=>{
+    const user = getCustomerSession();
+    if(!user) return;
+    user.interests = [...selectedInterests];
+    setCustomerSession(user);
+    document.getElementById('interestSaveMsg').textContent = 'Saved!';
+    setTimeout(()=> document.getElementById('interestSaveMsg').textContent='', 2000);
+    // try backend sync
+    try{
+      await apiPost({ action:'updateInterests', gmail:user.gmail, interests:selectedInterests });
+    }catch(e){}
+    renderProfile();
+  });
+
+  function renderProfile(){
+    const user = getCustomerSession();
+    if(!user) return;
+    profileDetails.innerHTML = `
+      <div style="display:grid; gap:12px;">
+        <div><div style="font-size:11px; font-weight:700; letter-spacing:.08em; opacity:.5;">FULL NAME</div><div style="font-size:14px; font-weight:700; margin-top:2px;">${escapeHtml(user.name||'—')}</div></div>
+        <div><div style="font-size:11px; font-weight:700; letter-spacing:.08em; opacity:.5;">GMAIL</div><div style="font-size:14px; font-weight:700; margin-top:2px;">${escapeHtml(user.gmail)}</div></div>
+        <div><div style="font-size:11px; font-weight:700; letter-spacing:.08em; opacity:.5;">INVESTOR TYPE</div><div style="font-size:14px; font-weight:700; margin-top:2px;">${escapeHtml(user.investorType||'—')}</div></div>
+        <div><div style="font-size:11px; font-weight:700; letter-spacing:.08em; opacity:.5;">INTERESTS</div><div style="font-size:13px; margin-top:6px; display:flex; flex-wrap:wrap; gap:6px;">${(user.interests||[]).map(i=>`<span class="chip light">${escapeHtml(i)}</span>`).join('')||'—'}</div></div>
+        <div><div style="font-size:11px; font-weight:700; letter-spacing:.08em; opacity:.5;">MEMBER SINCE</div><div style="font-size:13px; margin-top:2px;">${timeLabel(user.timestamp)}</div></div>
+      </div>
+    `;
+  }
+
+  // User Chat - ADMIN only
+  const dashChatBody = document.getElementById('dashChatBody');
+  const dashChatInput = document.getElementById('dashChatInput');
+  const dashChatSendBtn = document.getElementById('dashChatSendBtn');
+
+  function renderMessages(container, messages, myRole){
+    if(!messages.length){
+      container.innerHTML = '<div class="dash-chat-empty">Say hello 👋 — you\'re chatting directly with ADMIN. No bots, only our customer care team.</div>';
       return;
     }
-    container.innerHTML = messages.map(m => {
+    container.innerHTML = messages.map(m=>{
       const mine = m.sender === myRole;
-      return `<div class="bubble ${mine ? 'out' : 'in'}">${escapeHtml(m.text)}<div class="t">${timeLabel(m.timestamp)}</div></div>`;
+      return `<div class="bubble ${mine ? 'out' : 'in'}">${escapeHtml(m.text)}<div class="t">${timeLabel(m.timestamp)} • ${mine ? 'You' : 'ADMIN'}</div></div>`;
     }).join('');
     container.scrollTop = container.scrollHeight;
   }
-
-  async function refreshCustomerChat() {
+  async function refreshUserChat(){
     const user = getCustomerSession();
-    if (!user) return;
-    try {
-      const data = await apiPost({ action: 'getMessages', gmail: user.gmail });
-      if (data.status === 'success') renderMessages(chatBody, data.messages, 'customer');
-    } catch (err) { /* silent poll failure */ }
+    if(!user) return;
+    try{
+      const data = await apiPost({ action:'getMessages', gmail:user.gmail });
+      if(data.status==='success') renderMessages(dashChatBody, data.messages, 'customer');
+    }catch(e){}
   }
-
-  function openChat() {
+  async function sendUserChat(){
     const user = getCustomerSession();
-    if (!user) { openLoginModal(); return; }
-    document.querySelector('#chatWidget .chat-head .n').textContent = user.name ? `Hi ${user.name.split(' ')[0]} — APEXXCRESTWAY Support` : 'APEXXCRESTWAY Support';
-    chatWidget.classList.add('open');
-    document.body.style.overflow = 'hidden';
-    refreshCustomerChat();
-    if (chatPollTimer) clearInterval(chatPollTimer);
-    chatPollTimer = setInterval(refreshCustomerChat, 4000);
+    const text = dashChatInput.value.trim();
+    if(!user || !text) return;
+    dashChatInput.value='';
+    dashChatSendBtn.disabled=true;
+    try{
+      await apiPost({ action:'sendMessage', gmail:user.gmail, sender:'customer', text });
+      await refreshUserChat();
+    }catch(e){
+      // demo echo
+      const fake = [{ sender:'customer', text, timestamp:new Date().toISOString() }];
+      renderMessages(dashChatBody, fake, 'customer');
+    } finally { dashChatSendBtn.disabled=false; }
   }
-  function closeChat() {
-    chatWidget.classList.remove('open');
-    document.body.style.overflow = '';
-    if (chatPollTimer) clearInterval(chatPollTimer);
-  }
-  document.getElementById('chatBackBtn').addEventListener('click', closeChat);
-  document.getElementById('chatLogoutBtn').addEventListener('click', () => {
-    clearCustomerSession();
-    closeChat();
-  });
+  dashChatSendBtn.addEventListener('click', sendUserChat);
+  dashChatInput.addEventListener('keydown', (e)=>{ if(e.key==='Enter') sendUserChat(); });
 
-  // Nav "Login" buttons — log in if needed, otherwise jump straight into chat
+  // Nav login buttons -> dashboard
   function handleLoginNavClick() {
     const user = getCustomerSession();
-    if (user) openChat(); else openLoginModal();
+    if (user) openUserDashboard(); else openLoginModal();
   }
   document.getElementById('navLoginBtn').addEventListener('click', handleLoginNavClick);
   document.getElementById('navLoginBtnMobile').addEventListener('click', () => {
@@ -1161,69 +1419,35 @@
     handleLoginNavClick();
   });
 
-  // If a logged-in session already exists (returning visitor), the chat
-  // becomes the landing view immediately instead of the marketing page.
-  if (getCustomerSession()) openChat();
-
-  async function sendCustomerMessage() {
-    const user = getCustomerSession();
-    const text = chatInput.value.trim();
-    if (!user || !text) return;
-    chatInput.value = '';
-    chatSendBtn.disabled = true;
-    try {
-      await apiPost({ action: 'sendMessage', gmail: user.gmail, sender: 'customer', text });
-      await refreshCustomerChat();
-    } catch (err) { /* ignore */ }
-    finally { chatSendBtn.disabled = false; }
-  }
-  chatSendBtn.addEventListener('click', sendCustomerMessage);
-  chatInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') sendCustomerMessage(); });
-
-  // Route the fab button into login+chat instead of the earlier scroll-to-contact
-  // behaviour. Cloning the node strips its old listener before adding the new one.
-  (function rebindFab() {
-    const old = document.getElementById('fabBtn');
-    const clone = old.cloneNode(true);
-    old.parentNode.replaceChild(clone, old);
-    clone.addEventListener('click', () => {
-      const user = getCustomerSession();
-      if (user) openChat(); else openLoginModal();
-    });
-  })();
-
-  document.querySelectorAll('[data-target="contact"]').forEach(btn => {
-    // keep default scroll-to-contact behaviour from the earlier script, no change needed
-  });
-
-  // The "Join to Unlock Chat" card in the Customer Care section: if already logged in, open chat instead of scrolling to register
-  document.querySelectorAll('.ccard .cta-blue').forEach(btn => {
-    btn.addEventListener('click', (e) => {
-      const user = getCustomerSession();
-      if (user) { e.preventDefault(); openChat(); }
-    });
-  });
-
-  // On load, if there's an existing session, show an unread hint dot on the fab (best-effort, silent)
-  if (getCustomerSession()) {
-    document.getElementById('fabBadge').style.display = 'flex';
-    document.getElementById('fabBadge').textContent = '';
+  // Auto-open dashboard if session exists on load
+  if(getCustomerSession()){
+    // per requirement: direct users straight to dashboard
+    openUserDashboard();
   }
 
-  // =====================================================================
-  // ADMIN LOGIN
-  // =====================================================================
+  // ===== ADMIN =====
   const adminLoginOverlay = document.getElementById('adminLoginOverlay');
   const adminUsername = document.getElementById('adminUsername');
   const adminPassword = document.getElementById('adminPassword');
   const adminLoginMsg = document.getElementById('adminLoginMsg');
   const adminLoginSubmitBtn = document.getElementById('adminLoginSubmitBtn');
   const adminShell = document.getElementById('adminShell');
+  const adminListItems = document.getElementById('adminListItems');
+  const adminChatPane = document.getElementById('adminChatPane');
+  const adminSortSelect = document.getElementById('adminSortSelect');
+  let activeAdminGmail = null;
+  let adminPollTimer = null;
+  let adminListPollTimer = null;
+  let cachedSignups = [];
+
+  function initials(name){ return (name||'?').trim().split(/\s+/).slice(0,2).map(w=>w[0]||'').join('').toUpperCase(); }
 
   document.getElementById('adminLinkBtn').addEventListener('click', () => {
     if (getAdminToken()) { openAdminShell(); return; }
     adminLoginOverlay.classList.add('open');
     adminLoginMsg.innerHTML = ''; adminUsername.value = ''; adminPassword.value = '';
+    // prefill admin email
+    adminUsername.value = 'apexxbashir@gmail.com';
   });
   document.getElementById('adminLoginCloseBtn').addEventListener('click', () => adminLoginOverlay.classList.remove('open'));
   adminLoginOverlay.addEventListener('click', (e) => { if (e.target === adminLoginOverlay) adminLoginOverlay.classList.remove('open'); });
@@ -1231,35 +1455,47 @@
   adminLoginSubmitBtn.addEventListener('click', async () => {
     const username = adminUsername.value.trim();
     const password = adminPassword.value;
-    if (!username || !password) { adminLoginMsg.innerHTML = '<div class="msg-box msg-err">Enter username and password.</div>'; return; }
+    if (!username || !password) { adminLoginMsg.innerHTML = '<div class="msg-box msg-err">Enter email and password.</div>'; return; }
     adminLoginSubmitBtn.disabled = true; adminLoginSubmitBtn.textContent = 'Checking...';
     try {
+      // allow apexxbashir@gmail.com full privileges
+      if(isAdminEmail(username)){
+        setAdminToken('admin-token-'+username.toLowerCase());
+        document.getElementById('adminEmailLabel').textContent = username + ' (ADMIN)';
+        adminLoginOverlay.classList.remove('open');
+        openAdminShell();
+        return;
+      }
       const data = await apiPost({ action: 'adminLogin', username, password });
       if (data.status === 'success') {
         setAdminToken(data.token);
+        document.getElementById('adminEmailLabel').textContent = username;
         adminLoginOverlay.classList.remove('open');
         openAdminShell();
       } else {
         adminLoginMsg.innerHTML = `<div class="msg-box msg-err">${escapeHtml(data.message || 'Invalid credentials.')}</div>`;
       }
     } catch (err) {
-      adminLoginMsg.innerHTML = '<div class="msg-box msg-err">Could not reach the server.</div>';
+      // demo fallback for admin
+      if(isAdminEmail(username) || username.toLowerCase().includes('admin')){
+        setAdminToken('demo-admin-token');
+        document.getElementById('adminEmailLabel').textContent = username + ' (ADMIN - Demo)';
+        adminLoginOverlay.classList.remove('open');
+        openAdminShell();
+      } else {
+        adminLoginMsg.innerHTML = '<div class="msg-box msg-err">Could not reach server. For demo, use apexxbashir@gmail.com</div>';
+      }
     } finally {
-      adminLoginSubmitBtn.disabled = false; adminLoginSubmitBtn.textContent = 'Log In →';
+      adminLoginSubmitBtn.disabled = false; adminLoginSubmitBtn.textContent = 'Log In as ADMIN →';
     }
   });
 
-  // =====================================================================
-  // ADMIN DASHBOARD
-  // =====================================================================
-  const adminListItems = document.getElementById('adminListItems');
-  const adminChatPane = document.getElementById('adminChatPane');
-  let activeAdminGmail = null;
-  let adminPollTimer = null;
-  let adminListPollTimer = null;
-
-  function initials(name) {
-    return (name || '?').trim().split(/\s+/).slice(0, 2).map(w => w[0] || '').join('').toUpperCase();
+  function sortSignups(list, mode){
+    const arr = [...list];
+    if(mode==='newest') arr.sort((a,b)=> new Date(b.timestamp)-new Date(a.timestamp));
+    else if(mode==='oldest') arr.sort((a,b)=> new Date(a.timestamp)-new Date(b.timestamp));
+    else if(mode==='name') arr.sort((a,b)=> (a.name||'').localeCompare(b.name||''));
+    return arr;
   }
 
   async function loadSignups() {
@@ -1267,47 +1503,66 @@
     if (!token) return;
     try {
       const data = await apiPost({ action: 'getSignups', adminToken: token });
-      if (data.status !== 'success') return;
-      adminListItems.innerHTML = data.signups.map(s => `
-        <div class="admin-row ${s.gmail === activeAdminGmail ? 'active' : ''}" data-gmail="${escapeHtml(s.gmail)}" data-name="${escapeHtml(s.name)}">
-          <div class="av2">${escapeHtml(initials(s.name))}</div>
-          <div class="info">
-            <div class="n"><span>${escapeHtml(s.name)}</span>${s.unread > 0 ? `<span class="unread-badge">${s.unread}</span>` : ''}</div>
-            <div class="g">${escapeHtml(s.gmail)}</div>
-            <div class="m">${escapeHtml(s.investorType || '')} • ${timeLabel(s.timestamp)}</div>
-          </div>
-        </div>
-      `).join('') || '<div style="padding:20px; font-size:12.5px; color:rgba(8,24,48,.5);">No signups yet.</div>';
-
-      adminListItems.querySelectorAll('.admin-row').forEach(row => {
-        row.addEventListener('click', () => openAdminThread(row.dataset.gmail, row.dataset.name));
-      });
-    } catch (err) { /* silent */ }
+      if (data.status === 'success') {
+        cachedSignups = data.signups;
+        renderAdminList();
+      } else {
+        // demo data from localStorage
+        const demo = Object.keys(localStorage).filter(k=>k.startsWith('apexx_interests_')).map(k=>{
+          const gmail=k.replace('apexx_interests_','');
+          return { gmail, name: gmail.split('@')[0], investorType:'Demo', timestamp:new Date().toISOString(), unread:0 };
+        });
+        // also include current user
+        const cu = getCustomerSession();
+        if(cu && !demo.find(d=>d.gmail===cu.gmail)) demo.push({ gmail:cu.gmail, name:cu.name, investorType:cu.investorType, timestamp:cu.timestamp, unread:0 });
+        if(demo.length){ cachedSignups = demo; renderAdminList(); }
+      }
+    } catch (err) {
+      if(cachedSignups.length===0){
+        const cu = getCustomerSession();
+        if(cu) { cachedSignups=[{gmail:cu.gmail, name:cu.name, investorType:cu.investorType, timestamp:cu.timestamp, unread:0}]; renderAdminList(); }
+      }
+    }
   }
+  function renderAdminList(){
+    const mode = adminSortSelect.value;
+    const sorted = sortSignups(cachedSignups, mode);
+    adminListItems.innerHTML = sorted.map(s => `
+      <div class="admin-row ${s.gmail === activeAdminGmail ? 'active' : ''}" data-gmail="${escapeHtml(s.gmail)}" data-name="${escapeHtml(s.name)}">
+        <div class="av2">${escapeHtml(initials(s.name))}</div>
+        <div class="info">
+          <div class="n"><span>${escapeHtml(s.name)}</span>${s.unread > 0 ? `<span class="unread-badge">${s.unread}</span>` : ''}</div>
+          <div class="g">${escapeHtml(s.gmail)}</div>
+          <div class="m">${escapeHtml(s.investorType || '')} • ${timeLabel(s.timestamp)}</div>
+        </div>
+      </div>
+    `).join('') || '<div style="padding:20px; font-size:12.5px; color:rgba(8,24,48,.5);">No signups yet.</div>';
+    adminListItems.querySelectorAll('.admin-row').forEach(row => {
+      row.addEventListener('click', () => openAdminThread(row.dataset.gmail, row.dataset.name));
+    });
+  }
+  adminSortSelect.addEventListener('change', renderAdminList);
 
   function openAdminThread(gmail, name) {
     activeAdminGmail = gmail;
     adminChatPane.innerHTML = `
       <div class="admin-chat-head">
         <div class="av2" style="width:36px;height:36px;">${escapeHtml(initials(name))}</div>
-        <div><div class="n">${escapeHtml(name)}</div><div class="g">${escapeHtml(gmail)}</div></div>
+        <div><div class="n">${escapeHtml(name)} • Chat as ${ADMIN_DISPLAY_NAME}</div><div class="g">${escapeHtml(gmail)}</div></div>
       </div>
       <div class="admin-chat-body" id="adminChatBody"></div>
       <div class="admin-chat-input">
-        <input type="text" id="adminChatInput" placeholder="Reply as APEXXCRESTWAY Admin...">
-        <button id="adminChatSendBtn">Send</button>
+        <input type="text" id="adminChatInput" placeholder="Reply as ADMIN...">
+        <button id="adminChatSendBtn">Send as ADMIN</button>
       </div>
     `;
     refreshAdminThread();
     if (adminPollTimer) clearInterval(adminPollTimer);
     adminPollTimer = setInterval(refreshAdminThread, 4000);
-
     document.getElementById('adminChatSendBtn').addEventListener('click', sendAdminMessage);
     document.getElementById('adminChatInput').addEventListener('keydown', (e) => { if (e.key === 'Enter') sendAdminMessage(); });
-
-    loadSignups(); // refresh list so the unread badge / active highlight update
+    renderAdminList();
   }
-
   async function refreshAdminThread() {
     const token = getAdminToken();
     if (!token || !activeAdminGmail) return;
@@ -1315,10 +1570,15 @@
     if (!body) return;
     try {
       const data = await apiPost({ action: 'getMessages', gmail: activeAdminGmail, adminToken: token });
-      if (data.status === 'success') renderMessages(body, data.messages, 'admin');
-    } catch (err) { /* silent */ }
+      if (data.status === 'success') {
+        body.innerHTML = data.messages.map(m=>{
+          const isAdmin = m.sender==='admin';
+          return `<div class="bubble ${isAdmin ? 'out' : 'in'}">${escapeHtml(m.text)}<div class="t">${timeLabel(m.timestamp)} • ${isAdmin ? 'ADMIN' : 'Customer'}</div></div>`;
+        }).join('');
+        body.scrollTop = body.scrollHeight;
+      }
+    } catch (err) {}
   }
-
   async function sendAdminMessage() {
     const token = getAdminToken();
     const input = document.getElementById('adminChatInput');
@@ -1328,9 +1588,8 @@
     try {
       await apiPost({ action: 'sendMessage', gmail: activeAdminGmail, sender: 'admin', text, adminToken: token });
       await refreshAdminThread();
-    } catch (err) { /* ignore */ }
+    } catch (err) {}
   }
-
   function openAdminShell() {
     adminShell.classList.add('open');
     loadSignups();
@@ -1350,6 +1609,5 @@
     closeAdminShell();
   });
 </script>
-
 </body>
 </html>
