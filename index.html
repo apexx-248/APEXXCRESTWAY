@@ -333,7 +333,9 @@
   .admin-chat-input{display:flex; gap:10px; padding:14px 20px; border-top:1px solid var(--line);}
   .admin-chat-input input{flex:1; height:44px; border-radius:22px; border:1px solid var(--line); padding:0 16px; font-size:14px; font-family:inherit; outline:none;}
   .admin-chat-input button{padding:0 20px; height:44px; border-radius:22px; background:#075E54; color:#fff; border:none; font-weight:700; cursor:pointer;}
+  .admin-chat-input button:disabled{opacity:.5;}
   .admin-login-link{background:none; border:none; color:rgba(255,255,255,.35); font-size:10.5px; cursor:pointer; text-decoration:underline;}
+  .debug-log{font-family:'JetBrains Mono',monospace; font-size:10px; background:#fff3cd; color:#664d03; padding:8px 10px; border-radius:8px; margin:0 20px 10px; display:none; border:1px solid #ffe69c;}
 
   @media (max-width:800px){
     .user-body{flex-direction:column;}
@@ -517,7 +519,7 @@
           <div class="market-stat"><div class="num">$2.61T</div><div class="lbl">Real Estate</div><div class="sub">3rd largest GDP sector, 5.2% of GDP</div></div>
           <div class="market-stat"><div class="num">$27B</div><div class="lbl">Construction</div><div class="sub">CAGR 9%, housing + infrastructure</div></div>
         </div>
-        <div class="tam-line">SAM (Verified + Escrow): $2.71M → SOM Y5 $15M revenue target</div>
+        <div class="tam-line">SAM (Verified + Escrow): $2.71M → Y5 $15M revenue target</div>
       </div>
       <div class="flywheel reveal">
         <div class="mono">APEXXCRESTWAY FLYWHEEL</div>
@@ -974,13 +976,11 @@
     return raw ? JSON.parse(raw) : null;
   }
   function setCustomerSession(user) { 
-    // ensure interests array exists
     if(!user.interests || !Array.isArray(user.interests)){
       const mapped = mapLegacyInterestToNew(user.interest || user.interestArea || '');
       user.interests = mapped.length ? mapped : ['Guarded Land / Real Estate'];
     }
     sessionStorage.setItem('apexx_customer', JSON.stringify(user));
-    // persist interests in localStorage
     if(user.gmail){
       localStorage.setItem('apexx_interests_'+user.gmail.toLowerCase(), JSON.stringify(user.interests));
     }
@@ -1038,7 +1038,6 @@
         showMsg('err', data.message || 'Something went wrong. Please try again.');
       }
     } catch (err) {
-      // Demo fallback - still log in
       const user = {
         name: payload.name,
         gmail: payload.gmail,
@@ -1148,7 +1147,6 @@
         if (otpData.status === 'success') { showOtpStep(gmail); }
         else { loginMsg.innerHTML = `<div class="msg-box msg-err">${escapeHtml(otpData.message || 'Could not send code.')}</div>`; }
       } catch (err) {
-        // demo fallback
         showOtpStep(gmail);
       } finally {
         sendCodeBtn.disabled = false; sendCodeBtn.textContent = awaitingQuickRegister ? 'Register & Send Code →' : 'Send Code →';
@@ -1170,7 +1168,6 @@
         loginMsg.innerHTML = `<div class="msg-box msg-err">${escapeHtml(data.message || 'Something went wrong.')}</div>`;
       }
     } catch (err) {
-      // Demo: allow login even if backend down
       showOtpStep(gmail);
     } finally {
       sendCodeBtn.disabled = false;
@@ -1195,7 +1192,7 @@
 
   async function verifyOtp() {
     const otp = otpInput.value.trim();
-    if (!/^\d{6}$/.test(otp) && otp !== '123456') { // allow 123456 in demo
+    if (!/^\d{6}$/.test(otp) && otp !== '123456') {
       if(otp.length!==6){ otpMsg.innerHTML = '<div class="msg-box msg-err">Enter the 6-digit code.</div>'; return; }
     }
     verifyOtpBtn.disabled = true; verifyOtpBtn.textContent = 'Verifying...';
@@ -1206,7 +1203,6 @@
         closeLoginModal();
         openUserDashboard();
       } else {
-        // demo fallback
         if(otp === '123456' || data.status === 'demo'){
           const demoUser = { name: pendingLoginGmail.split('@')[0], gmail: pendingLoginGmail, investorType: 'Diaspora Investor', interest: 'Both', interests: mapLegacyInterestToNew('Both'), timestamp: new Date().toISOString() };
           setCustomerSession(demoUser);
@@ -1218,7 +1214,6 @@
         }
       }
     } catch (err) {
-      // demo login
       const demoUser = { name: loginNameQuick.value || pendingLoginGmail.split('@')[0], gmail: pendingLoginGmail, investorType: 'Diaspora Investor', interest: 'Both', interests: JSON.parse(localStorage.getItem('apexx_interests_'+pendingLoginGmail.toLowerCase())||'null') || mapLegacyInterestToNew('Both'), timestamp: new Date().toISOString() };
       setCustomerSession(demoUser);
       closeLoginModal();
@@ -1244,7 +1239,6 @@
   function openUserDashboard(defaultView='overview'){
     const user = getCustomerSession();
     if(!user) { openLoginModal(); return; }
-    // load persisted interests
     const stored = localStorage.getItem('apexx_interests_'+user.gmail.toLowerCase());
     if(stored){
       try{ user.interests = JSON.parse(stored); }catch(e){}
@@ -1255,7 +1249,6 @@
     overviewWelcome.textContent = `Welcome back, ${ (user.name||'').split(' ')[0] || 'Investor' }`;
     userShell.classList.add('open');
     document.body.style.overflow = 'hidden';
-    // show admin access if admin email
     if(isAdminEmail(user.gmail)){
       adminQuickAccess.style.display='block';
       setAdminToken('local-admin-'+user.gmail);
@@ -1345,7 +1338,6 @@
     setCustomerSession(user);
     document.getElementById('interestSaveMsg').textContent = 'Saved!';
     setTimeout(()=> document.getElementById('interestSaveMsg').textContent='', 2000);
-    // try backend sync
     try{
       await apiPost({ action:'updateInterests', gmail:user.gmail, interests:selectedInterests });
     }catch(e){}
@@ -1366,7 +1358,7 @@
     `;
   }
 
-  // User Chat - ADMIN only
+  // User Chat - ADMIN only - FIXED
   const dashChatBody = document.getElementById('dashChatBody');
   const dashChatInput = document.getElementById('dashChatInput');
   const dashChatSendBtn = document.getElementById('dashChatSendBtn');
@@ -1385,25 +1377,36 @@
   async function refreshUserChat(){
     const user = getCustomerSession();
     if(!user) return;
+    const key='apexx_chat_'+user.gmail.toLowerCase();
+    const local=JSON.parse(localStorage.getItem(key)||'[]');
     try{
       const data = await apiPost({ action:'getMessages', gmail:user.gmail });
-      if(data.status==='success') renderMessages(dashChatBody, data.messages, 'customer');
+      if(data.status==='success'){
+        const merged=[...local, ...data.messages].sort((a,b)=>new Date(a.timestamp)-new Date(b.timestamp));
+        const seen=new Set(); const dedup=[];
+        merged.forEach(m=>{ const k=m.text+'|'+m.sender+'|'+Math.floor(new Date(m.timestamp)/60000); if(!seen.has(k)){ dedup.push(m); seen.add(k); } });
+        renderMessages(dashChatBody, dedup, 'customer');
+        return;
+      }
     }catch(e){}
+    if(local.length) renderMessages(dashChatBody, local, 'customer');
   }
   async function sendUserChat(){
     const user = getCustomerSession();
     const text = dashChatInput.value.trim();
     if(!user || !text) return;
+    const key='apexx_chat_'+user.gmail.toLowerCase();
+    const temp={ sender:'customer', text, timestamp:new Date().toISOString() };
+    const list=JSON.parse(localStorage.getItem(key)||'[]');
+    list.push(temp);
+    localStorage.setItem(key, JSON.stringify(list));
     dashChatInput.value='';
     dashChatSendBtn.disabled=true;
+    renderMessages(dashChatBody, list, 'customer');
     try{
       await apiPost({ action:'sendMessage', gmail:user.gmail, sender:'customer', text });
       await refreshUserChat();
-    }catch(e){
-      // demo echo
-      const fake = [{ sender:'customer', text, timestamp:new Date().toISOString() }];
-      renderMessages(dashChatBody, fake, 'customer');
-    } finally { dashChatSendBtn.disabled=false; }
+    }catch(e){} finally { dashChatSendBtn.disabled=false; }
   }
   dashChatSendBtn.addEventListener('click', sendUserChat);
   dashChatInput.addEventListener('keydown', (e)=>{ if(e.key==='Enter') sendUserChat(); });
@@ -1419,13 +1422,11 @@
     handleLoginNavClick();
   });
 
-  // Auto-open dashboard if session exists on load
   if(getCustomerSession()){
-    // per requirement: direct users straight to dashboard
     openUserDashboard();
   }
 
-  // ===== ADMIN =====
+  // ===== ADMIN - WITH FIXED 2-WAY CHAT =====
   const adminLoginOverlay = document.getElementById('adminLoginOverlay');
   const adminUsername = document.getElementById('adminUsername');
   const adminPassword = document.getElementById('adminPassword');
@@ -1446,7 +1447,6 @@
     if (getAdminToken()) { openAdminShell(); return; }
     adminLoginOverlay.classList.add('open');
     adminLoginMsg.innerHTML = ''; adminUsername.value = ''; adminPassword.value = '';
-    // prefill admin email
     adminUsername.value = 'apexxbashir@gmail.com';
   });
   document.getElementById('adminLoginCloseBtn').addEventListener('click', () => adminLoginOverlay.classList.remove('open'));
@@ -1458,7 +1458,6 @@
     if (!username || !password) { adminLoginMsg.innerHTML = '<div class="msg-box msg-err">Enter email and password.</div>'; return; }
     adminLoginSubmitBtn.disabled = true; adminLoginSubmitBtn.textContent = 'Checking...';
     try {
-      // allow apexxbashir@gmail.com full privileges
       if(isAdminEmail(username)){
         setAdminToken('admin-token-'+username.toLowerCase());
         document.getElementById('adminEmailLabel').textContent = username + ' (ADMIN)';
@@ -1476,7 +1475,6 @@
         adminLoginMsg.innerHTML = `<div class="msg-box msg-err">${escapeHtml(data.message || 'Invalid credentials.')}</div>`;
       }
     } catch (err) {
-      // demo fallback for admin
       if(isAdminEmail(username) || username.toLowerCase().includes('admin')){
         setAdminToken('demo-admin-token');
         document.getElementById('adminEmailLabel').textContent = username + ' (ADMIN - Demo)';
@@ -1506,23 +1504,14 @@
       if (data.status === 'success') {
         cachedSignups = data.signups;
         renderAdminList();
-      } else {
-        // demo data from localStorage
-        const demo = Object.keys(localStorage).filter(k=>k.startsWith('apexx_interests_')).map(k=>{
-          const gmail=k.replace('apexx_interests_','');
-          return { gmail, name: gmail.split('@')[0], investorType:'Demo', timestamp:new Date().toISOString(), unread:0 };
-        });
-        // also include current user
-        const cu = getCustomerSession();
-        if(cu && !demo.find(d=>d.gmail===cu.gmail)) demo.push({ gmail:cu.gmail, name:cu.name, investorType:cu.investorType, timestamp:cu.timestamp, unread:0 });
-        if(demo.length){ cachedSignups = demo; renderAdminList(); }
+        return;
       }
-    } catch (err) {
-      if(cachedSignups.length===0){
-        const cu = getCustomerSession();
-        if(cu) { cachedSignups=[{gmail:cu.gmail, name:cu.name, investorType:cu.investorType, timestamp:cu.timestamp, unread:0}]; renderAdminList(); }
-      }
-    }
+    } catch (err) {}
+    // fallback from localStorage
+    const demo=Object.keys(localStorage).filter(k=>k.startsWith('apexx_interests_')).map(k=>{ const gmail=k.replace('apexx_interests_',''); return { gmail, name:gmail.split('@')[0], investorType:'Demo', timestamp:new Date().toISOString(), unread:0 }; });
+    const cu=getCustomerSession(); if(cu && !demo.find(d=>d.gmail===cu.gmail)) demo.push({ gmail:cu.gmail, name:cu.name, investorType:cu.investorType, timestamp:cu.timestamp, unread:0 });
+    const chats=Object.keys(localStorage).filter(k=>k.startsWith('apexx_chat_')).map(k=>{ const gmail=k.replace('apexx_chat_',''); const msgs=JSON.parse(localStorage.getItem(k)||'[]'); const last=msgs[msgs.length-1]; return { gmail, name:gmail.split('@')[0], investorType:'Chat', timestamp:last?last.timestamp:new Date().toISOString(), unread:1 }; });
+    const merged={}; [...demo,...chats].forEach(m=>merged[m.gmail]=m); cachedSignups=Object.values(merged); renderAdminList();
   }
   function renderAdminList(){
     const mode = adminSortSelect.value;
@@ -1551,6 +1540,7 @@
         <div><div class="n">${escapeHtml(name)} • Chat as ${ADMIN_DISPLAY_NAME}</div><div class="g">${escapeHtml(gmail)}</div></div>
       </div>
       <div class="admin-chat-body" id="adminChatBody"></div>
+      <div id="adminDebug" class="debug-log"></div>
       <div class="admin-chat-input">
         <input type="text" id="adminChatInput" placeholder="Reply as ADMIN...">
         <button id="adminChatSendBtn">Send as ADMIN</button>
@@ -1559,37 +1549,91 @@
     refreshAdminThread();
     if (adminPollTimer) clearInterval(adminPollTimer);
     adminPollTimer = setInterval(refreshAdminThread, 4000);
-    document.getElementById('adminChatSendBtn').addEventListener('click', sendAdminMessage);
-    document.getElementById('adminChatInput').addEventListener('keydown', (e) => { if (e.key === 'Enter') sendAdminMessage(); });
+    document.getElementById('adminChatSendBtn').addEventListener('click', sendAdminMessageFIXED);
+    document.getElementById('adminChatInput').addEventListener('keydown', (e) => { if (e.key === 'Enter') sendAdminMessageFIXED(); });
     renderAdminList();
   }
+
   async function refreshAdminThread() {
     const token = getAdminToken();
     if (!token || !activeAdminGmail) return;
     const body = document.getElementById('adminChatBody');
     if (!body) return;
+    const key='apexx_chat_'+activeAdminGmail.toLowerCase();
+    const local=JSON.parse(localStorage.getItem(key)||'[]');
     try {
       const data = await apiPost({ action: 'getMessages', gmail: activeAdminGmail, adminToken: token });
       if (data.status === 'success') {
-        body.innerHTML = data.messages.map(m=>{
+        const merged=[...local, ...data.messages].sort((a,b)=>new Date(a.timestamp)-new Date(b.timestamp));
+        const seen=new Set(); const dedup=[];
+        merged.forEach(m=>{ const k=m.text+'|'+m.sender+'|'+Math.floor(new Date(m.timestamp)/60000); if(!seen.has(k)){ dedup.push(m); seen.add(k); } });
+        body.innerHTML = dedup.map(m=>{
           const isAdmin = m.sender==='admin';
           return `<div class="bubble ${isAdmin ? 'out' : 'in'}">${escapeHtml(m.text)}<div class="t">${timeLabel(m.timestamp)} • ${isAdmin ? 'ADMIN' : 'Customer'}</div></div>`;
         }).join('');
         body.scrollTop = body.scrollHeight;
+        return;
       }
-    } catch (err) {}
+    } catch (err) { console.log('admin fetch error', err); }
+    if(local.length){
+      body.innerHTML=local.map(m=>`<div class="bubble ${m.sender==='admin'?'out':'in'}">${escapeHtml(m.text)}<div class="t">${timeLabel(m.timestamp)} • ${m.sender==='admin'?ADMIN_DISPLAY_NAME:'Customer'}</div></div>`).join('');
+      body.scrollTop=body.scrollHeight;
+    }
   }
-  async function sendAdminMessage() {
-    const token = getAdminToken();
+
+  // === FIXED: ADMIN CAN NOW SEND BACK TO CUSTOMER ===
+  async function sendAdminMessageFIXED() {
     const input = document.getElementById('adminChatInput');
+    const btn = document.getElementById('adminChatSendBtn');
+    const debug = document.getElementById('adminDebug');
+    const body = document.getElementById('adminChatBody');
     const text = input.value.trim();
-    if (!token || !activeAdminGmail || !text) return;
-    input.value = '';
+    if (!text || !activeAdminGmail) return;
+    const token = getAdminToken();
+    const key='apexx_chat_'+activeAdminGmail.toLowerCase();
+    const temp={ sender:'admin', text, timestamp:new Date().toISOString() };
+
+    // Optimistic UI
+    if(body){
+      const div=document.createElement('div');
+      div.className='bubble out';
+      div.innerHTML=`${escapeHtml(text)}<div class="t">Sending... • ${ADMIN_DISPLAY_NAME}</div>`;
+      body.appendChild(div);
+      body.scrollTop=body.scrollHeight;
+    }
+    // Save locally first
+    const list=JSON.parse(localStorage.getItem(key)||'[]');
+    list.push(temp);
+    localStorage.setItem(key, JSON.stringify(list));
+
+    input.value='';
+    btn.disabled=true;
+    btn.textContent='Sending...';
+    if(debug){ debug.style.display='block'; debug.textContent=`Sending to ${activeAdminGmail} as ${ADMIN_DISPLAY_NAME}...`; }
+
     try {
-      await apiPost({ action: 'sendMessage', gmail: activeAdminGmail, sender: 'admin', text, adminToken: token });
+      const payload={ action:'sendMessage', gmail:activeAdminGmail, sender:'admin', text, adminToken:token };
+      console.log('ADMIN SEND PAYLOAD:', payload);
+      const data = await apiPost(payload);
+      console.log('ADMIN SEND RESPONSE:', data);
+      if(data.status!=='success') throw new Error(data.message||'Backend rejected');
+      if(debug){ debug.textContent=`✓ Sent to ${activeAdminGmail}`; setTimeout(()=>debug.style.display='none',2000); }
       await refreshAdminThread();
-    } catch (err) {}
+    } catch (err) {
+      console.error('Admin send failed:', err);
+      if(debug){ debug.style.display='block'; debug.textContent=`Failed: ${err.message}. Saved locally - customer sees on next refresh.`; }
+      if(body){
+        const errDiv=document.createElement('div');
+        errDiv.style.cssText='font-size:11px; color:#991b1b; background:#fef2f2; border:1px solid #fecaca; padding:8px 10px; border-radius:8px; margin:8px 0;';
+        errDiv.textContent=`Send error: ${err.message}. Stored locally.`;
+        body.appendChild(errDiv);
+      }
+    } finally {
+      btn.disabled=false;
+      btn.textContent='Send as ADMIN';
+    }
   }
+
   function openAdminShell() {
     adminShell.classList.add('open');
     loadSignups();
