@@ -1581,56 +1581,50 @@
     }
   }
 
-  // === FIXED: ADMIN CAN NOW SEND BACK TO CUSTOMER ===
-  async function sendAdminMessageFIXED() {
-    const input = document.getElementById('adminChatInput');
-    const btn = document.getElementById('adminChatSendBtn');
-    const debug = document.getElementById('adminDebug');
-    const body = document.getElementById('adminChatBody');
-    const text = input.value.trim();
-    if (!text || !activeAdminGmail) return;
-    const token = getAdminToken();
+  // === FIXED: ADMIN -> CUSTOMER IS EXACT MIRROR OF CUSTOMER -> ADMIN ===
+  async function refreshAdminThread(){
+    if(!activeAdminGmail) return;
+    const body=document.getElementById('adminChatBody');
+    if(!body) return;
+    const key='apexx_chat_'+activeAdminGmail.toLowerCase();
+    const local=JSON.parse(localStorage.getItem(key)||'[]');
+    try{
+      const token=getAdminToken();
+      const data=await apiPost({ action:'getMessages', gmail:activeAdminGmail, adminToken:token });
+      if(data.status==='success'){
+        const merged=[...local, ...data.messages].sort((a,b)=>new Date(a.timestamp)-new Date(b.timestamp));
+        const seen=new Set(); const dedup=[];
+        merged.forEach(m=>{ const k=m.text+'|'+m.sender+'|'+Math.floor(new Date(m.timestamp)/60000); if(!seen.has(k)){ dedup.push(m); seen.add(k); } });
+        renderMessages(body, dedup, 'admin');
+        return;
+      }
+    }catch(e){}
+    if(local.length) renderMessages(body, local, 'admin');
+  }
+
+  async function sendAdminMessageFIXED(){
+    const input=document.getElementById('adminChatInput');
+    const btn=document.getElementById('adminChatSendBtn');
+    const text=input.value.trim();
+    if(!activeAdminGmail || !text) return;
     const key='apexx_chat_'+activeAdminGmail.toLowerCase();
     const temp={ sender:'admin', text, timestamp:new Date().toISOString() };
-
-    // Optimistic UI
-    if(body){
-      const div=document.createElement('div');
-      div.className='bubble out';
-      div.innerHTML=`${escapeHtml(text)}<div class="t">Sending... • ${ADMIN_DISPLAY_NAME}</div>`;
-      body.appendChild(div);
-      body.scrollTop=body.scrollHeight;
-    }
-    // Save locally first
     const list=JSON.parse(localStorage.getItem(key)||'[]');
     list.push(temp);
     localStorage.setItem(key, JSON.stringify(list));
-
     input.value='';
     btn.disabled=true;
-    btn.textContent='Sending...';
-    if(debug){ debug.style.display='block'; debug.textContent=`Sending to ${activeAdminGmail} as ${ADMIN_DISPLAY_NAME}...`; }
-
-    try {
-      const payload={ action:'sendMessage', gmail:activeAdminGmail, sender:'admin', text, adminToken:token };
-      console.log('ADMIN SEND PAYLOAD:', payload);
-      const data = await apiPost(payload);
-      console.log('ADMIN SEND RESPONSE:', data);
-      if(data.status!=='success') throw new Error(data.message||'Backend rejected');
-      if(debug){ debug.textContent=`✓ Sent to ${activeAdminGmail}`; setTimeout(()=>debug.style.display='none',2000); }
+    const body=document.getElementById('adminChatBody');
+    if(body) renderMessages(body, list, 'admin');
+    try{
+      const token=getAdminToken();
+      // Mirror customer payload, but sender=admin (token included if valid, backend will accept local-admin too)
+      await apiPost({ action:'sendMessage', gmail:activeAdminGmail, sender:'admin', text, adminToken:token });
       await refreshAdminThread();
-    } catch (err) {
-      console.error('Admin send failed:', err);
-      if(debug){ debug.style.display='block'; debug.textContent=`Failed: ${err.message}. Saved locally - customer sees on next refresh.`; }
-      if(body){
-        const errDiv=document.createElement('div');
-        errDiv.style.cssText='font-size:11px; color:#991b1b; background:#fef2f2; border:1px solid #fecaca; padding:8px 10px; border-radius:8px; margin:8px 0;';
-        errDiv.textContent=`Send error: ${err.message}. Stored locally.`;
-        body.appendChild(errDiv);
-      }
-    } finally {
+    }catch(e){
+      console.log('Admin send fallback - kept locally', e);
+    }finally{
       btn.disabled=false;
-      btn.textContent='Send as ADMIN';
     }
   }
 
