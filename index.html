@@ -23,11 +23,9 @@
   a{color:inherit;} img{max-width:100%; display:block;}
   .wrap{max-width:1240px; margin:0 auto; padding:0 24px;}
   :focus-visible{outline:2px solid var(--blue); outline-offset:3px;}
-
   .reveal{opacity:0; transform:translateY(16px); transition:opacity .6s ease, transform .6s ease;}
   .reveal.in{opacity:1; transform:none;}
   @media (prefers-reduced-motion: reduce){ .reveal{opacity:1; transform:none;} html{scroll-behavior:auto;} }
-
   header{position:fixed; top:0; left:0; right:0; z-index:50; transition:background .3s ease, border-color .3s ease;}
   header.scrolled{background:rgba(255,255,255,.92); backdrop-filter:blur(14px); border-bottom:1px solid var(--line); box-shadow:0 8px 30px rgba(0,0,0,.06);}
   nav{display:flex; align-items:center; justify-content:space-between; height:68px;}
@@ -63,15 +61,11 @@
   .mobile-menu{display:none; border-top:1px solid var(--line); background:rgba(255,255,255,.97); backdrop-filter:blur(14px);}
   .mobile-menu.open{display:block;}
   .mobile-menu .wrap{padding:20px 24px; display:flex; flex-direction:column; gap:16px;}
-
   #navLoginBtn{border-color:#C6A86F !important; color:#C6A86F !important;}
   #navLoginBtn:hover{background:rgba(198,168,111,0.08) !important; border-color:#A68B5B !important; color:#A68B5B !important;}
   #navLoginBtnMobile{color:#C6A86F !important; font-weight:600;}
-
   .mobile-menu button{background:none; border:none; text-align:left; font:inherit; font-size:15px; font-weight:600; padding:0; cursor:pointer; color:#C6A86F;}
-
   section{position:relative;}
-
   /* HERO */
   .hero{background:radial-gradient(1200px 600px at 80% -10%, rgba(42,127,255,.18), transparent), radial-gradient(800px 500px at -10% 80%, rgba(198,168,111,.14), transparent), var(--ink); color:#fff; position:relative; overflow:hidden; padding:140px 0 70px;}
   .hero .wrap{position:relative;}
@@ -87,23 +81,19 @@
   .btn-primary{background:var(--blue); color:#fff; box-shadow:0 8px 20px rgba(42,127,255,.35);} .btn-primary:hover{background:#1e6fe0; transform:translateY(-1px);}
   .btn-light{background:#fff; color:var(--ink);} .btn-light:hover{background:#f2f2f2;}
   .btn-dark{background:var(--ink); color:#fff;} .btn-dark:hover{background:#000;}
-
   .hero-stats{margin-top:52px; display:grid; grid-template-columns:1fr; gap:1px; background:rgba(255,255,255,.1); border:1px solid rgba(255,255,255,.12); border-radius:18px; overflow:hidden; backdrop-filter:blur(10px);}
   @media (min-width:640px){ .hero-stats{grid-template-columns:1fr 1fr;} }
   .hero-stat{background:rgba(13,34,63,.85); padding:26px 28px;}
   .hero-stat .num{font-family:'JetBrains Mono',monospace; font-weight:700; font-size:26px; letter-spacing:-.02em;}
   .hero-stat .lbl{margin-top:6px; font-size:13px; font-weight:700;}
   .hero-stat .sub{margin-top:6px; font-size:12.5px; color:rgba(255,255,255,.58); line-height:1.5;}
-
   .trust-pills{margin-top:24px; display:flex; flex-wrap:wrap; gap:10px;}
   .pill{font-size:11px; padding:7px 13px; border-radius:999px; background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.12); font-weight:600; letter-spacing:.02em;}
-
   /* SECTION HEADERS */
   .eyebrow{font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.16em; font-weight:700; text-transform:uppercase;}
   .eyebrow.gold{color:var(--gold);} .eyebrow.blue{color:var(--blue);}
   h2{font-weight:900; letter-spacing:-.03em; line-height:.98; font-size:clamp(28px,4vw,44px); margin-top:12px;}
   .section-sub{margin-top:16px; font-size:15px; color:rgba(8,24,48,.65); max-width:60ch; line-height:1.6;}
-
   /* PROBLEM */
   .problem{padding:90px 0; background:#fff;}
   .grid{display:grid; gap:1px; background:var(--line); border:1px solid var(--line); border-radius:20px; overflow:hidden;}
@@ -115,7 +105,6 @@
   .icon-badge{width:38px; height:38px; border-radius:11px; background:var(--ink); color:#fff; display:flex; align-items:center; justify-content:center;}
   .card h3{margin-top:18px; font-size:15px; font-weight:700; letter-spacing:-.01em;}
   .card p{margin-top:8px; font-size:13px; line-height:1.6; color:rgba(8,24,48,.65);}
-
   /* SOLUTION */
   .solution{padding:90px 0; background:var(--paper); border-top:1px solid var(--line); border-bottom:1px solid var(--line);}
   .solution-head{display:flex; flex-wrap:wrap; justify-content:space-between; align-items:flex-end; gap:20px;}
@@ -127,7 +116,6 @@
   .product ul{margin-top:18px; display:flex; flex-direction:column; gap:10px; list-style:none;}
   .product li{display:flex; gap:10px; font-size:13.5px; color:rgba(8,24,48,.72); line-height:1.5;}
   .product li::before{content:''; flex-shrink:0; width:16px; height:16px; margin-top:3px; border-radius:50%; background:var(--ink); background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3'%3E%3Cpath d='M20 6 9 17l-5-5'/%3E%3C/svg%3E"); background-size:9px; background-repeat:no-repeat; background-position:center;}
-
   /* WHY NOW */
   .whynow{padding:90px 0; background:#fff;}
   .whynow-grid{margin-top:36px; display:grid; grid-template-columns:1fr; gap:1px; background:var(--line); border:1px solid var(--line); border-radius:20px; overflow:hidden;}
@@ -136,7 +124,6 @@
   .whynow-card{background:var(--off); padding:22px;}
   .whynow-card h4{margin-top:14px; font-size:13px; font-weight:700;}
   .whynow-card p{margin-top:8px; font-size:12px; color:rgba(8,24,48,.6); line-height:1.5;}
-
   /* MOAT */
   .moat{padding:90px 0; background:var(--ink); color:#fff;}
   .moat-grid{margin-top:44px; display:grid; grid-template-columns:1fr; gap:20px;}
@@ -148,7 +135,6 @@
   .moat-card ul{margin-top:14px; display:flex; flex-direction:column; gap:6px; list-style:none;}
   .moat-card li{font-size:12px; color:rgba(255,255,255,.65);}
   .moat-card li::before{content:'• '; color:var(--gold);}
-
   /* MARKET */
   .market{padding:90px 0; background:var(--paper);}
   .market-grid{display:grid; grid-template-columns:1fr; gap:40px; align-items:center;}
@@ -167,7 +153,6 @@
   .fly-num{width:24px; height:24px; border-radius:50%; background:var(--blue); color:#fff; font-size:11px; font-weight:700; display:flex; align-items:center; justify-content:center; flex-shrink:0;}
   .fly-step .t{font-size:13px; font-weight:700;}
   .fly-step .d{font-size:12px; color:rgba(8,24,48,.6); margin-top:2px;}
-
   /* WHO WE SERVE */
   .who{padding:90px 0; background:#fff;}
   .who-grid{margin-top:36px; display:grid; grid-template-columns:1fr; gap:1px; background:var(--line); border:1px solid var(--line); border-radius:20px; overflow:hidden;}
@@ -178,7 +163,6 @@
   .who-card .loc{margin-top:8px; align-self:flex-start; font-size:10.5px; padding:4px 9px; border-radius:999px; background:var(--line); font-weight:600;}
   .who-card h3{margin-top:14px; font-size:13.5px; font-weight:700;}
   .who-card p{margin-top:8px; font-size:12px; color:rgba(8,24,48,.6); line-height:1.5;}
-
   /* ROADMAP */
   .roadmap{padding:90px 0; background:var(--off); border-top:1px solid var(--line); border-bottom:1px solid var(--line);}
   .roadmap-head{display:flex; flex-wrap:wrap; gap:16px; justify-content:space-between; align-items:flex-end;}
@@ -209,7 +193,6 @@
   .phase.blurred::before{content:''; position:absolute; inset:0; background:linear-gradient(180deg, rgba(255,255,255,.4), rgba(247,246,243,.7)); z-index:2;}
   .raise-box{margin-top:32px; background:var(--ink); color:#fff; border-radius:16px; padding:18px 20px; display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:14px;}
   .raise-box .t{font-size:13px; font-weight:700;} .raise-box .d{font-size:11px; color:rgba(255,255,255,.6); margin-top:2px;}
-
   /* REGISTER */
   .register{padding:90px 0; background:#fff;}
   .register-grid{display:grid; grid-template-columns:1fr; gap:50px;}
@@ -221,7 +204,6 @@
   .benefit-grid{margin-top:14px; display:grid; grid-template-columns:1fr 1fr; gap:12px;}
   .benefit{padding:12px; border-radius:12px; background:#fff; border:1px solid var(--line); font-size:12px;}
   .benefit .t{font-weight:700;} .benefit .d{color:rgba(8,24,48,.55); margin-top:2px;}
-
   .form-card{border:1px solid var(--line); border-radius:22px; padding:28px; box-shadow:0 24px 70px rgba(8,24,48,.08); background:#fff;}
   .form-head{display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;}
   .live-tag{font-size:11px; padding:5px 11px; border-radius:999px; background:#ecfdf5; color:#047857; border:1px solid #a7f3d0; font-weight:700;}
@@ -242,7 +224,6 @@
   .submit{margin-top:18px; width:100%; height:48px; border-radius:999px; background:var(--ink); color:#fff; border:none; font-size:14px; font-weight:700; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:8px; transition:background .2s ease;}
   .submit:hover{background:#000;} .submit:disabled{opacity:.6; cursor:not-allowed;}
   .fine{margin-top:12px; font-size:10.5px; color:rgba(8,24,48,.4); text-align:center; line-height:1.5;}
-
   /* CONTACT - simplified */
   .contact{padding:80px 0; background:var(--ink); color:#fff;}
   .contact-top{display:grid; grid-template-columns:1fr; gap:32px;}
@@ -259,7 +240,6 @@
   .share-icons{display:flex; gap:8px;}
   .share-icons a{width:34px; height:34px; border-radius:50%; background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.1); display:flex; align-items:center; justify-content:center; text-decoration:none; font-size:13px; transition:all .2s;}
   .share-icons a:hover{background:rgba(255,255,255,.15);}
-
   footer{padding:44px 0; background:#060f1f; color:rgba(255,255,255,.6);}
   .foot-top{display:flex; flex-wrap:wrap; gap:32px; justify-content:space-between;}
   .foot-brand{display:flex; align-items:center; gap:8px;}
@@ -269,7 +249,6 @@
   .foot-col.wide{max-width:380px;}
   .foot-col h5{color:#fff; font-size:12px; font-weight:700; margin-bottom:8px;}
   .foot-bottom{margin-top:32px; padding-top:22px; border-top:1px solid rgba(255,255,255,.08); display:flex; flex-wrap:wrap; justify-content:space-between; gap:10px; font-size:11px;}
-
   /* LOGIN MODAL */
   .overlay{position:fixed; inset:0; z-index:90; background:rgba(8,24,48,.55); backdrop-filter:blur(4px); display:none; align-items:center; justify-content:center; padding:20px;}
   .overlay.open{display:flex;}
@@ -277,7 +256,6 @@
   .modal-card h3{font-size:18px; font-weight:900; letter-spacing:-.01em;}
   .modal-card p.sub{margin-top:6px; font-size:12.5px; color:rgba(8,24,48,.6);}
   .modal-close{position:absolute; top:16px; right:16px; width:28px; height:28px; border-radius:50%; background:var(--paper); border:none; cursor:pointer; font-size:14px; display:flex; align-items:center; justify-content:center;}
-
   /* ===== USER DASHBOARD - NEW ===== */
   .user-shell{position:fixed; inset:0; z-index:80; background:#fff; display:none; flex-direction:column;}
   .user-shell.open{display:flex;}
@@ -325,7 +303,6 @@
   .dash-chat-input input{flex:1; height:44px; border-radius:22px; border:1px solid var(--line); padding:0 16px; font-size:14px; outline:none;}
   .dash-chat-input button{width:44px; height:44px; border-radius:50%; background:#075E54; color:#fff; border:none; cursor:pointer; font-size:16px;}
   .dash-chat-empty{margin:auto; text-align:center; color:rgba(8,24,48,.4); font-size:13px; padding:20px; max-width:320px;}
-
   /* ADMIN DASHBOARD - enhanced */
   .admin-shell{position:fixed; inset:0; z-index:95; background:#fff; display:none; flex-direction:column;}
   .admin-shell.open{display:flex;}
@@ -357,20 +334,6 @@
   .admin-chat-input button:disabled{opacity:.5;}
   .admin-login-link{display:none !important; background:none; border:none; color:rgba(255,255,255,.35); font-size:10.5px; cursor:pointer; text-decoration:underline;}
   .debug-log{font-family:'JetBrains Mono',monospace; font-size:10px; background:#fff3cd; color:#664d03; padding:8px 10px; border-radius:8px; margin:0 20px 10px; display:none; border:1px solid #ffe69c;}
-
-
-  /* INTRO LOADER */
-  #introLoader{position:fixed; inset:0; z-index:9999; background:var(--ink); display:flex; align-items:center; justify-content:center; flex-direction:column; gap:20px; transition:opacity .6s ease, visibility .6s ease;}
-  #introLoader.hidden{opacity:0; visibility:hidden; pointer-events:none;}
-  #introLoader .loader-logo{width:140px; height:auto; animation:logoRotate 1.8s cubic-bezier(.68,-0.55,.27,1.55) infinite, logoPulse 1.8s ease-in-out infinite;}
-  #introLoader .loader-text{font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.18em; color:var(--gold); font-weight:700; animation:fadePulse 1.2s ease-in-out infinite;}
-  #introLoader .loader-bar{width:120px; height:2px; background:rgba(255,255,255,.1); border-radius:999px; overflow:hidden; margin-top:8px;}
-  #introLoader .loader-bar-inner{height:100%; width:50%; background:linear-gradient(90deg,var(--blue),var(--gold)); border-radius:999px; animation:barSlide 1.2s ease-in-out infinite;}
-  @keyframes logoRotate{0%{transform:rotate(0deg) scale(1)} 50%{transform:rotate(180deg) scale(1.08)} 100%{transform:rotate(360deg) scale(1)}}
-  @keyframes logoPulse{0%,100%{filter:drop-shadow(0 0 0 rgba(198,168,111,0))} 50%{filter:drop-shadow(0 0 18px rgba(198,168,111,.5))}}
-  @keyframes fadePulse{0%,100%{opacity:.6} 50%{opacity:1}}
-  @keyframes barSlide{0%{transform:translateX(-100%)} 100%{transform:translateX(200%)}}
-
   @media (max-width:800px){
     .user-body{flex-direction:column;}
     .user-sidebar{width:100%; flex-direction:row; overflow-x:auto; padding:10px; gap:6px; border-right:none; border-bottom:1px solid var(--line);}
@@ -383,15 +346,6 @@
 </style>
 </head>
 <body>
-
-
-<!-- INTRO ANIMATION -->
-<div id="introLoader">
-  <img src="APEXX_GOLD_WHITE.png" alt="APEXXCRESTWAY" class="loader-logo" onerror="this.src='APEXX_GOLD_NAVY.png'">
-  <div class="loader-text">APEXXCRESTWAY</div>
-  <div class="loader-bar"><div class="loader-bar-inner"></div></div>
-</div>
-
 <header id="siteHeader">
   <div class="wrap">
     <nav>
@@ -427,7 +381,6 @@
     </div>
   </div>
 </header>
-
 <!-- HERO -->
 <section class="hero">
   <div class="wrap">
@@ -437,7 +390,6 @@
     <div class="hero-ctas">
       <button class="btn btn-primary" data-target="register">Sign Up →</button>
     </div>
-
     <div class="hero-stats reveal">
       <div class="hero-stat">
         <div class="num">5-min</div>
@@ -450,7 +402,6 @@
         <div class="sub">GIS mapping and on-site drone surveys confirm boundaries before a plot ever gets listed.</div>
       </div>
     </div>
-
     <div class="trust-pills reveal">
       <span class="pill">CBN &amp; Tier 1 Bank Escrow</span>
       <span class="pill">Drone-Verified Milestones</span>
@@ -459,7 +410,6 @@
     </div>
   </div>
 </section>
-
 <!-- PROBLEM -->
 <section class="problem" id="problem">
   <div class="wrap">
@@ -468,7 +418,6 @@
       <h2>Nigeria's real estate and construction markets are lucrative, but broken by design.</h2>
       <p class="section-sub">Every deal carries invisible risk. Buyers pay for fraud, delays, and shortages they never see coming — until it's too late.</p>
     </div>
-
     <div class="grid grid-3" style="margin-top:44px;">
       <div class="card reveal"><div class="icon-badge">⚠</div><h3>Fraudulent Sellers</h3><p>Scammers sell the same piece of land to multiple unsuspecting buyers at the same time.</p></div>
       <div class="card reveal"><div class="icon-badge">⏱</div><h3>Onerous Title Registration</h3><p>Securing a Governor's Consent or Certificate of Occupancy (C of O) can take months, sometimes years.</p></div>
@@ -482,7 +431,6 @@
     </div>
   </div>
 </section>
-
 <!-- SOLUTION -->
 <section class="solution" id="solution">
   <div class="wrap">
@@ -493,7 +441,6 @@
       </div>
       <p class="section-sub" style="max-width:320px;">Tech, legal, and escrow infrastructure that makes every square meter bankable.</p>
     </div>
-
     <div class="products">
       <div class="product reveal">
         <div class="tag">01 • ACQUISITION • TITLE • PROTECTION</div>
@@ -521,7 +468,6 @@
     </div>
   </div>
 </section>
-
 <!-- WHY NOW -->
 <section class="whynow">
   <div class="wrap">
@@ -535,7 +481,6 @@
     </div>
   </div>
 </section>
-
 <!-- MOAT -->
 <section class="moat">
   <div class="wrap">
@@ -550,7 +495,6 @@
     </div>
   </div>
 </section>
-
 <!-- MARKET -->
 <section class="market" id="market">
   <div class="wrap">
@@ -572,7 +516,6 @@
     </div>
   </div>
 </section>
-
 <!-- WHO WE SERVE -->
 <section class="who" id="who">
   <div class="wrap">
@@ -590,7 +533,6 @@
     </div>
   </div>
 </section>
-
 <!-- ROADMAP -->
 <section class="roadmap" id="roadmap">
   <div class="wrap">
@@ -601,7 +543,6 @@
       </div>
       <span class="raise-tag">● Raising ₦600M → Y5 $15M revenue target</span>
     </div>
-
     <div class="phases">
       <div class="phase active reveal">
         <div class="dot2" style="background:#081830;">1</div>
@@ -635,14 +576,12 @@
         </div>
       </div>
     </div>
-
     <div class="raise-box reveal">
       <div><div class="t">₦600M Raise Breakdown</div><div class="d">₦504M seed ops + product + legal • ₦96M utility vehicles (site vehicles + drone fleet)</div></div>
       <span class="raise-tag">Y5 $15M REVENUE TARGET</span>
     </div>
   </div>
 </section>
-
 <!-- REGISTER -->
 <section class="register" id="register">
   <div class="wrap register-grid">
@@ -662,7 +601,6 @@
         <div class="benefit"><div class="t">Bank-grade</div><div class="d">Escrow via CBN &amp; Tier 1 banks</div></div>
       </div>
     </div>
-
     <div class="form-card reveal">
       <div class="form-head">
         <h3 style="font-size:17px; font-weight:900;">Sign Up</h3>
@@ -685,7 +623,6 @@
     </div>
   </div>
 </section>
-
 <!-- CONTACT - cleaned up, no chat -->
 <section class="contact" id="contact">
   <div class="wrap">
@@ -709,7 +646,6 @@
         </div>
       </div>
     </div>
-
     <div class="share-row">
       <div style="display:flex; align-items:center; gap:12px;">
         <span class="mono" style="font-size:11px; letter-spacing:.1em; font-weight:700; color:rgba(255,255,255,.4);">SHARE</span>
@@ -722,7 +658,6 @@
     </div>
   </div>
 </section>
-
 <footer>
   <div class="wrap">
     <div class="foot-top">
@@ -735,13 +670,11 @@
         <p>All plots are subject to independent legal verification and AGIS/LAGIS confirmation. Escrow services are provided via CBN-regulated, Tier 1 partner banks. Drone verification is not a substitute for physical inspection. Past verification does not guarantee future title status. Buyers are advised to conduct their own independent due diligence.</p>
       </div>
     </div>
-
     <div class="foot-links">
       <button data-modal="about">About Us</button>
       <button data-modal="privacy">Privacy Policy</button>
       <button data-modal="terms">Terms & Conditions</button>
     </div>
-
     <div class="foot-bottom">
       <span>© 2026 APEXXCRESTWAY. AGIS, LAGIS Registered.</span>
       <span class="mono">RAISING ₦600M • Y5 $15M REVENUE TARGET</span>
@@ -752,7 +685,6 @@
     </div>
   </div>
 </footer>
-
 <!-- ===== CUSTOMER LOGIN MODAL (Gmail -> OTP) ===== -->
 <div class="overlay" id="loginOverlay">
   <div class="modal-card">
@@ -773,7 +705,6 @@
       <button class="submit" id="sendCodeBtn" style="margin-top:18px;">Send Code →</button>
       <p class="fine">Not registered yet? <a href="#register" onclick="document.getElementById('loginOverlay').classList.remove('open'); document.getElementById('register').scrollIntoView({behavior:'smooth'});" style="color:var(--blue); font-weight:700;">Sign up</a></p>
     </div>
-
     <div id="loginStepOtp" style="display:none;">
       <h3>Enter your code</h3>
       <p class="sub">We sent a 6-digit code to <b id="otpGmailLabel"></b>. It expires in 5 minutes.</p>
@@ -791,7 +722,6 @@
     </div>
   </div>
 </div>
-
 <!-- ===== NEW USER DASHBOARD ===== -->
 <div class="user-shell" id="userShell">
   <div class="user-topbar">
@@ -845,7 +775,6 @@
           </div>
         </div>
       </div>
-
       <!-- INTERESTS -->
       <div id="userView-interests" style="display:none;">
         <div class="dash-card">
@@ -862,7 +791,6 @@
           </div>
         </div>
       </div>
-
       <!-- PROFILE -->
       <div id="userView-profile" style="display:none;">
         <div class="dash-card">
@@ -871,7 +799,6 @@
           <div id="profileDetails" style="margin-top:16px;"></div>
         </div>
       </div>
-
       <!-- CHAT -->
       <div id="userView-chat" style="display:none;">
         <div class="dash-chat-wrap">
@@ -894,7 +821,6 @@
     </main>
   </div>
 </div>
-
 <!-- ===== ADMIN LOGIN MODAL ===== -->
 <div class="overlay" id="adminLoginOverlay">
   <div class="modal-card">
@@ -914,7 +840,6 @@
     <p class="fine">Admin email: apexxbashir@gmail.com has full access to user management and all chats.</p>
   </div>
 </div>
-
 <!-- ===== ADMIN DASHBOARD - Enhanced ===== -->
 <div class="admin-shell" id="adminShell">
   <div class="admin-topbar">
@@ -943,17 +868,7 @@
     </div>
   </div>
 </div>
-
 <script>
-
-  // Intro loader
-  window.addEventListener('load', ()=>{
-    setTimeout(()=>{
-      const loader=document.getElementById('introLoader');
-      if(loader){ loader.classList.add('hidden'); setTimeout(()=>loader.remove(), 700); }
-    }, 1600);
-  });
-
   const header = document.getElementById('siteHeader');
   window.addEventListener('scroll', () => { header.classList.toggle('scrolled', window.scrollY > 20); });
   document.querySelectorAll('[data-target]').forEach(el => {
@@ -970,7 +885,6 @@
     entries.forEach(en => { if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); } });
   }, { threshold: 0.12 });
   document.querySelectorAll('.reveal').forEach(el => io.observe(el));
-
   const GAS_ENDPOINT = 'https://script.google.com/macros/s/AKfycbx9mmL0OMf1p8qe6Od4GaMa6BSIqj7YjxdtZgon0xjIi5J_imnvPUlT7axhdtl5lSHl6w/exec';
   const ADMIN_EMAILS = ['apexxbashir@gmail.com'];
   const ADMIN_DISPLAY_NAME = 'ADMIN';
@@ -982,7 +896,6 @@
     'Commercial & Industrial Land',
     'Serviced Plots'
   ];
-
   function mapLegacyInterestToNew(legacy){
     if(!legacy) return [];
     const l = legacy.toLowerCase();
@@ -991,7 +904,6 @@
     if(l.includes('milestone') || l.includes('escrow') || l.includes('construction')) return ['Milestone Construction Escrow'];
     return [legacy];
   }
-
   const form = document.getElementById('regForm');
   const submitBtn = document.getElementById('submitBtn');
   const formMsg = document.getElementById('formMsg');
@@ -1015,7 +927,6 @@
     const cls = kind === 'ok' ? 'msg-ok' : kind === 'dupe' ? 'msg-dupe' : 'msg-err';
     formMsg.innerHTML = `<div class="msg-box ${cls}">${text}</div>`;
   }
-
   async function apiPost(payload) {
     const res = await fetch(GAS_ENDPOINT, {
       method: 'POST',
@@ -1050,7 +961,6 @@
   function setAdminToken(t) { sessionStorage.setItem('apexx_admin_token', t); }
   function clearAdminToken() { sessionStorage.removeItem('apexx_admin_token'); }
   function isAdminEmail(email){ return ADMIN_EMAILS.includes((email||'').toLowerCase()); }
-
   // ===== Registration -> Auto login to User Dashboard =====
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
@@ -1063,7 +973,6 @@
     if (!fields.interestArea.value) { setFieldError('f-interest', 'Select interest area'); ok = false; } else setFieldError('f-interest', '');
     if (document.getElementById('company').value) return;
     if (!ok) return;
-
     submitBtn.disabled = true;
     submitBtn.textContent = 'Creating account...';
     const payload = {
@@ -1116,7 +1025,6 @@
       submitBtn.textContent = 'Sign Up →';
     }
   });
-
   // ===== LOGIN MODAL =====
   const loginOverlay = document.getElementById('loginOverlay');
   const loginStepGmail = document.getElementById('loginStepGmail');
@@ -1135,7 +1043,6 @@
   const loginNameQuick = document.getElementById('loginNameQuick');
   const loginQuickName = document.getElementById('loginQuickName');
   let awaitingQuickRegister = false;
-
   function showGmailStep() {
     loginStepOtp.style.display = 'none';
     loginStepGmail.style.display = 'block';
@@ -1181,9 +1088,7 @@
   document.getElementById('loginCloseBtn').addEventListener('click', closeLoginModal);
   loginOverlay.addEventListener('click', (e) => { if (e.target === loginOverlay) closeLoginModal(); });
   changeGmailBtn.addEventListener('click', showGmailStep);
-
   async function requestOtp(gmail) { return apiPost({ action: 'requestOtp', gmail }); }
-
   sendCodeBtn.addEventListener('click', async () => {
     const gmail = loginGmail.value.trim();
     if (!/^[^\s@]+@gmail\.com$/i.test(gmail)) {
@@ -1234,7 +1139,6 @@
       if (!awaitingQuickRegister) sendCodeBtn.textContent = 'Send Code →';
     }
   });
-
   resendOtpBtn.addEventListener('click', async () => {
     if (resendOtpBtn.disabled) return;
     try {
@@ -1249,7 +1153,6 @@
       otpMsg.innerHTML = '<div class="msg-box msg-ok">Demo: code resent (check console)</div>';
     }
   });
-
   async function verifyOtp() {
     const otp = otpInput.value.trim();
     if (!/^\d{6}$/.test(otp) && otp !== '123456') {
@@ -1284,7 +1187,6 @@
   }
   verifyOtpBtn.addEventListener('click', verifyOtp);
   otpInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') verifyOtp(); });
-
   // ===== USER DASHBOARD LOGIC =====
   const userShell = document.getElementById('userShell');
   const userTopEmail = document.getElementById('userTopEmail');
@@ -1295,7 +1197,6 @@
   const adminQuickAccess = document.getElementById('adminQuickAccess');
   let userChatPollTimer = null;
   let selectedInterests = [];
-
   function openUserDashboard(defaultView='overview'){
     const user = getCustomerSession();
     if(!user) { openLoginModal(); return; }
@@ -1304,7 +1205,6 @@
       try{ user.interests = JSON.parse(stored); }catch(e){}
     }
     selectedInterests = [...(user.interests||[])];
-
     userTopEmail.textContent = user.gmail;
     overviewWelcome.textContent = `Welcome back, ${ (user.name||'').split(' ')[0] || 'Investor' }`;
     userShell.classList.add('open');
@@ -1334,7 +1234,6 @@
     closeUserDashboard();
     openAdminShell();
   });
-
   function switchUserView(view){
     document.querySelectorAll('.side-link[data-view]').forEach(b=> b.classList.toggle('active', b.dataset.view===view));
     document.getElementById('userView-overview').style.display = view==='overview' ? 'block':'none';
@@ -1352,7 +1251,6 @@
   document.querySelectorAll('.side-link[data-view]').forEach(btn=>{
     btn.addEventListener('click', ()=> switchUserView(btn.dataset.view));
   });
-
   function renderInterests(){
     myInterestsGrid.innerHTML = '';
     if(!selectedInterests.length){
@@ -1403,7 +1301,6 @@
     }catch(e){}
     renderProfile();
   });
-
   function renderProfile(){
     const user = getCustomerSession();
     if(!user) return;
@@ -1417,12 +1314,10 @@
       </div>
     `;
   }
-
   // User Chat - ADMIN only - FIXED
   const dashChatBody = document.getElementById('dashChatBody');
   const dashChatInput = document.getElementById('dashChatInput');
   const dashChatSendBtn = document.getElementById('dashChatSendBtn');
-
   function renderMessages(container, messages, myRole){
     if(!messages.length){
       container.innerHTML = '<div class="dash-chat-empty">Say hello 👋 — you\'re chatting directly with ADMIN. No bots, only our customer care team.</div>';
@@ -1470,7 +1365,6 @@
   }
   dashChatSendBtn.addEventListener('click', sendUserChat);
   dashChatInput.addEventListener('keydown', (e)=>{ if(e.key==='Enter') sendUserChat(); });
-
   // Nav login buttons -> dashboard
   function handleLoginNavClick() {
     const user = getCustomerSession();
@@ -1481,11 +1375,9 @@
     document.getElementById('mobileMenu').classList.remove('open');
     handleLoginNavClick();
   });
-
   if(getCustomerSession()){
     openUserDashboard();
   }
-
   // ===== ADMIN - WITH FIXED 2-WAY CHAT =====
   const adminLoginOverlay = document.getElementById('adminLoginOverlay');
   const adminUsername = document.getElementById('adminUsername');
@@ -1500,9 +1392,7 @@
   let adminPollTimer = null;
   let adminListPollTimer = null;
   let cachedSignups = [];
-
   function initials(name){ return (name||'?').trim().split(/\s+/).slice(0,2).map(w=>w[0]||'').join('').toUpperCase(); }
-
   document.getElementById('adminLinkBtn').addEventListener('click', () => {
     if (getAdminToken()) { openAdminShell(); return; }
     adminLoginOverlay.classList.add('open');
@@ -1511,7 +1401,6 @@
   });
   document.getElementById('adminLoginCloseBtn').addEventListener('click', () => adminLoginOverlay.classList.remove('open'));
   adminLoginOverlay.addEventListener('click', (e) => { if (e.target === adminLoginOverlay) adminLoginOverlay.classList.remove('open'); });
-
   adminLoginSubmitBtn.addEventListener('click', async () => {
     const username = adminUsername.value.trim();
     const password = adminPassword.value;
@@ -1547,7 +1436,6 @@
       adminLoginSubmitBtn.disabled = false; adminLoginSubmitBtn.textContent = 'Log In as ADMIN →';
     }
   });
-
   function sortSignups(list, mode){
     const arr = [...list];
     if(mode==='newest') arr.sort((a,b)=> new Date(b.timestamp)-new Date(a.timestamp));
@@ -1555,7 +1443,6 @@
     else if(mode==='name') arr.sort((a,b)=> (a.name||'').localeCompare(b.name||''));
     return arr;
   }
-
   async function loadSignups() {
     const token = getAdminToken();
     if (!token) return;
@@ -1591,7 +1478,6 @@
     });
   }
   adminSortSelect.addEventListener('change', renderAdminList);
-
   function openAdminThread(gmail, name) {
     activeAdminGmail = gmail;
     adminChatPane.innerHTML = `
@@ -1613,7 +1499,6 @@
     document.getElementById('adminChatInput').addEventListener('keydown', (e) => { if (e.key === 'Enter') sendAdminMessageFIXED(); });
     renderAdminList();
   }
-
   async function refreshAdminThread() {
     const token = getAdminToken();
     if (!token || !activeAdminGmail) return;
@@ -1640,7 +1525,6 @@
       body.scrollTop=body.scrollHeight;
     }
   }
-
   // === FIXED: ADMIN -> CUSTOMER IS EXACT MIRROR OF CUSTOMER -> ADMIN ===
   async function refreshAdminThread(){
     if(!activeAdminGmail) return;
@@ -1661,7 +1545,6 @@
     }catch(e){}
     if(local.length) renderMessages(body, local, 'admin');
   }
-
   async function sendAdminMessageFIXED(){
     const input=document.getElementById('adminChatInput');
     const btn=document.getElementById('adminChatSendBtn');
@@ -1687,8 +1570,6 @@
       btn.disabled=false;
     }
   }
-
-
   // Secret admin access (hidden link)
   // 1. Keyboard: Ctrl+Shift+A
   // 2. URL: ?admin or #admin
@@ -1704,8 +1585,6 @@
       else { document.getElementById('adminLoginOverlay').classList.add('open'); }
     }, 500);
   }
-
-
   // Footer modals
   function openLegalModal(id){ document.getElementById(id).classList.add('open'); document.body.style.overflow='hidden'; }
   function closeLegalModal(id){ document.getElementById(id).classList.remove('open'); document.body.style.overflow=''; }
@@ -1721,7 +1600,6 @@
     const el=document.getElementById(id);
     if(el) el.addEventListener('click', (e)=>{ if(e.target===el) closeLegalModal(id); });
   });
-
   function openAdminShell() {
     adminShell.classList.add('open');
     loadSignups();
@@ -1741,7 +1619,6 @@
     closeAdminShell();
   });
 </script>
-
 <!-- FOOTER MODALS WITH WATERMARK -->
 <div class="overlay" id="aboutModal">
   <div class="modal-card legal-modal watermarked" style="max-width:760px;">
@@ -1766,7 +1643,6 @@
     <p>We built Apexx Crestway to meet this moment — replacing manual, paper-based, relationship-dependent processes with verified data, escrow-backed guarantees, and a platform built for scale.</p>
   </div>
 </div>
-
 <div class="overlay" id="privacyModal">
   <div class="modal-card legal-modal watermarked">
     <button class="modal-close" onclick="closeLegalModal('privacyModal')">✕</button>
@@ -1800,7 +1676,6 @@
     <p>Apexx Crestway Ltd<br>753 Babagana Kingibe Street, Guzape District, Asokoro Extension, Abuja F.C.T<br>Email: apexxcrestway@gmail.com</p>
   </div>
 </div>
-
 <div class="overlay" id="termsModal">
   <div class="modal-card legal-modal watermarked">
     <button class="modal-close" onclick="closeLegalModal('termsModal')">✕</button>
@@ -1838,6 +1713,5 @@
     <p>We may update these Terms. Continued use means acceptance.</p>
   </div>
 </div>
-
 </body>
-</html
+</html>
