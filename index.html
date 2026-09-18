@@ -399,31 +399,43 @@
   .dash-chat-empty{margin:auto; text-align:center; color:rgba(8,24,48,.4); font-size:13px; padding:20px; max-width:320px;}
 
   /* ADMIN */
-  .admin-shell{position:fixed; inset:0; z-index:95; background:#fff; display:none; flex-direction:column;}
+  .admin-shell{position:fixed; inset:0; width:100vw; height:100vh; z-index:95; background:#fff; display:none; flex-direction:column;}
   .admin-shell.open{display:flex;}
-  .admin-topbar{background:var(--ink); color:#fff; padding:14px 20px; display:flex; align-items:center; justify-content:space-between; flex-shrink:0; gap:10px;}
-  .admin-topbar .t{font-weight:900; font-size:15px;}
-  .admin-topbar button{background:rgba(255,255,255,.12); border:none; color:#fff; font-size:12px; font-weight:700; padding:8px 14px; border-radius:var(--r-card); cursor:pointer;}
-  .admin-body{flex:1; display:flex; overflow:hidden;}
-  .admin-list{width:360px; max-width:42vw; border-right:1px solid var(--line); overflow-y:auto; flex-shrink:0; background:var(--off);}
-  .admin-list-head{padding:14px 16px; font-size:11px; font-weight:800; letter-spacing:.08em; color:rgba(8,24,48,.5); border-bottom:1px solid var(--line); text-transform:uppercase; display:flex; justify-content:space-between; align-items:center; gap:8px;}
-  .admin-list-head select{font-size:11px; padding:4px 8px; border-radius:8px; border:1px solid var(--line); background:#fff; font-family:inherit;}
-  .admin-row{padding:14px 16px; border-bottom:1px solid var(--line); cursor:pointer; display:flex; gap:10px; align-items:flex-start;}
-  .admin-row:hover, .admin-row.active{background:#fff;}
-  .admin-row.active{border-left:3px solid var(--blue);}
-  .admin-row .av2{width:36px; height:36px; border-radius:50%; background:var(--ink); color:var(--gold); font-weight:800; font-size:13px; display:flex; align-items:center; justify-content:center; flex-shrink:0;}
+  .admin-topbar{background:var(--ink); color:#fff; padding:16px 24px; display:flex; align-items:center; justify-content:space-between; flex-shrink:0; gap:10px; border-bottom:1px solid rgba(255,255,255,.08);}
+  .admin-topbar .t{font-family:var(--serif); font-weight:600; font-size:16px; letter-spacing:-.005em; display:flex; align-items:center; gap:9px;}
+  .admin-topbar .t svg{color:var(--gold);}
+  .admin-topbar .right{display:flex; align-items:center; gap:8px;}
+  .admin-topbar .who{font-family:var(--mono); font-size:10.5px; color:rgba(255,255,255,.55); letter-spacing:.02em; margin-right:4px;}
+  .admin-topbar button{background:transparent; border:1px solid rgba(255,255,255,.18); color:rgba(255,255,255,.85); font-size:11.5px; font-weight:600; padding:7px 14px; border-radius:var(--r-tight); cursor:pointer; transition:border-color .15s, color .15s;}
+  .admin-topbar button:hover{border-color:rgba(255,255,255,.4); color:#fff;}
+  .admin-body{flex:1; display:flex; overflow:hidden; width:100%;}
+  .admin-list{width:340px; max-width:42vw; border-right:1px solid var(--line); overflow-y:auto; flex-shrink:0; background:var(--off); display:flex; flex-direction:column;}
+  .admin-list-head{padding:16px 18px 12px; border-bottom:1px solid var(--line); flex-shrink:0;}
+  .admin-list-head .top-row{display:flex; justify-content:space-between; align-items:baseline; gap:8px;}
+  .admin-list-head .label{font-family:var(--serif); font-style:italic; font-size:14px; font-weight:500; color:var(--ink);}
+  .admin-list-head .count{font-family:var(--mono); font-size:11px; color:rgba(8,24,48,.45);}
+  .admin-list-head select{margin-top:10px; width:100%; font-size:11.5px; padding:7px 10px; border-radius:var(--r-tight); border:1px solid var(--line); background:#fff; font-family:inherit; color:rgba(8,24,48,.7);}
+  .admin-row{padding:13px 18px; border-bottom:1px solid var(--line); cursor:pointer; display:flex; gap:11px; align-items:flex-start; transition:background .12s;}
+  .admin-row:hover{background:rgba(8,24,48,.025);}
+  .admin-row.active{background:#fff; box-shadow:inset 2px 0 0 var(--gold);}
+  .admin-row .av2{width:34px; height:34px; border-radius:var(--r-tight); background:var(--ink); color:var(--gold); font-weight:700; font-size:12px; display:flex; align-items:center; justify-content:center; flex-shrink:0; font-family:var(--mono);}
   .admin-row .info{flex:1; min-width:0;}
-  .admin-row .info .n{font-size:13px; font-weight:700; display:flex; justify-content:space-between; gap:6px;}
-  .admin-row .info .g{font-size:11px; color:rgba(8,24,48,.55); overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}
-  .admin-row .info .m{font-size:10.5px; color:rgba(8,24,48,.4); margin-top:3px;}
-  .unread-badge{background:var(--blue); color:#fff; font-size:10px; font-weight:800; border-radius:999px; padding:2px 7px; flex-shrink:0;}
-  .admin-chat{flex:1; display:flex; flex-direction:column; min-width:0;}
-  .admin-chat-empty{margin:auto; text-align:center; color:rgba(8,24,48,.4); font-size:13px; padding:30px;}
-  .admin-chat-head{padding:14px 20px; border-bottom:1px solid var(--line); display:flex; align-items:center; gap:10px;}
-  .admin-chat-head .n{font-size:14px; font-weight:800;}
-  .admin-chat-head .g{font-size:11.5px; color:rgba(8,24,48,.5);}
+  .admin-row .info .n{font-size:13px; font-weight:700; color:var(--ink); display:flex; justify-content:space-between; gap:6px;}
+  .admin-row .info .g{font-size:11px; color:rgba(8,24,48,.5); overflow:hidden; text-overflow:ellipsis; white-space:nowrap; margin-top:1px;}
+  .admin-row .info .m{font-family:var(--mono); font-size:10px; color:rgba(8,24,48,.38); margin-top:5px; letter-spacing:.02em;}
+  .unread-badge{background:var(--blue); color:#fff; font-family:var(--mono); font-size:10px; font-weight:700; border-radius:var(--r-tight); padding:1px 6px; flex-shrink:0;}
+  .admin-chat{flex:1; display:flex; flex-direction:column; min-width:0; background:#fff;}
+  .admin-chat-empty{margin:auto; text-align:center; color:rgba(8,24,48,.4); font-size:13px; padding:30px; max-width:320px;}
+  .admin-chat-head{padding:18px 24px; border-bottom:1px solid var(--line); flex-shrink:0;}
+  .admin-chat-head .id-row{display:flex; align-items:center; gap:12px;}
+  .admin-chat-head .av2{width:38px; height:38px; border-radius:var(--r-tight); background:var(--ink); color:var(--gold); font-weight:700; font-size:13px; display:flex; align-items:center; justify-content:center; flex-shrink:0; font-family:var(--mono);}
+  .admin-chat-head .n{font-family:var(--serif); font-weight:600; font-size:17px; color:var(--ink);}
+  .admin-chat-head .g{font-size:12px; color:rgba(8,24,48,.5); font-family:var(--mono); margin-top:1px;}
+  .admin-chat-head .tag-row{display:flex; flex-wrap:wrap; gap:6px; margin-top:12px;}
+  .admin-chat-head .dtag{font-size:10.5px; font-weight:600; padding:4px 9px; border-radius:var(--r-tight); background:var(--paper); border:1px solid var(--line); color:rgba(8,24,48,.65);}
+  .admin-chat-head .dtag.role{background:var(--ink); color:var(--gold-lt); border-color:var(--ink);}
   .admin-chat-body{flex:1; overflow-y:auto; padding:4px 24px; background:#fff; display:flex; flex-direction:column;}
-  .admin-chat-input{display:flex; gap:10px; padding:14px 20px; border-top:1px solid var(--line); background:var(--off);}
+  .admin-chat-input{display:flex; gap:10px; padding:16px 24px; border-top:1px solid var(--line); background:var(--off); flex-shrink:0;}
   .admin-chat-input input{flex:1; height:42px; border-radius:var(--r-tight); border:1px solid var(--line); padding:0 14px; font-size:14px; font-family:inherit; outline:none; background:#fff;}
   .admin-chat-input button{padding:0 18px; height:42px; border-radius:var(--r-tight); background:var(--ink); color:#fff; border:none; font-weight:700; font-size:12.5px; cursor:pointer;}
 
@@ -1102,9 +1114,9 @@
   </div>
   <div class="admin-shell-body" id="adminShellBody" style="display:none;">
     <div class="admin-topbar">
-      <div class="t"><svg class="i" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5c0 5-3.2 8.5-7 10-3.8-1.5-7-5-7-10V6l7-3z"/></svg> Apexx Crestway admin</div>
-      <div style="display:flex; gap:10px; align-items:center;">
-        <span style="font-size:11px; opacity:.7;" id="adminEmailLabel"></span>
+      <div class="t"><svg class="i" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5c0 5-3.2 8.5-7 10-3.8-1.5-7-5-7-10V6l7-3z"/></svg>Apexx Crestway <span style="color:var(--gold);">admin</span></div>
+      <div class="right">
+        <span class="who" id="adminEmailLabel"></span>
         <button id="adminRefreshBtn">Refresh</button>
         <button id="adminLogoutBtn">Log out</button>
         <button id="adminCloseBtn">Exit to site</button>
@@ -1113,7 +1125,7 @@
     <div class="admin-body">
       <div class="admin-list">
         <div class="admin-list-head">
-          <span>Registered members</span>
+          <div class="top-row"><span class="label">Registered members</span><span class="count" id="adminMemberCount"></span></div>
           <select id="adminSortSelect">
             <option value="newest">Newest first</option>
             <option value="oldest">Oldest first</option>
@@ -1956,6 +1968,7 @@ function renderAdminList(){
     mode === 'name' ? (a.name||'').localeCompare(b.name||'')
     : mode === 'oldest' ? new Date(a.timestamp) - new Date(b.timestamp)
     : new Date(b.timestamp) - new Date(a.timestamp));
+  $('adminMemberCount').textContent = sorted.length + (sorted.length === 1 ? ' member' : ' members');
   $('adminListItems').innerHTML = sorted.map(s => `
     <div class="admin-row ${s.gmail === activeGmail ? 'active' : ''}" data-gmail="${esc(s.gmail)}" data-name="${esc(s.name)}">
       <div class="av2">${esc(initials(s.name))}</div>
@@ -1973,10 +1986,18 @@ $('adminSortSelect').addEventListener('change', renderAdminList);
 function openAdminThread(gmail, name){
   activeGmail = gmail;
   const s = cachedSignups.find(x => x.gmail === gmail) || {};
+  const interests = (s.interest || '').split(',').map(x => x.trim()).filter(Boolean);
+  const tags = [
+    s.investorType ? `<span class="dtag role">${esc(s.investorType)}</span>` : '',
+    ...interests.map(i => `<span class="dtag">${esc(i)}</span>`)
+  ].join('');
   $('adminChatPane').innerHTML = `
     <div class="admin-chat-head">
-      <div class="av2">${esc(initials(name))}</div>
-      <div><div class="n">${esc(name)}</div><div class="g">${esc(gmail)}${s.investorType ? ' · ' + esc(s.investorType) : ''}${s.interest ? ' · ' + esc(s.interest) : ''}</div></div>
+      <div class="id-row">
+        <div class="av2">${esc(initials(name))}</div>
+        <div><div class="n">${esc(name)}</div><div class="g">${esc(gmail)}</div></div>
+      </div>
+      ${tags ? `<div class="tag-row">${tags}</div>` : ''}
     </div>
     <div class="admin-chat-body" id="adminChatBody"></div>
     <div class="admin-chat-input">
