@@ -1220,7 +1220,9 @@
    APEXXCRESTWAY frontend — talks to the Cloudflare Worker API.
    Point API_BASE at your deployed worker (or a custom domain route).
    ======================================================================= */
-const API_BASE = 'https://apexxcrestway-api.apexxcrestway.workers.dev';
+/* Point this at your deployed Worker (or a custom domain route). Any
+   trailing slash is stripped automatically below, so it's safe either way. */
+const API_BASE = 'https://apexxcrestway-api.apexxcrestway.workers.dev'.replace(/\/+$/, '');
 
 /* ---------- tiny helpers ---------- */
 const $ = id => document.getElementById(id);
@@ -1537,7 +1539,11 @@ async function verifyOtp(){
   btn.disabled = true; btn.textContent = 'Verifying…';
   try {
     const d = await api('/api/otp/verify', { method:'POST', body:{ gmail: pendingGmail, otp } });
-    if (d.status === 'success') { session.set(d.user); navigate('/dashboard'); }
+    if (d.status === 'success') {
+      session.set(d.user);
+      if (d.adminToken) sessionStorage.setItem('apexx_admin_token', d.adminToken);
+      navigate('/dashboard');
+    }
     else {
       $('otpMsg').innerHTML = `<div class="msg-box msg-err">${esc(d.message || 'Incorrect code.')}</div>`;
       if (d.status === 'expired') showGmailStep();
